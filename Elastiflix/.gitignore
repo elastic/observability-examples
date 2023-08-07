@@ -4,7 +4,7 @@ node_modules/
 **/.venv
 */bin/Debug
 **__pycache__
-#.env
+.env
 **/.idea
 dotnet*/obj
 .idea
