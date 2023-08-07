@@ -1,0 +1,10 @@
+src/streaming-ui/scripts/.env-debug
+src/data-loader/env-debug
+node_modules/
+**/.venv
+*/bin/Debug
+**__pycache__
+#.env
+**/.idea
+dotnet*/obj
+.idea
