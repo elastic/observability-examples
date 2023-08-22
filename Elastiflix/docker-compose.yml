@@ -40,9 +40,9 @@ services:
       - "5000:5000"
     environment:
       - REDIS_HOST=redis
-      - TOGGLE_SERVICE_DELAY=${TOGGLE_SERVICE_DELAY}
-      - TOGGLE_CANARY_DELAY=${TOGGLE_CANARY_DELAY}
-      - TOGGLE_CANARY_FAILURE=${TOGGLE_CANARY_FAILURE}
+      - TOGGLE_SERVICE_DELAY=${TOGGLE_SERVICE_DELAY:-0}
+      - TOGGLE_CANARY_DELAY=${TOGGLE_CANARY_DELAY:-0}
+      - TOGGLE_CANARY_FAILURE=${TOGGLE_CANARY_FAILURE:-0}
   favorite-go:
     build: go-favorite/.
     image: docker.elastic.co/demos/workshop/observability/elastiflix-go-favorite:${ELASTIC_VERSION}-${BUILD_NUMBER}
@@ -54,9 +54,9 @@ services:
       - "5001:5000"
     environment:
       - REDIS_HOST=redis
-      - TOGGLE_SERVICE_DELAY=${TOGGLE_SERVICE_DELAY}
-      - TOGGLE_CANARY_DELAY=${TOGGLE_CANARY_DELAY}
-      - TOGGLE_CANARY_FAILURE=${TOGGLE_CANARY_FAILURE}
+      - TOGGLE_SERVICE_DELAY=${TOGGLE_SERVICE_DELAY:-0}
+      - TOGGLE_CANARY_DELAY=${TOGGLE_CANARY_DELAY:-0}
+      - TOGGLE_CANARY_FAILURE=${TOGGLE_CANARY_FAILURE:-0}
   favorite-java:
     build: java-favorite/.
     image: docker.elastic.co/demos/workshop/observability/elastiflix-java-favorite:${ELASTIC_VERSION}-${BUILD_NUMBER}
@@ -68,9 +68,9 @@ services:
       - "5002:5000"
     environment:
       - REDIS_HOST=redis
-      - TOGGLE_SERVICE_DELAY=${TOGGLE_SERVICE_DELAY}
-      - TOGGLE_CANARY_DELAY=${TOGGLE_CANARY_DELAY}
-      - TOGGLE_CANARY_FAILURE=${TOGGLE_CANARY_FAILURE}
+      - TOGGLE_SERVICE_DELAY=${TOGGLE_SERVICE_DELAY:-0}
+      - TOGGLE_CANARY_DELAY=${TOGGLE_CANARY_DELAY:-0}
+      - TOGGLE_CANARY_FAILURE=${TOGGLE_CANARY_FAILURE:-0}
   login:
     build: dotnet-login/.
     image: docker.elastic.co/demos/workshop/observability/elastiflix-dotnet-login:${ELASTIC_VERSION}-${BUILD_NUMBER}

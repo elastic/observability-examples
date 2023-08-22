@@ -44,9 +44,9 @@ services:
       - ELASTIC_APM_SERVER_URL=${ELASTIC_APM_SERVER_URL}
       - ELASTIC_APM_SERVICE_NAME=python-favorite-elastic-manual
       - REDIS_HOST=redis
-      - TOGGLE_SERVICE_DELAY=${TOGGLE_SERVICE_DELAY}
-      - TOGGLE_CANARY_DELAY=${TOGGLE_CANARY_DELAY}
-      - TOGGLE_CANARY_FAILURE=${TOGGLE_CANARY_FAILURE}
+      - TOGGLE_SERVICE_DELAY=${TOGGLE_SERVICE_DELAY:-0}
+      - TOGGLE_CANARY_DELAY=${TOGGLE_CANARY_DELAY:-0}
+      - TOGGLE_CANARY_FAILURE=${TOGGLE_CANARY_FAILURE:-0}
   favorite-go-elastic-manual:
     build: go-favorite-elastic-manual/.
     image: docker.elastic.co/demos/workshop/observability/elastiflix-go-favorite-elastic-manual:${ELASTIC_VERSION}-${BUILD_NUMBER}
@@ -62,9 +62,9 @@ services:
       - ELASTIC_APM_SERVER_URL=${ELASTIC_APM_SERVER_URL}
       - ELASTIC_APM_SERVICE_NAME=go-favorite-elastic-manual
       - REDIS_HOST=redis
-      - TOGGLE_SERVICE_DELAY=${TOGGLE_SERVICE_DELAY}
-      - TOGGLE_CANARY_DELAY=${TOGGLE_CANARY_DELAY}
-      - TOGGLE_CANARY_FAILURE=${TOGGLE_CANARY_FAILURE}
+      - TOGGLE_SERVICE_DELAY=${TOGGLE_SERVICE_DELAY:-0}
+      - TOGGLE_CANARY_DELAY=${TOGGLE_CANARY_DELAY:-0}
+      - TOGGLE_CANARY_FAILURE=${TOGGLE_CANARY_FAILURE:-0}
   favorite-java-elastic-manual:
     build: java-favorite-elastic-manual/.
     image: docker.elastic.co/demos/workshop/observability/elasticflix-java-favorite-elastic-manual:${ELASTIC_VERSION}-${BUILD_NUMBER}
@@ -80,9 +80,9 @@ services:
       - ELASTIC_APM_SERVER_URL=${ELASTIC_APM_SERVER_URL}
       - ELASTIC_APM_SERVICE_NAME=java-favorite-elastic-manual
       - REDIS_HOST=redis
-      - TOGGLE_SERVICE_DELAY=${TOGGLE_SERVICE_DELAY}
-      - TOGGLE_CANARY_DELAY=${TOGGLE_CANARY_DELAY}
-      - TOGGLE_CANARY_FAILURE=${TOGGLE_CANARY_FAILURE}
+      - TOGGLE_SERVICE_DELAY=${TOGGLE_SERVICE_DELAY:-0}
+      - TOGGLE_CANARY_DELAY=${TOGGLE_CANARY_DELAY:-0}
+      - TOGGLE_CANARY_FAILURE=${TOGGLE_CANARY_FAILURE:-0}
   favorite-java-elastic-auto:
     build: java-favorite-elastic-auto/.
     image: docker.elastic.co/demos/workshop/observability/elastiflix-java-favorite-elastic-auto:${ELASTIC_VERSION}-${BUILD_NUMBER}
@@ -98,9 +98,9 @@ services:
       - ELASTIC_APM_SERVER_URL=${ELASTIC_APM_SERVER_URL}
       - ELASTIC_APM_SERVICE_NAME=java-favorite-elastic-auto
       - REDIS_HOST=redis
-      - TOGGLE_SERVICE_DELAY=${TOGGLE_SERVICE_DELAY}
-      - TOGGLE_CANARY_DELAY=${TOGGLE_CANARY_DELAY}
-      - TOGGLE_CANARY_FAILURE=${TOGGLE_CANARY_FAILURE}
+      - TOGGLE_SERVICE_DELAY=${TOGGLE_SERVICE_DELAY:-0}
+      - TOGGLE_CANARY_DELAY=${TOGGLE_CANARY_DELAY:-0}
+      - TOGGLE_CANARY_FAILURE=${TOGGLE_CANARY_FAILURE:-0}
   login:
     build: dotnet-login-elastic-auto/.
     image: docker.elastic.co/demos/workshop/observability/elastiflix-dotnet-login-elastic-auto:${ELASTIC_VERSION}-${BUILD_NUMBER}
