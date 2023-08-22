@@ -77,4 +77,9 @@ set -ex
 
 # echo "}" >> ./env-config.js
 
+main_chunk=$(ls /usr/share/nginx/html/static/js/main.*.js)
+envsubst <$main_chunk >./main_chunk_temp
+cp ./main_chunk_temp $main_chunk
+rm ./main_chunk_temp
+
 exec env nginx -g 'daemon off;'
