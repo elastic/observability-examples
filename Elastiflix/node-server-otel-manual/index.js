@@ -20,23 +20,21 @@ const { ExpressInstrumentation } = require('@opentelemetry/instrumentation-expre
 
 var API_ENDPOINT_FAVORITES = process.env.API_ENDPOINT_FAVORITES || "127.0.0.1:5000";
 const API_ENDPOINT_LOGIN = process.env.API_ENDPOINT_LOGIN || "127.0.0.1:8000";
-const ELASTICSEARCH_URL = process.env.ELASTICSEARCH_URL || "";
+const ELASTICSEARCH_URL = process.env.ELASTICSEARCH_URL || "localhost:9200";
 const ELASTICSEARCH_USERNAME = process.env.ELASTICSEARCH_USERNAME || "elastic";
 const ELASTICSEARCH_PASSWORD = process.env.ELASTICSEARCH_PASSWORD || "";
 
 API_ENDPOINT_FAVORITES = API_ENDPOINT_FAVORITES.split(",")
 
-if (ELASTICSEARCH_URL == "") {
-  pino.error("ELASTICSEARCH_URL environment variable not set, exiting")
-  process.exit(1)
+if (ELASTICSEARCH_URL == "" || ELASTICSEARCH_URL == "localhost:9200") {
+  log.warn("ELASTICSEARCH_URL environment variable not set, movie search functionality will not be available")
 } else {
   if (ELASTICSEARCH_URL.endsWith("/")) {
     ELASTICSEARCH_URL = ELASTICSEARCH_URL.slice(0, -1);
   }
 }
 if (ELASTICSEARCH_PASSWORD == "") {
-  pino.error("ELASTICSEARCH_PASSWORD environment variable not set, exiting")
-  process.exit(1)
+  log.warn("ELASTICSEARCH_PASSWORD environment variable not set, movie search functionality will not be available")
 }
 
 const OTEL_EXPORTER_OTLP_HEADERS = process.env.OTEL_EXPORTER_OTLP_HEADERS;
