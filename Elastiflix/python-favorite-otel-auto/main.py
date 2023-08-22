@@ -10,7 +10,7 @@ import random
 import time 
 
 delay_time = os.environ.get('TOGGLE_SERVICE_DELAY')
-if delay_time is "":
+if delay_time is "" or delay_time is None:
     delay_time = 0
 delay_time = int(delay_time)
 

@@ -23,13 +23,12 @@ from opentelemetry.instrumentation.redis import RedisInstrumentor
 from opentelemetry.sdk.resources import Resource
 
 delay_time = os.environ.get('TOGGLE_SERVICE_DELAY')
-if delay_time is "":
+if delay_time is "" or delay_time is None:
     delay_time = 0
 delay_time = int(delay_time)
 
 redis_host = os.environ.get('REDIS_HOST') or 'localhost'
 redis_port = os.environ.get('REDIS_PORT') or 6379
-otel_service_name = os.environ.get('OTEL_SERVICE_NAME') or 'favorite_otel_manual'
 otel_traces_exporter = os.environ.get('OTEL_TRACES_EXPORTER') or 'otlp'
 otel_metrics_exporter = os.environ.get('OTEL_TRACES_EXPORTER') or 'otlp'
 environment = os.environ.get('ENVIRONMENT') or 'dev'
@@ -39,9 +38,9 @@ resource_attributes = os.environ.get('OTEL_RESOURCE_ATTRIBUTES') or 'service.ver
 otel_exporter_otlp_headers = os.environ.get('OTEL_EXPORTER_OTLP_HEADERS')
 # fail if secret token not set
 if otel_exporter_otlp_headers is None:
-    raise Exception('SECRET_TOKEN environment variable not set')
+    raise Exception('OTEL_EXPORTER_OTLP_HEADERS environment variable not set')
 #else:
-#    otel_exporter_otlp_headers= f"Authorization=Bearer%20{secret_token}"
+#    otel_exporter_otlp_fheaders= f"Authorization=Bearer%20{secret_token}"
 
 otel_exporter_otlp_endpoint = os.environ.get('OTEL_EXPORTER_OTLP_ENDPOINT')
 # fail if server url not set
@@ -59,7 +58,7 @@ for pair in key_value_pairs:
     result_dict[key] = value
 
 resourceAttributes = {
-     "service.name": otel_service_name,
+     "service.name": result_dict['service.name'],
      "service.version": result_dict['service.version'],
      "deployment.environment": result_dict['deployment.environment']
 #     # Add more attributes as needed
@@ -76,7 +75,7 @@ provider.add_span_processor(processor)
 trace.set_tracer_provider(provider)
 
 # Creates a tracer from the global tracer provider
-tracer = trace.get_tracer(otel_service_name)
+tracer = trace.get_tracer("favorite")
 
 
 application_port = os.environ.get('APPLICATION_PORT') or 5000

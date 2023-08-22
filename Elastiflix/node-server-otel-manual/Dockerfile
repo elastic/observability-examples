@@ -7,6 +7,8 @@ RUN ls
 RUN npm install --production
 COPY . .
 
+# the package.json contains these already so we don't have to 
+# install them individually
 # RUN npm install --save @opentelemetry/api
 # RUN npm install --save @opentelemetry/resources
 # RUN npm install --save @opentelemetry/semantic-conventions
