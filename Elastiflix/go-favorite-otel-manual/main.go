@@ -51,22 +51,24 @@ func initTracer() func(context.Context) error {
 	collectorURL = strings.Replace(collectorURL, "https://", "", 1)
 	//serviceVersion := "v1.0.0"
 
-	// OTLP_HEADERS is a comma-separated list of key-value pairs
+	secureOption := otlptracegrpc.WithInsecure()
 
-	secretToken := os.Getenv("ELASTIC_APM_SECRET_TOKEN")
-	if secretToken == "" {
-		log.Fatal("ELASTIC_APM_SECRET_TOKEN is required")
+	// split otlpHeaders by comma and convert to map
+	headers := make(map[string]string)
+	for _, header := range strings.Split(otlpHeaders, ",") {
+		headerParts := strings.Split(header, "=")
+
+		if len(headerParts) == 2 {
+			headers[headerParts[0]] = headerParts[1]
+		}
 	}
 
-	secureOption := otlptracegrpc.WithInsecure()
     exporter, err := otlptrace.New(
         context.Background(),
         otlptracegrpc.NewClient(
             secureOption,
             otlptracegrpc.WithEndpoint(collectorURL),
-			otlptracegrpc.WithHeaders(map[string]string{
-				"Authorization": "Bearer " + secretToken,
-			}),
+			otlptracegrpc.WithHeaders(headers),
 			otlptracegrpc.WithTLSCredentials(credentials.NewTLS(&tls.Config{})),
         ),
     )
@@ -93,7 +95,9 @@ func initTracer() func(context.Context) error {
 
 var (
     collectorURL = os.Getenv("OTEL_EXPORTER_OTLP_ENDPOINT")
+	otlpHeaders = os.Getenv("OTEL_EXPORTER_OTLP_HEADERS")
 )
+
 
 var logger = &logrus.Logger{
 	Out:   os.Stderr,
@@ -192,6 +196,11 @@ func main() {
 	})
 
 	r.POST("/favorites", func(c *gin.Context) {
+		// start otel span
+		ctx := c.Request.Context()
+		ctx, span := tracer.Start(ctx, "add_favorite_movies")
+		defer span.End()
+
 		// artificial sleep for delayTime
 		time.Sleep(time.Duration(delayTime) * time.Millisecond)
 		
