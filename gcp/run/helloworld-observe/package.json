@@ -1,0 +1,17 @@
+{
+    "name": "helloworld",
+    "description": "Hello World in Node.js with minimal instrumentation for Elastic Observability",
+    "version": "1.0.0",
+    "private": true,
+    "main": "index.js",
+    "scripts": {
+      "start": "node index.js"
+    },
+    "engines": {
+      "node": ">= 12.0.0"
+    },
+    "dependencies": {
+      "express": "^4.18.2",
+      "elastic-apm-node": "^3.49.1"
+    }
+}
