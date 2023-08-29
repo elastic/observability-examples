@@ -8,9 +8,9 @@ The repository provides all possible permutations of the application, instrument
 You can compare the code samples and Dockerfiles to better understand what it takes to instrument an application with Elastic APM or OpenTelemetry.
 
 
-![frontend](./Elastiflix/screenshots/frontend.png)
-![service-map](./Elastiflix/screenshots/service-map.png)
-![inventory](./Elastiflix/screenshots/inventory.png)
+![frontend](./screenshots/frontend.png)
+![service-map](./screenshots/service-map.png)
+![inventory](./screenshots/inventory.png)
 
 ## Setup
 
