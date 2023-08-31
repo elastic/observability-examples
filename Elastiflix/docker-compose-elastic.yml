@@ -67,7 +67,7 @@ services:
       - TOGGLE_CANARY_FAILURE=${TOGGLE_CANARY_FAILURE:-0}
   favorite-java-elastic-manual:
     build: java-favorite-elastic-manual/.
-    image: docker.elastic.co/demos/workshop/observability/elasticflix-java-favorite-elastic-manual:${ELASTIC_VERSION}-${BUILD_NUMBER}
+    image: docker.elastic.co/demos/workshop/observability/elastiflix-java-favorite-elastic-manual:${ELASTIC_VERSION}-${BUILD_NUMBER}
     depends_on:
       - redis
     networks:
