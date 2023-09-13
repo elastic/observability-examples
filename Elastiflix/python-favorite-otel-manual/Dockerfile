@@ -1,7 +1,7 @@
 FROM python:3.9-slim as base
 
 ENV REDIS_HOST="redis"
-ENV REDIS_POR="6379"
+ENV REDIS_PORT="6379"
 ENV ENVIRONMENT="dev"
 ENV OTEL_SERVICE_NAME="favorite_otel_manual"
 ENV OTEL_SERVICE_VERSION="1.0.0"
