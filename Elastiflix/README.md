@@ -58,7 +58,7 @@ the add favourites button is the main functionality right now. It calls the node
 |  language | non instrumented  | elastic manual  | elastic auto  | otel manual  | otel auto  |
 |---|:---:|:---:|:---:|:---:|:---:|
 | python  | [x] | [x] | not supported | [x] | [x] |
-| dotnet  | [x] |   | [x] |   | [x] |
+| dotnet  | [x] | [x] | [x] | [x] | [x] |
 | node  | [x] |[x]| not supported | [x] | [x] |
 | javascript  | [x] | [x] | not supported | [ ]| not supported |
 | Go  | [x] | [x] | not supported | [x] | not supported  |
