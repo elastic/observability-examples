@@ -79,7 +79,9 @@ services:
     ports:
       - "127.0.0.1:8000:80"
   node-server:
-    build: node-server/.
+    build:
+      context: node-server
+      dockerfile: Dockerfile
     image: docker.elastic.co/demos/workshop/observability/elastiflix-node-server:${ELASTIC_VERSION}-${BUILD_NUMBER}
     depends_on:
       - redis
