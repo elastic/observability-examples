@@ -165,9 +165,10 @@ services:
       - OTEL_EXPORTER_OTLP_HEADERS=Authorization=Bearer ${ELASTIC_APM_SECRET_TOKEN}
       - OTEL_LOG_LEVEL=info
       - OTEL_METRICS_EXPORTER=otlp
-      - OTEL_RESOURCE_ATTRIBUTES=service.version=1.0,deployment.environment=production,service.name=node-server-otel-manual
+      - OTEL_RESOURCE_ATTRIBUTES=service.version=1.0,deployment.environment=production,service.name=node-server-otel-${NODE_APM_SETUP_MODE}
+      - OTEL_SERVICE_NAME=node-server-otel-${NODE_APM_SETUP_MODE}
       - OTEL_TRACES_EXPORTER=otlp
-      - THROW_NOT_A_FUNCTION_ERROR=${THROW_NOT_A_FUNCTION_ERROR}
+      - THROW_NOT_A_FUNCTION_ERROR=${THROW_NOT_A_FUNCTION_ERROR:-}
   frontend:
     build: javascript-client-elastic-manual/.
     image: docker.elastic.co/demos/workshop/observability/elastiflix-javascript-client-elastic-manual:${ELASTIC_VERSION}-${BUILD_NUMBER}
