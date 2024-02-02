@@ -6,7 +6,7 @@ services:
       - "8089:8089"
     volumes:
       - ./locustfile.py:/mnt/locust/locustfile.py
-    command: -f /mnt/locust/locustfile.py --host http://node-server:3001 --autostart
+    command: -f /mnt/locust/locustfile.py --autostart -u 2
     networks:
       - app-network
     environment:
