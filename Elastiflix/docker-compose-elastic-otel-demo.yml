@@ -182,7 +182,7 @@ services:
     networks:
       - app-network
     ports:
-      - "9000:9000"
+      - "80:9000"
     environment:
       - ELASTIC_APM_ENVIRONMENT=production
       - ELASTIC_APM_SERVER_URL=${ELASTIC_APM_SERVER_URL}
