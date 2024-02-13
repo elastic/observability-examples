@@ -126,7 +126,6 @@ services:
       - OTEL_METRICS_EXPORTER=otlp
       - OTEL_LOGS_EXPORTER=otlp
       - OTEL_TRACES_EXPORTER=otlp
-      - OTEL_JAVAAGENT_DEBUG=true
       - OTEL_DISTRIBUTION=otel
       - REDIS_HOST=redis
       - TOGGLE_SERVICE_DELAY=${TOGGLE_SERVICE_DELAY:-0}
