@@ -16,7 +16,7 @@ RUN mvn clean install
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
 
-ARG AGENT_VERSION=1.40.0
+ARG AGENT_VERSION=1.46.0
 USER root
 RUN apt-get update && apt-get install -y zip curl
 RUN mkdir /elastic_apm_agent
