@@ -1,7 +1,7 @@
 #!/bin/sh
 
 agent_path=''
-case "${OTEL_DISTRIBUTION:-otel}" in
+case "${AGENT_DISTRIBUTION:-otel}" in
   elastic)
     agent_path='/elastic/elastic-otel-javaagent.jar'
     ;;
@@ -9,7 +9,7 @@ case "${OTEL_DISTRIBUTION:-otel}" in
     agent_path='/otel/opentelemetry-javaagent.jar'
     ;;
   *)
-    echo "unknown otel distribution: ${OTEL_DISTRIBUTION}"
+    echo "unknown otel distribution: ${AGENT_DISTRIBUTION}"
     exit 1
   ;;
 esac
