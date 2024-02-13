@@ -126,7 +126,10 @@ services:
       - OTEL_METRICS_EXPORTER=otlp
       - OTEL_LOGS_EXPORTER=otlp
       - OTEL_TRACES_EXPORTER=otlp
+      # agent distribution, either 'otel' or 'elastic'
       - AGENT_DISTRIBUTION=otel
+      # inferred spans feature, only available for elastic distribution
+      - ELASTIC_OTEL_INFERRED_SPANS_ENABLED=true
       - REDIS_HOST=redis
       - TOGGLE_SERVICE_DELAY=${TOGGLE_SERVICE_DELAY:-0}
       - TOGGLE_CANARY_DELAY=${TOGGLE_CANARY_DELAY:-0}
