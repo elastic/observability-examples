@@ -26,7 +26,7 @@ services:
     networks:
       - app-network
     environment:
-      - TOGGLE_CLIENT_PAUSE=${TOGGLE_CLIENT_PAUSE}
+      - TOGGLE_CLIENT_PAUSE=${TOGGLE_CLIENT_PAUSE:-}
   favorite-python-otel-manual:
     build: python-favorite-otel-manual/.
     image: docker.elastic.co/demos/workshop/observability/elastiflix-python-favorite-otel-manual:${ELASTIC_VERSION}-${BUILD_NUMBER}
@@ -171,7 +171,7 @@ services:
   #     - OTEL_RESOURCE_ATTRIBUTES=service.version=1.0,deployment.environment=production
   #     - OTEL_SERVICE_NAME=node-server-otel-auto
   #     - OTEL_TRACES_EXPORTER=otlp
-  #     - THROW_NOT_A_FUNCTION_ERROR=${THROW_NOT_A_FUNCTION_ERROR}
+  #     - THROW_NOT_A_FUNCTION_ERROR=${THROW_NOT_A_FUNCTION_ERROR:-}
   node-server:
     build: node-server-otel-manual/.
     image: docker.elastic.co/demos/workshop/observability/elastiflix-node-server-otel-manual:${ELASTIC_VERSION}-${BUILD_NUMBER}
@@ -194,7 +194,7 @@ services:
       - OTEL_METRICS_EXPORTER=otlp
       - OTEL_RESOURCE_ATTRIBUTES=service.version=1.0,deployment.environment=production,service.name=node-server-otel-manual
       - OTEL_TRACES_EXPORTER=otlp
-      - THROW_NOT_A_FUNCTION_ERROR=${THROW_NOT_A_FUNCTION_ERROR}
+      - THROW_NOT_A_FUNCTION_ERROR=${THROW_NOT_A_FUNCTION_ERROR:-}
   frontend:
     build: javascript-client-elastic-manual/.
     image: docker.elastic.co/demos/workshop/observability/elastiflix-javascript-client-elastic-manual:${ELASTIC_VERSION}-${BUILD_NUMBER}

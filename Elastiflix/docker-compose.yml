@@ -19,7 +19,7 @@ services:
     networks:
       - app-network
     environment:
-      - TOGGLE_CLIENT_PAUSE=${TOGGLE_CLIENT_PAUSE}
+      - TOGGLE_CLIENT_PAUSE=${TOGGLE_CLIENT_PAUSE:-}
   movie-data-loader:
     build: movie-data-loader/.
     image: docker.elastic.co/demos/workshop/observability/elastiflix-movie-data-loader:${ELASTIC_VERSION}-${BUILD_NUMBER}
@@ -95,7 +95,7 @@ services:
       - ELASTICSEARCH_URL=${ELASTICSEARCH_URL}
       - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME}
       - ELASTICSEARCH_PASSWORD=${ELASTICSEARCH_PASSWORD}
-      - THROW_NOT_A_FUNCTION_ERROR=${THROW_NOT_A_FUNCTION_ERROR}
+      - THROW_NOT_A_FUNCTION_ERROR=${THROW_NOT_A_FUNCTION_ERROR:-}
   frontend:
     build: javascript-client/.
     image: docker.elastic.co/demos/workshop/observability/elastiflix-javascript-client:${ELASTIC_VERSION}-${BUILD_NUMBER}
