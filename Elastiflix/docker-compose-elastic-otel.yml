@@ -96,12 +96,12 @@ services:
     ports:
       - "5003:5000"
     environment:
-      - OTEL_EXPORTER_OTLP_HEADERS=Authorization=Bearer%20${ELASTIC_APM_SECRET_TOKEN}
-      - ELASTIC_APM_SECRET_TOKEN=${ELASTIC_APM_SECRET_TOKEN}
+      - OTEL_EXPORTER_OTLP_HEADERS=Authorization=Bearer ${ELASTIC_APM_SECRET_TOKEN}
       - OTEL_EXPORTER_OTLP_ENDPOINT=${ELASTIC_APM_SERVER_URL}
-      - OTEL_METRICS_EXPORTER=otlp
       - OTEL_RESOURCE_ATTRIBUTES=service.version=1.0,deployment.environment=production
       - OTEL_SERVICE_NAME=java-favorite-otel-manual
+      - OTEL_METRICS_EXPORTER=otlp
+      - OTEL_LOGS_EXPORTER=otlp
       - OTEL_TRACES_EXPORTER=otlp
       - REDIS_HOST=redis
       - TOGGLE_SERVICE_DELAY=${TOGGLE_SERVICE_DELAY:-0}
@@ -117,16 +117,21 @@ services:
     ports:
       - "5004:5000"
     environment:
-      - ELASTIC_APM_SECRET_TOKEN=${ELASTIC_APM_SECRET_TOKEN}
+      - OTEL_EXPORTER_OTLP_HEADERS=Authorization=Bearer ${ELASTIC_APM_SECRET_TOKEN}
       - OTEL_EXPORTER_OTLP_ENDPOINT=${ELASTIC_APM_SERVER_URL}
-      - OTEL_METRICS_EXPORTER=otlp
       - OTEL_RESOURCE_ATTRIBUTES=service.version=1.0,deployment.environment=production
       - OTEL_SERVICE_NAME=java-favorite-otel-auto
+      - OTEL_METRICS_EXPORTER=otlp
+      - OTEL_LOGS_EXPORTER=otlp
       - OTEL_TRACES_EXPORTER=otlp
       - REDIS_HOST=redis
       - TOGGLE_SERVICE_DELAY=${TOGGLE_SERVICE_DELAY:-0}
       - TOGGLE_CANARY_DELAY=${TOGGLE_CANARY_DELAY:-0}
       - TOGGLE_CANARY_FAILURE=${TOGGLE_CANARY_FAILURE:-0}
+      # agent distribution, either 'otel' or 'elastic'
+      - AGENT_DISTRIBUTION=otel
+      # inferred spans feature, only available for elastic distribution
+      - ELASTIC_OTEL_INFERRED_SPANS_ENABLED=true
   login:
     build: dotnet-login-otel-auto/.
     image: docker.elastic.co/demos/workshop/observability/elastiflix-dotnet-login-otel-auto:${ELASTIC_VERSION}-${BUILD_NUMBER}
