@@ -16,7 +16,7 @@ RUN mvn clean install
 USER root
 RUN apt-get update && apt-get install -y zip curl
 
-ARG OTEL_AGENT_VERSION=1.28.0
+ARG OTEL_AGENT_VERSION=2.0.0
 RUN mkdir /otel
 RUN curl -L -o /otel/opentelemetry-javaagent.jar https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/download/v${OTEL_AGENT_VERSION}/opentelemetry-javaagent.jar
 
