@@ -8,3 +8,10 @@ node_modules/
 **/.idea
 dotnet*/obj
 .idea
+
+# maven target folder
+java-favorite-elastic-auto/target
+java-favorite-elastic-manual/target
+java-favorite-otel-auto/target
+java-favorite-otel-manual/target
+java-favorite/target
