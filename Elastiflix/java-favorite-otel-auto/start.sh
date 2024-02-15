@@ -14,5 +14,9 @@ case "${AGENT_DISTRIBUTION:-otel}" in
   ;;
 esac
 
-java -javaagent:${agent_path} \
--jar /usr/src/app/target/favorite-0.0.1-SNAPSHOT.jar --server.port=5000
+folder="$(dirname $0)"
+
+java \
+    -javaagent:${agent_path} \
+    -jar /usr/src/app/target/favorite-0.0.1-SNAPSHOT.jar \
+    --server.port=5000
