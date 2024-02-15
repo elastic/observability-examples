@@ -102,6 +102,10 @@ TOGGLE_SERVICE_DELAY=100 TOGGLE_CANARY_DELAY=1000 TOGGLE_CANARY_FAILURE=0.2 dock
 THROW_NOT_A_FUNCTION_ERROR=true docker-compose -f docker-compose-elastic.yml up -d 
 ``````
 
+The `auto` variant uses an instrumentation agent without modification of the application code (or very minimal).
+
+The `manual` variant uses explicit modification of the application code by calling an Elastic API.
+
 ### OpenTelemetry
 ``````
 # healthy
@@ -116,10 +120,13 @@ TOGGLE_SERVICE_DELAY=100 TOGGLE_CANARY_DELAY=1000 docker-compose -f docker-compo
 # add artificial delay to python service, 100ms, delay 50% of requests by 1000ms, and fail 20% of them
 TOGGLE_SERVICE_DELAY=100 TOGGLE_CANARY_DELAY=1000 TOGGLE_CANARY_FAILURE=0.2 docker-compose -f docker-compose-elastic-otel.yml up -d
 
-
 # throw error in nodejs service, 50% of the time
 THROW_NOT_A_FUNCTION_ERROR=true docker-compose -f docker-compose-elastic-otel.yml up -d 
 ``````
+
+The `auto` variant uses an instrumentation agent without modification of the application code (or very minimal).
+
+The `manual` variant uses explicit modification of the application code by calling the OpenTelemetry API.
 
 ### Scenario / Feature Toggles
 
