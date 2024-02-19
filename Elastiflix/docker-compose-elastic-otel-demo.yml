@@ -29,24 +29,6 @@ services:
       - app-network
     environment:
       - TOGGLE_CLIENT_PAUSE=${TOGGLE_CLIENT_PAUSE:-}
-  favorite-go-elastic-manual:
-    build: go-favorite-elastic-manual/.
-    image: docker.elastic.co/demos/workshop/observability/elastiflix-go-favorite-elastic-manual:${ELASTIC_VERSION}-${BUILD_NUMBER}
-    depends_on:
-      - redis
-    networks:
-      - app-network
-    ports:
-      - "5001:5000"
-    environment:
-      - ELASTIC_APM_ENVIRONMENT=production
-      - ELASTIC_APM_SECRET_TOKEN=${ELASTIC_APM_SECRET_TOKEN}
-      - ELASTIC_APM_SERVER_URL=${ELASTIC_APM_SERVER_URL}
-      - ELASTIC_APM_SERVICE_NAME=go-favorite-elastic-manual
-      - REDIS_HOST=redis
-      - TOGGLE_SERVICE_DELAY=${TOGGLE_SERVICE_DELAY:-0}
-      - TOGGLE_CANARY_DELAY=${TOGGLE_CANARY_DELAY:-0}
-      - TOGGLE_CANARY_FAILURE=${TOGGLE_CANARY_FAILURE:-0}
   favorite-java-elastic-manual:
     build: java-favorite-elastic-manual/.
     image: docker.elastic.co/demos/workshop/observability/elastiflix-java-favorite-elastic-manual:${ELASTIC_VERSION}-${BUILD_NUMBER}
@@ -111,8 +93,7 @@ services:
     ports:
       - "3001:3001"
     environment:
-      # - API_ENDPOINT_FAVORITES=favorite-python-elastic-manual:5000,favorite-go-elastic-manual:5000,favorite-java-elastic-auto:5000,favorite-java-elastic-manual:5000
-      - API_ENDPOINT_FAVORITES=favorite-go-elastic-manual:5000,favorite-java-elastic-auto:5000,favorite-java-elastic-manual:5000
+      - API_ENDPOINT_FAVORITES=favorite-java-elastic-auto:5000,favorite-java-elastic-manual:5000
       - API_ENDPOINT_LOGIN=login:80
       - ELASTICSEARCH_PASSWORD=${ELASTICSEARCH_PASSWORD}
       - ELASTICSEARCH_URL=${ELASTICSEARCH_URL}
@@ -139,8 +120,7 @@ services:
     ports:
       - "3002:3002"
     environment:
-      # - API_ENDPOINT_FAVORITES=favorite-python-elastic-manual:5000,favorite-go-elastic-manual:5000,favorite-java-elastic-auto:5000,favorite-java-elastic-manual:5000
-      - API_ENDPOINT_FAVORITES=favorite-go-elastic-manual:5000,favorite-java-elastic-auto:5000,favorite-java-elastic-manual:5000
+      - API_ENDPOINT_FAVORITES=favorite-java-elastic-auto:5000,favorite-java-elastic-manual:5000
       - API_ENDPOINT_LOGIN=login:80
       - ELASTICSEARCH_PASSWORD=${ELASTICSEARCH_PASSWORD}
       - ELASTICSEARCH_URL=${ELASTICSEARCH_URL}
