@@ -147,6 +147,7 @@ services:
     build:
       context: node-server
       dockerfile: Dockerfile-elastic-otel-${NODE_APM_SETUP_MODE}
+      ssh: ["default"]
     image: docker.elastic.co/demos/workshop/observability/elastiflix-node-server-elastic-otel-${NODE_APM_SETUP_MODE}:${ELASTIC_VERSION}-${BUILD_NUMBER}
     container_name: node-server-elastic-otel
     depends_on:
