@@ -1,10 +1,22 @@
 #!/bin/sh
-java -javaagent:/otel/opentelemetry-javaagent.jar \
--Dotel.exporter.otlp.endpoint=${OTEL_EXPORTER_OTLP_ENDPOINT} \
--Dotel.exporter.otlp.headers="Authorization=Bearer ${ELASTIC_APM_SECRET_TOKEN}" \
--Dotel.metrics.exporter=otlp \
--Dotel.logs.exporter=otlp \
--Dotel.resource.attributes=${OTEL_RESOURCE_ATTRIBUTES} \
--Dotel.service.name=${OTEL_SERVICE_NAME} \
--Dotel.javaagent.debug=true \
--jar /usr/src/app/target/favorite-0.0.1-SNAPSHOT.jar --server.port=5000
+
+agent_path=''
+case "${AGENT_DISTRIBUTION:-otel}" in
+  elastic)
+    agent_path='/elastic/elastic-otel-javaagent.jar'
+    ;;
+  otel)
+    agent_path='/otel/opentelemetry-javaagent.jar'
+    ;;
+  *)
+    echo "unknown otel distribution: ${AGENT_DISTRIBUTION}"
+    exit 1
+  ;;
+esac
+
+folder="$(dirname $0)"
+
+java \
+    -javaagent:${agent_path} \
+    -jar /usr/src/app/target/favorite-0.0.1-SNAPSHOT.jar \
+    --server.port=5000
