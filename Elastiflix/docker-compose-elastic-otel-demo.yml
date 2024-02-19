@@ -29,25 +29,6 @@ services:
       - app-network
     environment:
       - TOGGLE_CLIENT_PAUSE=${TOGGLE_CLIENT_PAUSE:-}
-  # TODO: this image is faiing to build. Check and fix it
-  # favorite-python-elastic-manual:
-  #   build: python-favorite-elastic-manual/.
-  #   image: docker.elastic.co/demos/workshop/observability/elastiflix-python-favorite-elastic-manual:${ELASTIC_VERSION}-${BUILD_NUMBER}
-  #   depends_on:
-  #     - redis
-  #   networks:
-  #     - app-network
-  #   ports:
-  #     - "5000:5000"
-  #   environment:
-  #     - ELASTIC_APM_ENVIRONMENT=production
-  #     - ELASTIC_APM_SECRET_TOKEN=${ELASTIC_APM_SECRET_TOKEN}
-  #     - ELASTIC_APM_SERVER_URL=${ELASTIC_APM_SERVER_URL}
-  #     - ELASTIC_APM_SERVICE_NAME=python-favorite-elastic-manual
-  #     - REDIS_HOST=redis
-  #     - TOGGLE_SERVICE_DELAY=${TOGGLE_SERVICE_DELAY:-0}
-  #     - TOGGLE_CANARY_DELAY=${TOGGLE_CANARY_DELAY:-0}
-  #     - TOGGLE_CANARY_FAILURE=${TOGGLE_CANARY_FAILURE:-0}
   favorite-go-elastic-manual:
     build: go-favorite-elastic-manual/.
     image: docker.elastic.co/demos/workshop/observability/elastiflix-go-favorite-elastic-manual:${ELASTIC_VERSION}-${BUILD_NUMBER}
