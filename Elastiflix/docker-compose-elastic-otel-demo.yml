@@ -47,6 +47,8 @@ services:
       - TOGGLE_SERVICE_DELAY=${TOGGLE_SERVICE_DELAY:-0}
       - TOGGLE_CANARY_DELAY=${TOGGLE_CANARY_DELAY:-0}
       - TOGGLE_CANARY_FAILURE=${TOGGLE_CANARY_FAILURE:-0}
+      # enable inferred spans as it's disabled by default
+      - ELASTIC_APM_PROFILING_INFERRED_SPANS_ENABLED
   favorite-java-otel:
     build: java-favorite-otel-auto/.
     image: docker.elastic.co/demos/workshop/observability/elastiflix-java-favorite-otel-auto:${ELASTIC_VERSION}-${BUILD_NUMBER}
