@@ -122,7 +122,7 @@ services:
     ports:
       - "3001:3001"
     environment:
-      - API_ENDPOINT_FAVORITES=favorite-java-elastic:5000,favorite-java-elastic-otel:5000,favorite-java-elastic-otel:5000
+      - API_ENDPOINT_FAVORITES=favorite-java-elastic:5000,favorite-java-otel:5000,favorite-java-elastic-otel:5000
       - API_ENDPOINT_LOGIN=login:80
       - ELASTICSEARCH_PASSWORD=${ELASTICSEARCH_PASSWORD}
       - ELASTICSEARCH_URL=${ELASTICSEARCH_URL}
