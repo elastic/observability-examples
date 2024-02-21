@@ -29,62 +29,7 @@ services:
       - app-network
     environment:
       - TOGGLE_CLIENT_PAUSE=${TOGGLE_CLIENT_PAUSE:-}
-  # TODO: this image is faiing to build. Check and fix it
-  # favorite-python-elastic-manual:
-  #   build: python-favorite-elastic-manual/.
-  #   image: docker.elastic.co/demos/workshop/observability/elastiflix-python-favorite-elastic-manual:${ELASTIC_VERSION}-${BUILD_NUMBER}
-  #   depends_on:
-  #     - redis
-  #   networks:
-  #     - app-network
-  #   ports:
-  #     - "5000:5000"
-  #   environment:
-  #     - ELASTIC_APM_ENVIRONMENT=production
-  #     - ELASTIC_APM_SECRET_TOKEN=${ELASTIC_APM_SECRET_TOKEN}
-  #     - ELASTIC_APM_SERVER_URL=${ELASTIC_APM_SERVER_URL}
-  #     - ELASTIC_APM_SERVICE_NAME=python-favorite-elastic-manual
-  #     - REDIS_HOST=redis
-  #     - TOGGLE_SERVICE_DELAY=${TOGGLE_SERVICE_DELAY:-0}
-  #     - TOGGLE_CANARY_DELAY=${TOGGLE_CANARY_DELAY:-0}
-  #     - TOGGLE_CANARY_FAILURE=${TOGGLE_CANARY_FAILURE:-0}
-  favorite-go-elastic-manual:
-    build: go-favorite-elastic-manual/.
-    image: docker.elastic.co/demos/workshop/observability/elastiflix-go-favorite-elastic-manual:${ELASTIC_VERSION}-${BUILD_NUMBER}
-    depends_on:
-      - redis
-    networks:
-      - app-network
-    ports:
-      - "5001:5000"
-    environment:
-      - ELASTIC_APM_ENVIRONMENT=production
-      - ELASTIC_APM_SECRET_TOKEN=${ELASTIC_APM_SECRET_TOKEN}
-      - ELASTIC_APM_SERVER_URL=${ELASTIC_APM_SERVER_URL}
-      - ELASTIC_APM_SERVICE_NAME=go-favorite-elastic-manual
-      - REDIS_HOST=redis
-      - TOGGLE_SERVICE_DELAY=${TOGGLE_SERVICE_DELAY:-0}
-      - TOGGLE_CANARY_DELAY=${TOGGLE_CANARY_DELAY:-0}
-      - TOGGLE_CANARY_FAILURE=${TOGGLE_CANARY_FAILURE:-0}
-  favorite-java-elastic-manual:
-    build: java-favorite-elastic-manual/.
-    image: docker.elastic.co/demos/workshop/observability/elastiflix-java-favorite-elastic-manual:${ELASTIC_VERSION}-${BUILD_NUMBER}
-    depends_on:
-      - redis
-    networks:
-      - app-network
-    ports:
-      - "5002:5000"
-    environment:
-      - ELASTIC_APM_ENVIRONMENT=production
-      - ELASTIC_APM_SECRET_TOKEN=${ELASTIC_APM_SECRET_TOKEN}
-      - ELASTIC_APM_SERVER_URL=${ELASTIC_APM_SERVER_URL}
-      - ELASTIC_APM_SERVICE_NAME=java-favorite-elastic-manual
-      - REDIS_HOST=redis
-      - TOGGLE_SERVICE_DELAY=${TOGGLE_SERVICE_DELAY:-0}
-      - TOGGLE_CANARY_DELAY=${TOGGLE_CANARY_DELAY:-0}
-      - TOGGLE_CANARY_FAILURE=${TOGGLE_CANARY_FAILURE:-0}
-  favorite-java-elastic-auto:
+  favorite-java-elastic:
     build: java-favorite-elastic-auto/.
     image: docker.elastic.co/demos/workshop/observability/elastiflix-java-favorite-elastic-auto:${ELASTIC_VERSION}-${BUILD_NUMBER}
     depends_on:
@@ -97,11 +42,60 @@ services:
       - ELASTIC_APM_ENVIRONMENT=production
       - ELASTIC_APM_SECRET_TOKEN=${ELASTIC_APM_SECRET_TOKEN}
       - ELASTIC_APM_SERVER_URL=${ELASTIC_APM_SERVER_URL}
-      - ELASTIC_APM_SERVICE_NAME=java-favorite-elastic-auto
+      - ELASTIC_APM_SERVICE_NAME=java-favorite-elastic
       - REDIS_HOST=redis
       - TOGGLE_SERVICE_DELAY=${TOGGLE_SERVICE_DELAY:-0}
       - TOGGLE_CANARY_DELAY=${TOGGLE_CANARY_DELAY:-0}
       - TOGGLE_CANARY_FAILURE=${TOGGLE_CANARY_FAILURE:-0}
+      # enable inferred spans as it's disabled by default
+      - ELASTIC_APM_PROFILING_INFERRED_SPANS_ENABLED=true
+  favorite-java-otel:
+    build: java-favorite-otel-auto/.
+    image: docker.elastic.co/demos/workshop/observability/elastiflix-java-favorite-otel-auto:${ELASTIC_VERSION}-${BUILD_NUMBER}
+    depends_on:
+      - redis
+    networks:
+      - app-network
+    ports:
+      - "5004:5000"
+    environment:
+      - OTEL_EXPORTER_OTLP_HEADERS=Authorization=Bearer ${ELASTIC_APM_SECRET_TOKEN}
+      - OTEL_EXPORTER_OTLP_ENDPOINT=${ELASTIC_APM_SERVER_URL}
+      - OTEL_RESOURCE_ATTRIBUTES=service.version=1.0,deployment.environment=production
+      - OTEL_SERVICE_NAME=java-favorite-otel
+      - OTEL_METRICS_EXPORTER=otlp
+      - OTEL_LOGS_EXPORTER=otlp
+      - OTEL_TRACES_EXPORTER=otlp
+      - OTEL_JAVAAGENT_DEBUG=${OTEL_JAVAAGENT_DEBUG:-false}
+      - REDIS_HOST=redis
+      - TOGGLE_SERVICE_DELAY=${TOGGLE_SERVICE_DELAY:-0}
+      - TOGGLE_CANARY_DELAY=${TOGGLE_CANARY_DELAY:-0}
+      - TOGGLE_CANARY_FAILURE=${TOGGLE_CANARY_FAILURE:-0}
+      - AGENT_DISTRIBUTION=otel
+  favorite-java-elastic-otel:
+    build: java-favorite-otel-auto/.
+    image: docker.elastic.co/demos/workshop/observability/elastiflix-java-favorite-otel-auto:${ELASTIC_VERSION}-${BUILD_NUMBER}
+    depends_on:
+      - redis
+    networks:
+      - app-network
+    ports:
+      - "5005:5000"
+    environment:
+      - OTEL_EXPORTER_OTLP_HEADERS=Authorization=Bearer ${ELASTIC_APM_SECRET_TOKEN}
+      - OTEL_EXPORTER_OTLP_ENDPOINT=${ELASTIC_APM_SERVER_URL}
+      - OTEL_RESOURCE_ATTRIBUTES=service.version=1.0,deployment.environment=production
+      - OTEL_SERVICE_NAME=favorite-java-elastic-otel
+      - OTEL_METRICS_EXPORTER=otlp
+      - OTEL_LOGS_EXPORTER=otlp
+      - OTEL_TRACES_EXPORTER=otlp
+      - OTEL_JAVAAGENT_DEBUG=${OTEL_JAVAAGENT_DEBUG:-false}
+      - REDIS_HOST=redis
+      - TOGGLE_SERVICE_DELAY=${TOGGLE_SERVICE_DELAY:-0}
+      - TOGGLE_CANARY_DELAY=${TOGGLE_CANARY_DELAY:-0}
+      - TOGGLE_CANARY_FAILURE=${TOGGLE_CANARY_FAILURE:-0}
+      - AGENT_DISTRIBUTION=elastic
+      - ELASTIC_OTEL_INFERRED_SPANS_ENABLED=true
   login:
     build: dotnet-login-elastic-auto/.
     image: docker.elastic.co/demos/workshop/observability/elastiflix-dotnet-login-elastic-auto:${ELASTIC_VERSION}-${BUILD_NUMBER}
@@ -130,8 +124,7 @@ services:
     ports:
       - "3001:3001"
     environment:
-      # - API_ENDPOINT_FAVORITES=favorite-python-elastic-manual:5000,favorite-go-elastic-manual:5000,favorite-java-elastic-auto:5000,favorite-java-elastic-manual:5000
-      - API_ENDPOINT_FAVORITES=favorite-go-elastic-manual:5000,favorite-java-elastic-auto:5000,favorite-java-elastic-manual:5000
+      - API_ENDPOINT_FAVORITES=favorite-java-elastic:5000,favorite-java-otel:5000,favorite-java-elastic-otel:5000
       - API_ENDPOINT_LOGIN=login:80
       - ELASTICSEARCH_PASSWORD=${ELASTICSEARCH_PASSWORD}
       - ELASTICSEARCH_URL=${ELASTICSEARCH_URL}
@@ -158,8 +151,7 @@ services:
     ports:
       - "3002:3002"
     environment:
-      # - API_ENDPOINT_FAVORITES=favorite-python-elastic-manual:5000,favorite-go-elastic-manual:5000,favorite-java-elastic-auto:5000,favorite-java-elastic-manual:5000
-      - API_ENDPOINT_FAVORITES=favorite-go-elastic-manual:5000,favorite-java-elastic-auto:5000,favorite-java-elastic-manual:5000
+      - API_ENDPOINT_FAVORITES=favorite-java-elastic:5000,favorite-java-elastic-otel:5000,favorite-java-elastic-otel:5000
       - API_ENDPOINT_LOGIN=login:80
       - ELASTICSEARCH_PASSWORD=${ELASTICSEARCH_PASSWORD}
       - ELASTICSEARCH_URL=${ELASTICSEARCH_URL}
