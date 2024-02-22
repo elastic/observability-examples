@@ -67,12 +67,11 @@ sdk.start();
 
 
 // Add OpenTelemetry packages
-const opentelemetry = require("@opentelemetry/api");
-const { NodeTracerProvider } = require('@opentelemetry/sdk-trace-node');
-const { BatchSpanProcessor } = require("@opentelemetry/sdk-trace-base");
-const { OTLPTraceExporter } = require('@opentelemetry/exporter-trace-otlp-grpc');
-const { Resource } = require('@opentelemetry/resources');
-const { SemanticResourceAttributes } = require('@opentelemetry/semantic-conventions');
+// const opentelemetry = require("@opentelemetry/api");
+// const { NodeTracerProvider } = require('@opentelemetry/sdk-trace-node');
+// const { BatchSpanProcessor } = require("@opentelemetry/sdk-trace-base");
+// const { OTLPTraceExporter } = require('@opentelemetry/exporter-trace-otlp-grpc');
+// const { Resource } = require('@opentelemetry/resources');
+// const { SemanticResourceAttributes } = require('@opentelemetry/semantic-conventions');
 
-const { registerInstrumentations } = require('@opentelemetry/instrumentation');
-
+// const { registerInstrumentations } = require('@opentelemetry/instrumentation');

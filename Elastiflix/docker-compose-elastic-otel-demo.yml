@@ -158,13 +158,43 @@ services:
       - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME}
       - OTEL_LOG_LEVEL=info
       - OTEL_METRICS_EXPORTER=otlp
+      - OTEL_RESOURCE_ATTRIBUTES=service.version=1.0,deployment.environment=production,service.name=node-server-elastic-otel-${NODE_APM_SETUP_MODE}
+      - OTEL_SERVICE_NAME=node-server-elastic-otel-${NODE_APM_SETUP_MODE}
+      - OTEL_TRACES_EXPORTER=otlp
+      - OTEL_EXPORTER_OTLP_ENDPOINT=${ELASTIC_APM_SERVER_URL}
+      - OTEL_EXPORTER_OTLP_HEADERS=Authorization=Bearer ${ELASTIC_APM_SECRET_TOKEN}
+      - THROW_NOT_A_FUNCTION_ERROR=${THROW_NOT_A_FUNCTION_ERROR:-}
+      - PORT=3002
+  # We have one API server instrumented with otel SDK
+  node-server-otel:
+    build:
+      context: node-server
+      dockerfile: Dockerfile-otel-${NODE_APM_SETUP_MODE}
+      ssh: ["default"]
+    image: docker.elastic.co/demos/workshop/observability/elastiflix-node-server-otel-${NODE_APM_SETUP_MODE}:${ELASTIC_VERSION}-${BUILD_NUMBER}
+    container_name: node-server-otel
+    depends_on:
+      - redis
+      - login
+    networks:
+      - app-network
+    ports:
+      - "3003:3003"
+    environment:
+      - API_ENDPOINT_FAVORITES=favorite-java-elastic:5000,favorite-java-elastic-otel:5000,favorite-java-elastic-otel:5000
+      - API_ENDPOINT_LOGIN=login:80
+      - ELASTICSEARCH_PASSWORD=${ELASTICSEARCH_PASSWORD}
+      - ELASTICSEARCH_URL=${ELASTICSEARCH_URL}
+      - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME}
+      - OTEL_LOG_LEVEL=info
+      - OTEL_METRICS_EXPORTER=otlp
       - OTEL_RESOURCE_ATTRIBUTES=service.version=1.0,deployment.environment=production,service.name=node-server-otel-${NODE_APM_SETUP_MODE}
       - OTEL_SERVICE_NAME=node-server-otel-${NODE_APM_SETUP_MODE}
       - OTEL_TRACES_EXPORTER=otlp
       - OTEL_EXPORTER_OTLP_ENDPOINT=${ELASTIC_APM_SERVER_URL}
       - OTEL_EXPORTER_OTLP_HEADERS=Authorization=Bearer ${ELASTIC_APM_SECRET_TOKEN}
       - THROW_NOT_A_FUNCTION_ERROR=${THROW_NOT_A_FUNCTION_ERROR:-}
-      - PORT=3002
+      - PORT=3003
   javascript-client:
     build: javascript-client-elastic-manual/.
     image: docker.elastic.co/demos/workshop/observability/elastiflix-javascript-client-elastic-manual:${ELASTIC_VERSION}-${BUILD_NUMBER}
