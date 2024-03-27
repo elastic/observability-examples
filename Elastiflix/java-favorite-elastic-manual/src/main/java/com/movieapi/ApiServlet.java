@@ -131,7 +131,7 @@ public class ApiServlet {
      private void handleCanary() throws Exception {
         Random random = new Random();
         if (sleepTime > 0 && random.nextDouble() < 0.5) {
-            double randomGaussDelay = Math.min(delayTime*5, Math.max(0, random.nextGaussian() * (delayTime)));
+            double randomGaussDelay = Math.min(sleepTime*5, Math.max(0, random.nextGaussian() * (sleepTime)));
             TimeUnit.MILLISECONDS.sleep((long) randomGaussDelay);
             logger.info("Canary enabled");
             Transaction transaction = ElasticApm.currentTransaction();
