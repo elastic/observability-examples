@@ -1,0 +1,78 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+
+  "data": [
+    {
+      "name": "source",
+      "url": {
+                "%context%": true,
+
+        "index": "traces-apm*,apm-*,logs-apm*,apm-*,metrics-apm*,apm-*",
+        "body": {
+          "aggs": {
+            "models": {
+              "terms": {
+                "field": "labels.model.keyword",
+                "size": 10
+              },
+              "aggs": {
+                "prompt_tokens_sum": {
+                  "sum": {
+                    "field": "numeric_labels.prompt_tokens"
+                  }
+                },
+                "completion_tokens_sum": {
+                  "sum": {
+                    "field": "numeric_labels.completion_tokens"
+                  }
+                },
+                "token_count_sum": {
+                  "sum": {
+                    "field": "numeric_labels.token_count"
+                  }
+                }
+              }
+            }
+            
+          }
+        }
+      },
+      "format": {"property": "aggregations.models.buckets"},
+      "transform": [
+        {
+          "type": "formula",
+          "expr": "datum.key === 'gpt-4' || datum.key === 'gpt-4-0314' ? (datum.prompt_tokens_sum.value * 0.0300 / 1000) + (datum.completion_tokens_sum.value * 0.0600 / 1000) : datum.key === 'gpt-4-32k' || datum.key === 'gpt-4-32k-0314' ? (datum.prompt_tokens_sum.value * 0.0600 / 1000) + (datum.completion_tokens_sum.value * 0.1200 / 1000) : indexof(datum.key, 'gpt-3.5-turbo') !== -1 ? datum.token_count_sum.value * 0.0020 / 1000 : indexof(datum.key, 'davinci') !== -1 ? datum.token_count_sum.value * 0.0200 / 1000 : indexof(datum.key, 'curie') !== -1 ? datum.token_count_sum.value * 0.0020 / 1000 : indexof(datum.key, 'babbage') !== -1 ? datum.token_count_sum.value * 0.0005 / 1000 : indexof(datum.key, 'ada') !== -1 ? datum.token_count_sum.value * 0.0004 / 1000 : 0",
+          "as": "cost"
+        }
+      ]
+    },
+    {
+      "type": "aggregate",
+      "from": "source",
+      "fields": ["cost"],
+      "ops": ["sum"],
+      "as": ["total_cost"]
+    }
+  ],
+  
+  "title": "Cost (USD)",
+  "marks": [
+    {
+      "type": "text",
+      "from": {"data": "source"},
+      "encode": {
+        "enter": {
+          "x": {"value": 150},
+          "y": {"value": 100},
+          "text": {"signal": "format(datum.total_cost, '.2f')"},
+          "fontSize": {"value": 24},
+          "fontWeight": {"value": "bold"},
+          "align": {"value": "center"},
+          "baseline": {"value": "middle"}
+        }
+      }
+    }
+
+
+  ]
+}
