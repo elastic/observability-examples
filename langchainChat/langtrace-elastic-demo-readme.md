@@ -12,8 +12,8 @@ This project demonstrates the integration of Langtrace with Elastic APM for trac
 
 1. Clone this repository:
    ```
-   git clone https://github.com/bshetti/langhcainChat.git
-   cd langtrace
+   git clone https://github.com/elastic/observability-examples.git
+   cd langchainChat
    ```
 2. Create and activate a virtual environment:
 
@@ -52,9 +52,18 @@ This project demonstrates the integration of Langtrace with Elastic APM for trac
 
 Note: The OTEL_EXPORTER_OTLP_HEADERS should include the full header string, including the "Authorization=Bearer" prefix.
 
+There is an example file `ENV` in this directory
+
+```
+cp ENV .env
+```
+
+Edit the file with your favorite editor and put in the proper values
+
+
 ## Usage
 
-Run the script with:
+Run the app with:
 
 ```
 opentelemetry-instrument python langtrace-elastic-demo.py
@@ -75,6 +84,4 @@ Type 'quit' to exit the chat.
 3. When you ask a question, it performs a web search and uses the results to generate an AI response.
 4. All operations are traced using Langtrace, which sends the trace data to Elastic APM.
 
-## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.

@@ -1,4 +1,11 @@
+#Azure 
 export AZURE_OPENAI_API_KEY=YYYY
 export AZURE_OPENAI_ENDPOINT="ZZZZZ"
 export AZURE_OPENAI_DEPLOYMENT_NAME="gpt-4o-global"
 export AZURE_OPENAI_API_VERSION="2024-02-15-preview"
+
+#OTel
+export OTEL_EXPORTER_OTLP_ENDPOINT=XXX:443
+export OTEL_EXPORTER_OTLP_HEADERS=""Authorization=Bearer%YYY""
+export OTEL_RESOURCE_ATTRIBUTES="service.name=langchainChat,service.version=1.0,deployment.environment=production"
+export OTEL_SERVICE_NAME=langchainChat
