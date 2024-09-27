@@ -1,0 +1,7 @@
+python-dotenv
+opentelemetry-exporter-otlp-proto-http
+langtrace_python_sdk
+langchain
+langchain_openai
+langchain_community
+duckduckgo-search
