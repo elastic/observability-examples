@@ -9,22 +9,6 @@ from langchain.schema.runnable import RunnableSequence
 from langchain_community.tools import DuckDuckGoSearchResults
 from langchain_community.utilities import DuckDuckGoSearchAPIWrapper
 
-# Load environment variables
-#load_dotenv()
-
-# OpenTelemetry settings
-#OTEL_EXPORTER_OTLP_ENDPOINT = os.getenv("OTEL_EXPORTER_OTLP_ENDPOINT")
-#OTEL_SERVICE_NAME = os.getenv("OTEL_SERVICE_NAME")
-#OTEL_EXPORTER_OTLP_HEADERS = os.getenv("OTEL_EXPORTER_OTLP_HEADERS")
-
-#OTEL_EXPORTER_OTLP_ENDPOINT="https://92eca2bbf03147a18859529631e76688.apm.us-west-2.aws.cloud.es.io:443"
-#OTEL_EXPORTER_OTLP_HEADERS="Authorization=Bearer Z70tQAUXOtoA4l6Jo3"
-#OTEL_SERVICE_NAME="langchainChat"
-#OTEL_RESOURCE_ATTRIBUTES="service.name=langchainChat,service.version=1.2,deployment.environment=dev"
-
-#headers = dict(item.split("=") for item in OTEL_EXPORTER_OTLP_HEADERS.split(",")) if OTEL_EXPORTER_OTLP_HEADERS else {}
-#headers = { 'Authorization' : 'ApiKey SENaWWg1RUJqd0EzM2JwUnE3eWI6OFBta21GR2VUMDZub3hjNUdNa2hBZw=='}
-
 
 #set up tracing and initialize
 otel_traces_exporter = os.environ.get('OTEL_TRACES_EXPORTER') or 'otlp'
@@ -49,14 +33,6 @@ else:
 
 print(otel_exporter_otlp_endpoint, otel_exporter_otlp_headers)
 
-
-# Set up Elastic exporter
-#elastic_exporter = OTLPSpanExporter(
-#    endpoint=OTEL_EXPORTER_OTLP_ENDPOINT,
-#    headers=headers
-#)
-
-#print(OTEL_EXPORTER_OTLP_ENDPOINT, headers)
 
 # Initialize Langtrace with Elastic exporter
 langtrace.init(
