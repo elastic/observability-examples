@@ -3,7 +3,7 @@ services:
   locust:
     image: locustio/locust:2.15.1
     ports:
-     - "8089:8089"
+      - "8089:8089"
     volumes:
       - ./locustfile.py:/mnt/locust/locustfile.py
     command: -f /mnt/locust/locustfile.py --host http://node-server:3001 --autostart
@@ -149,34 +149,12 @@ services:
       - OTEL_SERVICE_NAME=dotnet-login-otel-auto
       - OTEL_TRACES_EXPORTER=otlp
       - REDIS_HOST=redis
-  # node-server:
-  #   build: node-server-otel-auto/.
-  #   image: docker.elastic.co/demos/workshop/observability/elastiflix-node-server-otel-auto:${ELASTIC_VERSION}-${BUILD_NUMBER}
-  #   depends_on:
-  #     - redis
-  #     - login
-  #   networks:
-  #     - app-network
-  #   ports:
-  #     - "3001:3001"
-  #   environment:
-  #   environment:
-  #     - API_ENDPOINT_FAVORITES=favorite-java-otel-auto:5000,favorite-java-otel-manual:5000,favorite-python-otel-auto:5000,favorite-go-otel-manual:5000,favorite-python-otel-manual:5000
-  #     - API_ENDPOINT_LOGIN=login:80
-  #     - ELASTICSEARCH_PASSWORD=${ELASTICSEARCH_PASSWORD}
-  #     - ELASTICSEARCH_URL=${ELASTICSEARCH_URL}
-  #     - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME}
-  #     - OTEL_EXPORTER_OTLP_ENDPOINT=${ELASTIC_APM_SERVER_URL}
-  #     - OTEL_EXPORTER_OTLP_HEADERS=Authorization=Bearer ${ELASTIC_APM_SECRET_TOKEN}
-  #     - OTEL_LOG_LEVEL=info
-  #     - OTEL_METRICS_EXPORTER=otlp
-  #     - OTEL_RESOURCE_ATTRIBUTES=service.version=1.0,deployment.environment=production
-  #     - OTEL_SERVICE_NAME=node-server-otel-auto
-  #     - OTEL_TRACES_EXPORTER=otlp
-  #     - THROW_NOT_A_FUNCTION_ERROR=${THROW_NOT_A_FUNCTION_ERROR:-}
   node-server:
-    build: node-server-otel-manual/.
-    image: docker.elastic.co/demos/workshop/observability/elastiflix-node-server-otel-manual:${ELASTIC_VERSION}-${BUILD_NUMBER}
+    build: 
+      context: node-server
+      dockerfile: Dockerfile-elastic-otel-${NODE_APM_SETUP_MODE}
+      ssh: ["default"]
+    image: docker.elastic.co/demos/workshop/observability/elastiflix-node-server-elastic-otel-${NODE_APM_SETUP_MODE}:${ELASTIC_VERSION}-${BUILD_NUMBER}
     depends_on:
       - redis
       - login
@@ -194,7 +172,8 @@ services:
       - OTEL_EXPORTER_OTLP_HEADERS=Authorization=Bearer ${ELASTIC_APM_SECRET_TOKEN}
       - OTEL_LOG_LEVEL=info
       - OTEL_METRICS_EXPORTER=otlp
-      - OTEL_RESOURCE_ATTRIBUTES=service.version=1.0,deployment.environment=production,service.name=node-server-otel-manual
+      - OTEL_RESOURCE_ATTRIBUTES=service.version=1.0,deployment.environment=production,service.name=node-server-otel-${NODE_APM_SETUP_MODE}
+      - OTEL_SERVICE_NAME=node-server-otel-${NODE_APM_SETUP_MODE}
       - OTEL_TRACES_EXPORTER=otlp
       - THROW_NOT_A_FUNCTION_ERROR=${THROW_NOT_A_FUNCTION_ERROR:-}
   frontend:

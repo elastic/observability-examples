@@ -3,7 +3,7 @@ services:
   locust:
     image: locustio/locust:2.15.1
     ports:
-     - "8089:8089"
+      - "8089:8089"
     volumes:
       - ./locustfile.py:/mnt/locust/locustfile.py
     command: -f /mnt/locust/locustfile.py --host http://node-server:3001 --autostart
@@ -29,24 +29,25 @@ services:
       - app-network
     environment:
       - TOGGLE_CLIENT_PAUSE=${TOGGLE_CLIENT_PAUSE:-}
-  favorite-python-elastic-manual:
-    build: python-favorite-elastic-manual/.
-    image: docker.elastic.co/demos/workshop/observability/elastiflix-python-favorite-elastic-manual:${ELASTIC_VERSION}-${BUILD_NUMBER}
-    depends_on:
-      - redis
-    networks:
-      - app-network
-    ports:
-      - "5000:5000"
-    environment:
-      - ELASTIC_APM_ENVIRONMENT=production
-      - ELASTIC_APM_SECRET_TOKEN=${ELASTIC_APM_SECRET_TOKEN}
-      - ELASTIC_APM_SERVER_URL=${ELASTIC_APM_SERVER_URL}
-      - ELASTIC_APM_SERVICE_NAME=python-favorite-elastic-manual
-      - REDIS_HOST=redis
-      - TOGGLE_SERVICE_DELAY=${TOGGLE_SERVICE_DELAY:-0}
-      - TOGGLE_CANARY_DELAY=${TOGGLE_CANARY_DELAY:-0}
-      - TOGGLE_CANARY_FAILURE=${TOGGLE_CANARY_FAILURE:-0}
+  # TODO: this image is faiing to build. Check and fix it
+  # favorite-python-elastic-manual:
+  #   build: python-favorite-elastic-manual/.
+  #   image: docker.elastic.co/demos/workshop/observability/elastiflix-python-favorite-elastic-manual:${ELASTIC_VERSION}-${BUILD_NUMBER}
+  #   depends_on:
+  #     - redis
+  #   networks:
+  #     - app-network
+  #   ports:
+  #     - "5000:5000"
+  #   environment:
+  #     - ELASTIC_APM_ENVIRONMENT=production
+  #     - ELASTIC_APM_SECRET_TOKEN=${ELASTIC_APM_SECRET_TOKEN}
+  #     - ELASTIC_APM_SERVER_URL=${ELASTIC_APM_SERVER_URL}
+  #     - ELASTIC_APM_SERVICE_NAME=python-favorite-elastic-manual
+  #     - REDIS_HOST=redis
+  #     - TOGGLE_SERVICE_DELAY=${TOGGLE_SERVICE_DELAY:-0}
+  #     - TOGGLE_CANARY_DELAY=${TOGGLE_CANARY_DELAY:-0}
+  #     - TOGGLE_CANARY_FAILURE=${TOGGLE_CANARY_FAILURE:-0}
   favorite-go-elastic-manual:
     build: go-favorite-elastic-manual/.
     image: docker.elastic.co/demos/workshop/observability/elastiflix-go-favorite-elastic-manual:${ELASTIC_VERSION}-${BUILD_NUMBER}
@@ -115,8 +116,10 @@ services:
       - ELASTIC_APM_SERVICE_NAME=dotnet-login-elastic-auto
       - PAL_OUTPUTDEBUGSTRING=1
   node-server:
-    build: node-server-elastic-manual/.
-    image: docker.elastic.co/demos/workshop/observability/elastiflix-node-server-elastic-manual:${ELASTIC_VERSION}-${BUILD_NUMBER}
+    build:
+      context: node-server
+      dockerfile: Dockerfile-elastic-apm-${NODE_APM_SETUP_MODE}
+    image: docker.elastic.co/demos/workshop/observability/elastiflix-node-server-elastic-${NODE_APM_SETUP_MODE}:${ELASTIC_VERSION}-${BUILD_NUMBER}
     depends_on:
       - redis
       - login
@@ -125,7 +128,8 @@ services:
     ports:
       - "3001:3001"
     environment:
-      - API_ENDPOINT_FAVORITES=favorite-python-elastic-manual:5000,favorite-go-elastic-manual:5000,favorite-java-elastic-auto:5000,favorite-java-elastic-manual:5000
+      # - API_ENDPOINT_FAVORITES=favorite-python-elastic-manual:5000,favorite-go-elastic-manual:5000,favorite-java-elastic-auto:5000,favorite-java-elastic-manual:5000
+      - API_ENDPOINT_FAVORITES=favorite-go-elastic-manual:5000,favorite-java-elastic-auto:5000,favorite-java-elastic-manual:5000
       - API_ENDPOINT_LOGIN=login:80
       - ELASTICSEARCH_PASSWORD=${ELASTICSEARCH_PASSWORD}
       - ELASTICSEARCH_URL=${ELASTICSEARCH_URL}
@@ -133,7 +137,7 @@ services:
       - ELASTIC_APM_ENVIRONMENT=production
       - ELASTIC_APM_SECRET_TOKEN=${ELASTIC_APM_SECRET_TOKEN}
       - ELASTIC_APM_SERVER_URL=${ELASTIC_APM_SERVER_URL}
-      - ELASTIC_APM_SERVICE_NAME=node-server-elastic-manual
+      - ELASTIC_APM_SERVICE_NAME=node-server-elastic-${NODE_APM_SETUP_MODE}
       - THROW_NOT_A_FUNCTION_ERROR=${THROW_NOT_A_FUNCTION_ERROR:-}
   javascript-client:
     build: javascript-client-elastic-manual/.

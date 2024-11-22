@@ -1,0 +1,30 @@
+FROM node:18.17.0
+
+# TODO: this is a workaround to install the new package while
+# still not published in NPM registry. We checkout the repo then
+# later install the dependency using the `file:` schema
+# NOTE: you may select to clone from a specific branch by just
+# changing the branch name in the `-b` CLI option
+WORKDIR /
+RUN --mount=type=ssh GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=accept-new"\
+  git clone -b main git@github.com:elastic/elastic-otel-node.git
+
+
+WORKDIR /app
+
+COPY ["package.json", "./"]
+RUN ls
+RUN npm install --production
+COPY . .
+
+# TODO: use this regular `npm install` when distro is published
+# RUN npm install --save @elastic/opentelemetry-node
+
+# TODO: Remove and use the install 
+# `--install-links` option forces to install `@elastic/opentelemetry-node` dependencies
+RUN npm install ../elastic-otel-node/packages/opentelemetry-node --install-links --production
+
+EXPOSE 3001
+
+CMD ["node", "--require", "@elastic/opentelemetry-node/start", "index.js"]
+
