@@ -24,7 +24,7 @@ This code example generates 1000 example credit card transactions which include 
 
 1. Change directory to the code example folder:
     ```
-    cd anomaly-detection
+    cd observability-examples/anomaly-detection
     ```
 
 2. Install the code example’s dependencies:
