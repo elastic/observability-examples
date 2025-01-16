@@ -1,0 +1,11 @@
+{
+  "name": "transactions-generator",
+  "version": "1.0.0",
+  "description": "generate sample transactions",
+  "main": "generate-transactions.js",
+  "author": "Elastic NV",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@faker-js/faker": "^9.3.0"
+  }
+}
