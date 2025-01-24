@@ -1,0 +1,44 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: init-elasticsearch-index-test
+spec:
+  template:
+    spec:
+      containers:
+      - name: init-index
+#update your image location for chatbot rag app
+        image: your-image-location:latest
+        workingDir: /app/api
+        command: ["python3", "-m", "flask", "--app", "app", "create-index"]
+        env:
+        - name: FLASK_APP
+          value: "app"
+        - name: LLM_TYPE
+          value: "openai"
+        - name: CHAT_MODEL
+          value: "gpt-4o-mini"
+        - name: ES_INDEX
+          value: "workplace-app-docs"
+        - name: ES_INDEX_CHAT_HISTORY
+          value: "workplace-app-docs-chat-history"
+        - name: ELASTICSEARCH_URL
+          valueFrom:
+            secretKeyRef:
+              name: chatbot-regular-secrets
+              key: ELASTICSEARCH_URL
+        - name: ELASTICSEARCH_USER
+          valueFrom:
+            secretKeyRef:
+              name: chatbot-regular-secrets
+              key: ELASTICSEARCH_USER
+        - name: ELASTICSEARCH_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: chatbot-regular-secrets
+              key: ELASTICSEARCH_PASSWORD
+        envFrom:
+        - secretRef:
+            name: chatbot-regular-secrets
+      restartPolicy: Never
+  backoffLimit: 4

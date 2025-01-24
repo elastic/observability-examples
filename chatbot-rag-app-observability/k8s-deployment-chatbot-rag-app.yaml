@@ -1,0 +1,77 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: chatbot-regular-secrets
+type: Opaque
+stringData:
+  ELASTICSEARCH_URL: "YOUR_ELASTIC_SEARCH_URL"
+  ELASTICSEARCH_USER: "elastic"
+  ELASTICSEARCH_PASSWORD: "elastic"
+  OTEL_EXPORTER_OTLP_HEADERS: "Authorization=Bearer%20xxxx"
+  OTEL_EXPORTER_OTLP_ENDPOINT: "https://1234567.apm.us-west-2.aws.cloud.es.io:443"
+  OPENAI_API_KEY: "YYYYYYYY"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chatbot-regular
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: chatbot-regular
+  template:
+    metadata:
+      labels:
+        app: chatbot-regular
+    spec:
+      containers:
+      - name: chatbot-regular
+#Replace your image location below
+        image: your-image-location:latest
+        ports:
+        - containerPort: 4000
+        env:
+        - name: LLM_TYPE
+          value: "openai"
+        - name: CHAT_MODEL
+          value: "gpt-4o-mini"
+        - name: OTEL_RESOURCE_ATTRIBUTES
+          value: "service.name=chatbot-regular,service.version=0.0.1,deployment.environment=dev"
+        - name: OTEL_SDK_DISABLED
+          value: "false"
+        - name: OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT
+          value: "true"
+        - name: OTEL_EXPERIMENTAL_RESOURCE_DETECTORS
+          value: "process_runtime,os,otel,telemetry_distro"
+        - name: OTEL_EXPORTER_OTLP_PROTOCOL
+          value: "http/protobuf"
+        - name: OTEL_METRIC_EXPORT_INTERVAL
+          value: "3000"
+        - name: OTEL_BSP_SCHEDULE_DELAY
+          value: "3000"
+        envFrom:
+        - secretRef:
+            name: chatbot-regular-secrets
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: chatbot-regular-service
+spec:
+  selector:
+    app: chatbot-regular
+  ports:
+  - port: 80
+    targetPort: 4000
+  type: LoadBalancer
+
