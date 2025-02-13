@@ -28,8 +28,8 @@ spec:
     spec:
       containers:
       - name: chatbot-regular
-#Replace your image location below
-        image: your-image-location:latest
+#Replace your image location below or continue to use this prebuilt version
+        image: ghcr.io/elastic/elasticsearch-labs/chatbot-rag-app:latest
         ports:
         - containerPort: 4000
         env:

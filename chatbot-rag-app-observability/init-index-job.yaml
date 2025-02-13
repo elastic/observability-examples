@@ -7,8 +7,8 @@ spec:
     spec:
       containers:
       - name: init-index
-#update your image location for chatbot rag app
-        image: your-image-location:latest
+#update your image location for chatbot rag app or continue to use this prebuilt one
+        image: ghcr.io/elastic/elasticsearch-labs/chatbot-rag-app:latest
         workingDir: /app/api
         command: ["python3", "-m", "flask", "--app", "app", "create-index"]
         env:
