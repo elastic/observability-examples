@@ -30,7 +30,7 @@ In order to set this up, you can follow the following repo on Observability-exam
 
 2. Get the appropriate ENV variables:
 
-- Find the OTEL_EXPORTER_OTLP\_ENDPOINT/HEADER variables in your Elastic Cloud instance under `integrations-->APM` 
+- Find the `OTEL_EXPORTER_OTLP_ENDPOINT` and `OTEL_EXPORTER_OTLP_HEADER` variables in your Elastic Cloud instance under `integrations-->APM` 
 
 - Get your OpenAI Key
 
