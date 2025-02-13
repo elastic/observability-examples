@@ -2,7 +2,7 @@
 
 This repo and instructions are for running [Chatbot RAG App](https://github.com/elastic/elasticsearch-labs/tree/main/example-apps/chatbot-rag-app) with Elastic Cloud using either Docker or Kubernetes
 
-Elastic’s sample [RAG based Chatbot application](https://github.com/elastic/elasticsearch-labs/tree/main/example-apps/chatbot-rag-app), showcases how to use Elasticsearch with local data that has embeddings, enabling search to properly pull out the most contextual information during a query with a chatbot connected to an LLM of your choice.  It’s a great example of how to build out a RAG based application with Elasticsearch.
+Elastic’s sample [RAG based Chatbot application](https://github.com/elastic/elasticsearch-labs/tree/main/example-apps/chatbot-rag-app), showcases how to use Elasticsearch with local data that has embeddings, enabling search to properly pull out the most contextual information during a query with a chatbot connected to an LLM of your choice.  It’ a great example of how to build out a RAG based application with Elasticsearch. 
 
 This app is also now insturmented with EDOT, and you can visualize the Chatbot’s traces to OpenAI, as well as relevant logs, and metrics from the application. By running the app as instructed in the github repo with Docker you can see these traces on a local stack. But how about running it against serverless, Elastic cloud or even with Kubernetes?
 
@@ -28,7 +28,15 @@ In order to set this up, you can follow the following repo on Observability-exam
 
 1. Set up the Kubernetes Cluster
 
-2. Get the appropriate ENV variables:
+2. Create a docker image using the Dockerfile from the repo. However use the following build command to ensure it will run on any K8s environment.,
+
+```bash
+docker buildx build --platform linux/amd64 -t chatbot-rag-app .
+```
+
+3. Push the image to your favorite container repo
+
+4. Get the appropriate ENV variables:
 
 - Find the `OTEL_EXPORTER_OTLP_ENDPOINT` and `OTEL_EXPORTER_OTLP_HEADER` variables in your Elastic Cloud instance under `integrations-->APM` 
 
@@ -36,7 +44,10 @@ In order to set this up, you can follow the following repo on Observability-exam
 
 - Get the Elasticsearch URL, username and password.
 
-3. Replace the variables in `k8s-deployment.yaml`
+5. Replace the variables and your image location in both `init-index-job.yaml` and `k8s-deployment.yaml`
+
+
+Here is what you replace in `k8s-deployment.yaml`
 
 ```bash
 stringData:
@@ -46,6 +57,23 @@ stringData:
   OTEL_EXPORTER_OTLP_HEADERS: "Authorization=Bearer%20xxxx"
   OTEL_EXPORTER_OTLP_ENDPOINT: "https://12345.apm.us-west-2.aws.cloud.es.io:443"
   OPENAI_API_KEY: "YYYYYYYY"
+
+  AND
+
+spec:
+      containers:
+      - name: chatbot-regular
+#Replace your image location here
+        image: yourimagelocation:latest
+```
+Here is what you replace in `init-index-job.yaml`
+
+```bash
+    spec:
+      containers:
+      - name: init-index
+#update your image location for chatbot rag app
+        image: your-image-location:latest
 ```
 
 6. Then run the following
@@ -58,10 +86,10 @@ kubectl create -f init-index-job.yaml
 Here is what happens:
 
 - `k8s-deployment.yaml` will ensure the chatbot-rag-app pods are running
-- `k8s-deployment.yaml` deploys a secret with your env variables (OpenAI key, Elastic end points, OTel endpoint and header, etc)
-- `init-index-job.yaml` will run a job initializing elasticsearch with the index for the app, and use the secret created by k8s-deployment.yaml
+-  `k8s-deployment.yaml` deploys a secret with your env variables (OpenAI key, Elastic end points, OTel endpoint and header, etc)
+-  `init-index-job.yaml` will run a job initializing elasticsearch with the index for the app, and use the secret created by k8s-deployment.yaml
 
-6. Once the job is complete and the chatbot-rag-app is running, get the loadbalancer url by running:
+6. Once the job iscomplete and the chatbot-rag-app is running, get the loadbalancer url by running:
 
 ```bash
 kubectl get services
@@ -89,7 +117,7 @@ chatbot-regular-service            LoadBalancer   10.100.130.44    xxxxxxxxx-151
 
 2. Replace the variables a local copy of `env.example` - DO NOT FORGET TO call it `.env`
 
-3. Run `docker compose up --pull always --force-recreate`
+3. Run `docker compose up --build --force-recreate`
 
 4. Play with app at `localhost:4000`
 
