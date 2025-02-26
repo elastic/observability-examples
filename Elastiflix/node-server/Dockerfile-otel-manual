@@ -9,5 +9,5 @@ COPY . .
 
 EXPOSE 3001
 
-CMD ["node", "index.js"]
+CMD ["node", "--require", "apm-setup/otel.js", "index.js"]
 

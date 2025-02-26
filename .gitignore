@@ -1,1 +1,6 @@
+# editor settings
 **/.idea
+.vscode
+
+# dev env
+.env.dev

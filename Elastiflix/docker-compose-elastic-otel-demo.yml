@@ -1,0 +1,215 @@
+version: "3"
+services:
+  locust:
+    image: locustio/locust:2.15.1
+    ports:
+      - "8089:8089"
+    volumes:
+      - ./locustfile.py:/mnt/locust/locustfile.py
+    command: -f /mnt/locust/locustfile.py --autostart -u 2
+    networks:
+      - app-network
+    environment:
+      - ELASTIC_APM_ENVIRONMENT=production
+  movie-data-loader:
+    build: movie-data-loader/.
+    image: docker.elastic.co/demos/workshop/observability/elastiflix-movie-data-loader:${ELASTIC_VERSION}-${BUILD_NUMBER}
+    networks:
+      - app-network
+    environment:
+      - ELASTICSEARCH_URL=${ELASTICSEARCH_URL}
+      - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME}
+      - ELASTICSEARCH_PASSWORD=${ELASTICSEARCH_PASSWORD}
+  redis:
+    build: redis/.
+    image: docker.elastic.co/demos/workshop/observability/elastiflix-redis:${ELASTIC_VERSION}-${BUILD_NUMBER}
+    ports:
+      - 6379
+    networks:
+      - app-network
+    environment:
+      - TOGGLE_CLIENT_PAUSE=${TOGGLE_CLIENT_PAUSE:-}
+  favorite-java-elastic:
+    build: java-favorite-elastic-auto/.
+    image: docker.elastic.co/demos/workshop/observability/elastiflix-java-favorite-elastic-auto:${ELASTIC_VERSION}-${BUILD_NUMBER}
+    depends_on:
+      - redis
+    networks:
+      - app-network
+    ports:
+      - "5003:5000"
+    environment:
+      - ELASTIC_APM_ENVIRONMENT=production
+      - ELASTIC_APM_SECRET_TOKEN=${ELASTIC_APM_SECRET_TOKEN}
+      - ELASTIC_APM_SERVER_URL=${ELASTIC_APM_SERVER_URL}
+      - ELASTIC_APM_SERVICE_NAME=java-favorite-elastic
+      - REDIS_HOST=redis
+      - TOGGLE_SERVICE_DELAY=${TOGGLE_SERVICE_DELAY:-0}
+      - TOGGLE_CANARY_DELAY=${TOGGLE_CANARY_DELAY:-0}
+      - TOGGLE_CANARY_FAILURE=${TOGGLE_CANARY_FAILURE:-0}
+      # enable inferred spans as it's disabled by default
+      - ELASTIC_APM_PROFILING_INFERRED_SPANS_ENABLED=true
+  favorite-java-otel:
+    build: java-favorite-otel-auto/.
+    image: docker.elastic.co/demos/workshop/observability/elastiflix-java-favorite-otel-auto:${ELASTIC_VERSION}-${BUILD_NUMBER}
+    depends_on:
+      - redis
+    networks:
+      - app-network
+    ports:
+      - "5004:5000"
+    environment:
+      - OTEL_EXPORTER_OTLP_HEADERS=Authorization=Bearer ${ELASTIC_APM_SECRET_TOKEN}
+      - OTEL_EXPORTER_OTLP_ENDPOINT=${ELASTIC_APM_SERVER_URL}
+      - OTEL_RESOURCE_ATTRIBUTES=service.version=1.0,deployment.environment=production
+      - OTEL_SERVICE_NAME=java-favorite-otel
+      - OTEL_METRICS_EXPORTER=otlp
+      - OTEL_LOGS_EXPORTER=otlp
+      - OTEL_TRACES_EXPORTER=otlp
+      - OTEL_JAVAAGENT_DEBUG=${OTEL_JAVAAGENT_DEBUG:-false}
+      - REDIS_HOST=redis
+      - TOGGLE_SERVICE_DELAY=${TOGGLE_SERVICE_DELAY:-0}
+      - TOGGLE_CANARY_DELAY=${TOGGLE_CANARY_DELAY:-0}
+      - TOGGLE_CANARY_FAILURE=${TOGGLE_CANARY_FAILURE:-0}
+      - AGENT_DISTRIBUTION=otel
+  favorite-java-elastic-otel:
+    build: java-favorite-otel-auto/.
+    image: docker.elastic.co/demos/workshop/observability/elastiflix-java-favorite-otel-auto:${ELASTIC_VERSION}-${BUILD_NUMBER}
+    depends_on:
+      - redis
+    networks:
+      - app-network
+    ports:
+      - "5005:5000"
+    environment:
+      - OTEL_EXPORTER_OTLP_HEADERS=Authorization=Bearer ${ELASTIC_APM_SECRET_TOKEN}
+      - OTEL_EXPORTER_OTLP_ENDPOINT=${ELASTIC_APM_SERVER_URL}
+      - OTEL_RESOURCE_ATTRIBUTES=service.version=1.0,deployment.environment=production
+      - OTEL_SERVICE_NAME=favorite-java-elastic-otel
+      - OTEL_METRICS_EXPORTER=otlp
+      - OTEL_LOGS_EXPORTER=otlp
+      - OTEL_TRACES_EXPORTER=otlp
+      - OTEL_JAVAAGENT_DEBUG=${OTEL_JAVAAGENT_DEBUG:-false}
+      - REDIS_HOST=redis
+      - TOGGLE_SERVICE_DELAY=${TOGGLE_SERVICE_DELAY:-0}
+      - TOGGLE_CANARY_DELAY=${TOGGLE_CANARY_DELAY:-0}
+      - TOGGLE_CANARY_FAILURE=${TOGGLE_CANARY_FAILURE:-0}
+      - AGENT_DISTRIBUTION=elastic
+      - ELASTIC_OTEL_INFERRED_SPANS_ENABLED=true
+  login:
+    build: dotnet-login-elastic-auto/.
+    image: docker.elastic.co/demos/workshop/observability/elastiflix-dotnet-login-elastic-auto:${ELASTIC_VERSION}-${BUILD_NUMBER}
+    networks:
+      - app-network
+    ports:
+      - "127.0.0.1:8000:80"
+    environment:
+      - ELASTIC_APM_ENVIRONMENT=production
+      - ELASTIC_APM_SECRET_TOKEN=${ELASTIC_APM_SECRET_TOKEN}
+      - ELASTIC_APM_SERVER_URL=${ELASTIC_APM_SERVER_URL}
+      - ELASTIC_APM_SERVICE_NAME=dotnet-login-elastic-auto
+      - PAL_OUTPUTDEBUGSTRING=1
+  # We have one API server instrumented with elastic-apm-node
+  node-server-elastic-apm:
+    build:
+      context: node-server
+      dockerfile: Dockerfile-elastic-apm-${NODE_APM_SETUP_MODE}
+    image: docker.elastic.co/demos/workshop/observability/elastiflix-node-server-elastic-apm-${NODE_APM_SETUP_MODE}:${ELASTIC_VERSION}-${BUILD_NUMBER}
+    container_name: node-server-elastic-apm
+    depends_on:
+      - redis
+      - login
+    networks:
+      - app-network
+    ports:
+      - "3001:3001"
+    environment:
+      - API_ENDPOINT_FAVORITES=favorite-java-elastic:5000,favorite-java-otel:5000,favorite-java-elastic-otel:5000
+      - API_ENDPOINT_LOGIN=login:80
+      - ELASTICSEARCH_PASSWORD=${ELASTICSEARCH_PASSWORD}
+      - ELASTICSEARCH_URL=${ELASTICSEARCH_URL}
+      - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME}
+      - ELASTIC_APM_ENVIRONMENT=production
+      - ELASTIC_APM_SECRET_TOKEN=${ELASTIC_APM_SECRET_TOKEN}
+      - ELASTIC_APM_SERVER_URL=${ELASTIC_APM_SERVER_URL}
+      - ELASTIC_APM_SERVICE_NAME=node-server-elastic-${NODE_APM_SETUP_MODE}
+      - THROW_NOT_A_FUNCTION_ERROR=${THROW_NOT_A_FUNCTION_ERROR:-}
+      - PORT=3001
+  # We have one API server instrumented with elastic otel distro
+  node-server-elastic-otel:
+    build:
+      context: node-server
+      dockerfile: Dockerfile-elastic-otel-${NODE_APM_SETUP_MODE}
+      ssh: ["default"]
+    image: docker.elastic.co/demos/workshop/observability/elastiflix-node-server-elastic-otel-${NODE_APM_SETUP_MODE}:${ELASTIC_VERSION}-${BUILD_NUMBER}
+    container_name: node-server-elastic-otel
+    depends_on:
+      - redis
+      - login
+    networks:
+      - app-network
+    ports:
+      - "3002:3002"
+    environment:
+      - API_ENDPOINT_FAVORITES=favorite-java-elastic:5000,favorite-java-elastic-otel:5000,favorite-java-elastic-otel:5000
+      - API_ENDPOINT_LOGIN=login:80
+      - ELASTICSEARCH_PASSWORD=${ELASTICSEARCH_PASSWORD}
+      - ELASTICSEARCH_URL=${ELASTICSEARCH_URL}
+      - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME}
+      - OTEL_LOG_LEVEL=info
+      - OTEL_METRICS_EXPORTER=otlp
+      - OTEL_RESOURCE_ATTRIBUTES=service.version=1.0,deployment.environment=production,service.name=node-server-elastic-otel-${NODE_APM_SETUP_MODE}
+      - OTEL_SERVICE_NAME=node-server-elastic-otel-${NODE_APM_SETUP_MODE}
+      - OTEL_TRACES_EXPORTER=otlp
+      - OTEL_EXPORTER_OTLP_ENDPOINT=${ELASTIC_APM_SERVER_URL}
+      - OTEL_EXPORTER_OTLP_HEADERS=Authorization=Bearer ${ELASTIC_APM_SECRET_TOKEN}
+      - THROW_NOT_A_FUNCTION_ERROR=${THROW_NOT_A_FUNCTION_ERROR:-}
+      - PORT=3002
+  # We have one API server instrumented with otel SDK
+  node-server-otel:
+    build:
+      context: node-server
+      dockerfile: Dockerfile-otel-${NODE_APM_SETUP_MODE}
+      ssh: ["default"]
+    image: docker.elastic.co/demos/workshop/observability/elastiflix-node-server-otel-${NODE_APM_SETUP_MODE}:${ELASTIC_VERSION}-${BUILD_NUMBER}
+    container_name: node-server-otel
+    depends_on:
+      - redis
+      - login
+    networks:
+      - app-network
+    ports:
+      - "3003:3003"
+    environment:
+      - API_ENDPOINT_FAVORITES=favorite-java-elastic:5000,favorite-java-elastic-otel:5000,favorite-java-elastic-otel:5000
+      - API_ENDPOINT_LOGIN=login:80
+      - ELASTICSEARCH_PASSWORD=${ELASTICSEARCH_PASSWORD}
+      - ELASTICSEARCH_URL=${ELASTICSEARCH_URL}
+      - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME}
+      - OTEL_LOG_LEVEL=info
+      - OTEL_METRICS_EXPORTER=otlp
+      - OTEL_RESOURCE_ATTRIBUTES=service.version=1.0,deployment.environment=production,service.name=node-server-otel-${NODE_APM_SETUP_MODE}
+      - OTEL_SERVICE_NAME=node-server-otel-${NODE_APM_SETUP_MODE}
+      - OTEL_TRACES_EXPORTER=otlp
+      - OTEL_EXPORTER_OTLP_ENDPOINT=${ELASTIC_APM_SERVER_URL}
+      - OTEL_EXPORTER_OTLP_HEADERS=Authorization=Bearer ${ELASTIC_APM_SECRET_TOKEN}
+      - THROW_NOT_A_FUNCTION_ERROR=${THROW_NOT_A_FUNCTION_ERROR:-}
+      - PORT=3003
+  javascript-client:
+    build: javascript-client-elastic-manual/.
+    image: docker.elastic.co/demos/workshop/observability/elastiflix-javascript-client-elastic-manual:${ELASTIC_VERSION}-${BUILD_NUMBER}
+    depends_on:
+      - redis
+      - node-server-elastic-apm
+      - node-server-elastic-otel
+    networks:
+      - app-network
+    ports:
+      - "80:9000"
+    environment:
+      - ELASTIC_APM_ENVIRONMENT=production
+      - ELASTIC_APM_SERVER_URL=${ELASTIC_APM_SERVER_URL}
+      - ELASTIC_APM_SERVICE_NAME=javascript-client-elastic-manual
+networks:
+  app-network:
+    driver: bridge
