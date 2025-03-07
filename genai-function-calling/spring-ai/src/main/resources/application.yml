@@ -1,0 +1,38 @@
+# See https://docs.spring.io/spring-ai/reference/api/chat/openai-chat.html
+spring:
+  main:
+    web-application-type: none
+    banner-mode: "off"
+  ai:
+    openai:
+      base-url: ${OPENAI_BASE_URL:https://api.openai.com}
+      api-key: ${OPENAI_API_KEY:enter-your-api-key}
+      chat:
+        options:
+          model: ${CHAT_MODEL:gpt-4o-mini}
+    azure.openai:
+      api-key: ${AZURE_OPENAI_API_KEY:}
+      endpoint: ${AZURE_OPENAI_ENDPOINT:}
+      chat:
+        options:
+          deployment-name: ${CHAT_MODEL:}
+
+    chat:
+      observations:
+        include-prompt: true
+        include-completion: true
+        include-error-logging: true
+
+management.observations.annotations.enabled: true
+
+logging:
+  level:
+    root: WARN
+    org:
+      springframework:
+        ai:
+          autoconfigure:
+            chat:
+              observation:
+                # Hush warnings about prompt and completion logging
+                ChatObservationAutoConfiguration: OFF

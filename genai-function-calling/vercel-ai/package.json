@@ -1,0 +1,24 @@
+{
+  "name": "genai-function-calling",
+  "version": "1.0.0",
+  "private": true,
+  "type": "commonjs",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node --env-file .env -r @elastic/opentelemetry-node index.js"
+  },
+  "dependencies": {
+    "ai": "^4.1.46",
+    "@ai-sdk/azure": "^1.2.1",
+    "@ai-sdk/openai": "^1.1.15",
+    "@elastic/opentelemetry-node": "*"
+  },
+  "_comment": "Override to avoid punycode warnings in recent versions of Node.JS",
+  "overrides": {
+    "node-fetch@2.x": {
+      "whatwg-url": "14.x"
+    }
+  }
+}
