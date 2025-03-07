@@ -1,1 +1,31 @@
-**/.idea
+.env
+.envrc
+.idea
+node_modules
+.vscode
+venv
+.venv
+tmp
+*.swp
+*.egg-info
+build
+__pycache__
+.gradle
+.nyc_output
+*.sln
+
+# dotnet
+out
+obj
+bin
+
+# maven
+target
+
+### Mac OS ###
+.DS_Store
+
+# Alternative Python package managers like rye
+requirements*.lock
+
+shdotenv
