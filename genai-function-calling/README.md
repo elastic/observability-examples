@@ -26,7 +26,7 @@ performs the same process. The user asks a question that is beyond the training
 date of the LLM. The application uses the framework to implement an agent
 pattern to automatically call functions when it needs new information.
 
-Here's how the question "What's the latest version of Elasticsearch 8?" ends up
+Here's how the question "What is the latest version of Elasticsearch 8?" ends up
 being answered.
 
 ```mermaid
@@ -35,7 +35,7 @@ sequenceDiagram
     participant LLM
 
     Note over Agent: Framework sends its tools along with the prompt
-    Agent ->> LLM: user: "What's the latest version of Elasticsearch 8?"
+    Agent ->> LLM: user: "What is the latest version of Elasticsearch 8?"
     activate LLM
     Note over LLM: LLM determines it needs to use a tool to complete the task
 

@@ -94,7 +94,7 @@ class Program
 
 
         var chatHistory = new ChatHistory();
-        chatHistory.AddUserMessage("What's the latest version of Elasticsearch 8?");
+        chatHistory.AddUserMessage("What is the latest version of Elasticsearch 8?");
 
         await foreach (ChatMessageContent response in agent.InvokeAsync(chatHistory))
         {
