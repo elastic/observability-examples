@@ -46,7 +46,7 @@ const getLatestElasticsearchVersion = tool({
 async function main() {
     const {text} = await generateText({
         model: openai(model),
-        messages: [{role: 'user', content: "What's the latest version of Elasticsearch 8?"}],
+        messages: [{role: 'user', content: "What is the latest version of Elasticsearch 8?"}],
         temperature: 0,
         tools: {
             getLatestElasticsearchVersion: getLatestElasticsearchVersion,
