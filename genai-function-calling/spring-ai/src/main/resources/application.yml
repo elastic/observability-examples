@@ -5,11 +5,13 @@ spring:
     banner-mode: "off"
   ai:
     openai:
-      base-url: ${OPENAI_BASE_URL:https://api.openai.com}
+      base-url: ${OPENAI_BASE_URL:https://api.openai.com/v1}
       api-key: ${OPENAI_API_KEY:enter-your-api-key}
       chat:
         options:
           model: ${CHAT_MODEL:gpt-4o-mini}
+        # ensure /v1 isn't appended twice
+        completions-path: /chat/completions
     azure.openai:
       api-key: ${AZURE_OPENAI_API_KEY:}
       endpoint: ${AZURE_OPENAI_ENDPOINT:}
