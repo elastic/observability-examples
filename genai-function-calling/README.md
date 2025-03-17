@@ -15,6 +15,7 @@ and Kibana.
 
 Here are the examples:
 
+* [OpenAI Agents SDK (Python)](openai-agents)
 * [Semantic Kernel .NET](semantic-kernel-dotnet)
 * [Spring AI (Java)](spring-ai)
 * [Vercel AI (Node.js)](vercel-ai)
@@ -60,9 +61,9 @@ flexibility in defining and testing functions.
 
 ## Observability with EDOT
 
-Each example uses a framework with built-in OpenTelemetry instrumentation.
-While features vary, each of these produces at least traces, and some also logs
-and metrics.
+Each example uses a framework with built-in or 3rd party OpenTelemetry
+instrumentation. While features vary, each of these produces at least traces,
+and some also logs and metrics.
 
 We use Elastic Distributions of OpenTelemetry (EDOT) SDKs to enable these
 features and fill in other data, such as HTTP requests underlying the LLM and
