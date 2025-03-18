@@ -1,8 +1,3 @@
-##
-## Copyright Elasticsearch B.V. and contributors
-## SPDX-License-Identifier: Apache-2.0
-##
-
 # Use glibc-based image with pre-compiled wheels for psutil
 FROM python:3.12-slim
 
