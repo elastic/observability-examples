@@ -6,12 +6,8 @@ on:
       - main
     paths:
       - 'genai-function-calling/openai-agents/**'
-    paths-ignore:
-      - '**/*.md'
-      - '**/*.png'
-      - .pre-commit-config.yaml
-      - lychee.toml
-      - Makefile
+      - '!**/*.md'
+      - '!**/*.png'
 
 jobs:
   test:
