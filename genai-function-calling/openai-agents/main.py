@@ -1,6 +1,7 @@
+import asyncio
 import os
 
-import httpx
+from httpx import AsyncClient
 from agents import (
     Agent,
     ModelSettings,
@@ -19,13 +20,14 @@ GLOBAL_TRACE_PROVIDER.shutdown()
 
 
 @function_tool(strict_mode=False)
-def get_latest_elasticsearch_version(major_version: int = 0) -> str:
+async def get_latest_elasticsearch_version(major_version: int = 0) -> str:
     """Returns the latest GA version of Elasticsearch in "X.Y.Z" format.
 
     Args:
         major_version: Major version to filter by (e.g. 7, 8). Defaults to latest
     """
-    response = httpx.get("https://artifacts.elastic.co/releases/stack.json")
+    async with AsyncClient() as client:
+        response = await client.get("https://artifacts.elastic.co/releases/stack.json")
     response.raise_for_status()
     releases = response.json()["releases"]
 
@@ -47,7 +49,7 @@ def get_latest_elasticsearch_version(major_version: int = 0) -> str:
     return max(versions, key=lambda v: tuple(map(int, v.split("."))))
 
 
-def main():
+async def main():
     model_name = os.getenv("CHAT_MODEL", "gpt-4o-mini")
     openai_client = AsyncAzureOpenAI() if os.getenv("AZURE_OPENAI_API_KEY") else None
     model = OpenAIProvider(openai_client=openai_client, use_responses=False).get_model(model_name)
@@ -58,7 +60,7 @@ def main():
         model_settings=ModelSettings(temperature=0),
     )
 
-    result = Runner.run_sync(
+    result = await Runner.run(
         starting_agent=agent,
         input="What is the latest version of Elasticsearch 8?",
         run_config=RunConfig(workflow_name="GetLatestElasticsearchVersion"),
@@ -67,4 +69,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())

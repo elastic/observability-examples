@@ -55,6 +55,27 @@ Finally, run `main.py` (notice the prefix of `opentelemetry-instrument):
 dotenv run --no-override -- opentelemetry-instrument python main.py
 ```
 
+## Tests
+
+Tests use [pytest-vcr][pytest-vcr] to capture HTTP traffic for offline unit
+testing. Recorded responses keeps test passing considering LLMs are
+non-deterministic and the Elasticsearch version list changes frequently.
+
+Run like this:
+```bash
+pip install -r requirements-dev.txt
+pytest
+```
+
+OpenAI responses routinely change as they add features, and some may cause
+failures. To re-record, delete [cassettes/test_main.yaml][test_main.yaml], and
+run pytest with dotenv, so that ENV variables are present:
+
+```bash
+rm cassettes/test_main.yaml
+dotenv -f ../.env run -- pytest
+```
+
 ## Notes
 
 The LLM should generate something like "The latest stable version of
@@ -67,4 +88,6 @@ OpenAI Agents SDK's OpenTelemetry instrumentation is via
 ---
 [flow]: ../README.md#example-application-flow
 [openai-agents-python]: https://github.com/openai/openai-agents-python
+[pytest-vcr]: https://pytest-vcr.readthedocs.io/
+[test_main.yaml]: cassettes/test_main.yaml
 [openinference]:  https://github.com/Arize-ai/openinference/tree/main/python/instrumentation/openinference-instrumentation-openai-agents
