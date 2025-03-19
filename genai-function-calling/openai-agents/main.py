@@ -10,6 +10,7 @@ from agents import (
     function_tool,
 )
 from agents.tracing import GLOBAL_TRACE_PROVIDER
+from openai import AsyncAzureOpenAI
 
 # Shut down the global tracer as it sends to the OpenAI "/traces/ingest"
 # endpoint, which we aren't using and doesn't exist on alternative backends
@@ -48,7 +49,8 @@ def get_latest_elasticsearch_version(major_version: int = 0) -> str:
 
 def main():
     model_name = os.getenv("CHAT_MODEL", "gpt-4o-mini")
-    model = OpenAIProvider(use_responses=False).get_model(model_name)
+    openai_client = AsyncAzureOpenAI() if os.getenv("AZURE_OPENAI_API_KEY") else None
+    model = OpenAIProvider(openai_client=openai_client, use_responses=False).get_model(model_name)
     agent = Agent(
         name="version_assistant",
         tools=[get_latest_elasticsearch_version],
