@@ -37,6 +37,11 @@ def vcr_config():
     }
 
 
+# Below this line ensures that cassettes are readable and pretty-printed. The
+# default yaml serialization isn't easy to read or understand. Elastic also
+# contributed this code to opentelemetry-python-contrib for the same reason.
+
+
 class LiteralBlockScalar(str):
     """Formats the string as a literal block scalar, preserving whitespace and
     without interpreting escape characters"""
