@@ -45,9 +45,6 @@ pip install -r requirements.txt
 Now, use EDOT to bootstrap instrumentation (this only needs to happen once):
 ```bash
 edot-bootstrap --action=install
-# TODO(EDOT): remove when > v0.6.1
-pip uninstall -y elastic-opentelemetry-instrumentation-openai
-pip install 'elastic-opentelemetry-instrumentation-openai @ git+https://github.com/elastic/elastic-otel-python-instrumentations.git@main#subdirectory=instrumentation/elastic-opentelemetry-instrumentation-openai'
 ```
 
 Finally, run `main.py` (notice the prefix of `opentelemetry-instrument):
