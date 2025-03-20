@@ -78,5 +78,27 @@ http://localhost:5601/app/apm/traces?rangeFrom=now-15m&rangeTo=now
 
 ![Kibana screenshot](./kibana-trace.png)
 
+## Prerequisites
+
+Docker or Podman is required. You'll also need an OpenAI API compatible
+inference platform and an OpenTelemetry collector.
+
+First of all, you need to be in a directory that contains this repository. If
+you haven't yet, you get one like this:
+```bash
+curl -L https://github.com/elastic/observability-examples/archive/refs/heads/main.tar.gz | tar -xz
+cd observability-examples-main/genai-function-calling/
+```
+
+### Podman
+
+If you are using [Podman](https://podman.io/) to run docker containers, export
+`HOST_IP`. If you don't you'll get this error running exercises:
+> unable to upgrade to tcp, received 500
+
+Here's how to export your `HOST_IP`:
+  * If macOS: `export HOST_IP=$(ipconfig getifaddr en0)`
+  * If Ubuntu: `export HOST_IP=$(hostname -I | awk '{print $1}')`
+
 ---
 [native]: https://opentelemetry.io/docs/languages/java/instrumentation/#native-instrumentation

@@ -4,15 +4,15 @@
   "private": true,
   "type": "commonjs",
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "scripts": {
     "start": "node --env-file .env -r @elastic/opentelemetry-node index.js"
   },
   "dependencies": {
-    "ai": "^4.1.46",
-    "@ai-sdk/azure": "^1.2.1",
-    "@ai-sdk/openai": "^1.1.15",
+    "ai": "^4.1.63",
+    "@ai-sdk/azure": "^1.2.6",
+    "@ai-sdk/openai": "^1.2.6",
     "@elastic/opentelemetry-node": "*"
   },
   "_comment": "Override to avoid punycode warnings in recent versions of Node.JS",

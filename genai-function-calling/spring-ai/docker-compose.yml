@@ -6,4 +6,4 @@ services:
     env_file:
       - .env
     extra_hosts:  # send localhost traffic to the docker host, e.g. your laptop
-      - "localhost:host-gateway"
+      - "localhost:${HOST_IP:-host-gateway}"

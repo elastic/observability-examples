@@ -1,5 +1,4 @@
-# TODO: temporary until openai-agents 0.0.5
-openai-agents @ git+https://github.com/openai/openai-agents-python.git@main
+openai-agents~=0.0.5
 httpx~=0.28.1
 
 elastic-opentelemetry~=0.8.0
