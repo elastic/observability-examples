@@ -1,0 +1,7 @@
+# TODO: temporary until openai-agents 0.0.5
+openai-agents @ git+https://github.com/openai/openai-agents-python.git@main
+httpx~=0.28.1
+
+elastic-opentelemetry~=0.8.0
+# Use openai-agents instrumentation from OpenInference
+openinference-instrumentation-openai-agents~=0.1.1

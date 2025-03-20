@@ -15,6 +15,7 @@ and Kibana.
 
 Here are the examples:
 
+* [OpenAI Agents SDK (Python)](openai-agents)
 * [Semantic Kernel .NET](semantic-kernel-dotnet)
 * [Spring AI (Java)](spring-ai)
 * [Vercel AI (Node.js)](vercel-ai)
@@ -60,9 +61,10 @@ flexibility in defining and testing functions.
 
 ## Observability with EDOT
 
-Each example uses a framework with built-in OpenTelemetry instrumentation.
-While features vary, each of these produces at least traces, and some also logs
-and metrics.
+The OpenTelemetry instrumentation approach varies per GenAI framework. Some are
+[native][native] (their codebase includes OpenTelemetry code), while others
+rely on external instrumentation libraries. Signals vary as well. While all
+produce traces, only some produce logs or metrics.
 
 We use Elastic Distributions of OpenTelemetry (EDOT) SDKs to enable these
 features and fill in other data, such as HTTP requests underlying the LLM and
@@ -70,6 +72,11 @@ tool calls. In doing so, this implements the "zero code instrumentation"
 pattern of OpenTelemetry.
 
 Here's an example Kibana screenshot of one of the examples, looked up from a
-query like: http://localhost:5601/app/apm/traces?rangeFrom=now-15m&rangeTo=now
+query like:
+
+http://localhost:5601/app/apm/traces?rangeFrom=now-15m&rangeTo=now
 
 ![Kibana screenshot](./kibana-trace.png)
+
+---
+[native]: https://opentelemetry.io/docs/languages/java/instrumentation/#native-instrumentation

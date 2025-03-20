@@ -1,0 +1,1158 @@
+interactions:
+- request:
+    body: |-
+      {
+        "messages": [
+          {
+            "role": "user",
+            "content": "What is the latest version of Elasticsearch 8?"
+          }
+        ],
+        "model": "gpt-4o-mini",
+        "stream": false,
+        "temperature": 0,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "get_latest_elasticsearch_version",
+              "description": "Returns the latest GA version of Elasticsearch in \"X.Y.Z\" format.",
+              "parameters": {
+                "properties": {
+                  "major_version": {
+                    "default": 0,
+                    "description": "Major version to filter by (e.g. 7, 8). Defaults to latest",
+                    "title": "Major Version",
+                    "type": "integer"
+                  }
+                },
+                "title": "get_latest_elasticsearch_version_args",
+                "type": "object"
+              }
+            }
+          }
+        ]
+      }
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      content-length:
+      - '551'
+      content-type:
+      - application/json
+      host:
+      - api.openai.com
+      user-agent:
+      - Agents/Python 0.0.0
+      x-stainless-arch:
+      - arm64
+      x-stainless-async:
+      - async:asyncio
+      x-stainless-lang:
+      - python
+      x-stainless-os:
+      - MacOS
+      x-stainless-package-version:
+      - 1.66.3
+      x-stainless-read-timeout:
+      - '600'
+      x-stainless-retry-count:
+      - '0'
+      x-stainless-runtime:
+      - CPython
+      x-stainless-runtime-version:
+      - 3.12.9
+    method: POST
+    uri: https://api.openai.com/v1/chat/completions
+  response:
+    body:
+      string: |-
+        {
+          "id": "chatcmpl-BCezuQjRIx8MotUzQJcjJSYe9TyHv",
+          "object": "chat.completion",
+          "created": 1742357230,
+          "model": "gpt-4o-mini-2024-07-18",
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_pT4CJ0D2kmnTP5WoVhv2edrt",
+                    "type": "function",
+                    "function": {
+                      "name": "get_latest_elasticsearch_version",
+                      "arguments": "{\"major_version\":8}"
+                    }
+                  }
+                ],
+                "refusal": null,
+                "annotations": []
+              },
+              "logprobs": null,
+              "finish_reason": "tool_calls"
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 104,
+            "completion_tokens": 19,
+            "total_tokens": 123,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "audio_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "audio_tokens": 0,
+              "accepted_prediction_tokens": 0,
+              "rejected_prediction_tokens": 0
+            }
+          },
+          "service_tier": "default",
+          "system_fingerprint": "fp_b8bc95a0ac"
+        }
+    headers:
+      CF-RAY:
+      - 922a19f41e4a071d-ATL
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 19 Mar 2025 04:07:11 GMT
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      access-control-expose-headers:
+      - X-Request-ID
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '1108'
+      openai-processing-ms:
+      - '502'
+      openai-version:
+      - '2020-10-01'
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-ratelimit-limit-requests:
+      - '10000'
+      x-ratelimit-limit-tokens:
+      - '200000'
+      x-ratelimit-remaining-requests:
+      - '9999'
+      x-ratelimit-remaining-tokens:
+      - '199971'
+      x-ratelimit-reset-requests:
+      - 8.64s
+      x-ratelimit-reset-tokens:
+      - 8ms
+      x-request-id:
+      - req_2f55cdcb162fb892f0050536bbd987b5
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - artifacts.elastic.co
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://artifacts.elastic.co/releases/stack.json
+  response:
+    body:
+      string: |-
+        {
+          "releases": [
+            {
+              "version": "6.7.0",
+              "public_release_date": "2019-03-26"
+            },
+            {
+              "version": "6.7.1",
+              "public_release_date": "2019-04-04"
+            },
+            {
+              "version": "6.7.2",
+              "public_release_date": "2019-05-02"
+            },
+            {
+              "version": "6.8.0",
+              "public_release_date": "2019-05-20"
+            },
+            {
+              "version": "6.8.1",
+              "public_release_date": "2019-06-20"
+            },
+            {
+              "version": "6.8.10",
+              "public_release_date": "2020-06-03"
+            },
+            {
+              "version": "6.8.11",
+              "public_release_date": "2020-07-27"
+            },
+            {
+              "version": "6.8.12",
+              "public_release_date": "2020-08-18"
+            },
+            {
+              "version": "6.8.13",
+              "public_release_date": "2020-10-22"
+            },
+            {
+              "version": "6.8.14",
+              "public_release_date": "2021-02-10"
+            },
+            {
+              "version": "6.8.15",
+              "public_release_date": "2021-03-23"
+            },
+            {
+              "version": "6.8.16",
+              "public_release_date": "2021-05-25"
+            },
+            {
+              "version": "6.8.17",
+              "public_release_date": "2021-07-07"
+            },
+            {
+              "version": "6.8.18",
+              "public_release_date": "2021-08-03"
+            },
+            {
+              "version": "6.8.19",
+              "public_release_date": "2021-09-21"
+            },
+            {
+              "version": "6.8.2",
+              "public_release_date": "2019-07-30"
+            },
+            {
+              "version": "6.8.20",
+              "public_release_date": "2021-10-14"
+            },
+            {
+              "version": "6.8.21",
+              "public_release_date": "2021-12-13"
+            },
+            {
+              "version": "6.8.22",
+              "public_release_date": "2021-12-19"
+            },
+            {
+              "version": "6.8.23",
+              "public_release_date": "2022-01-13"
+            },
+            {
+              "version": "6.8.3",
+              "public_release_date": "2019-09-05"
+            },
+            {
+              "version": "6.8.4",
+              "public_release_date": "2019-10-23"
+            },
+            {
+              "version": "6.8.5",
+              "public_release_date": "2019-11-20"
+            },
+            {
+              "version": "6.8.6",
+              "public_release_date": "2019-12-18"
+            },
+            {
+              "version": "6.8.7",
+              "public_release_date": "2020-03-03"
+            },
+            {
+              "version": "6.8.8",
+              "public_release_date": "2020-03-31"
+            },
+            {
+              "version": "6.8.9",
+              "public_release_date": "2020-05-13"
+            },
+            {
+              "version": "7.0.0 GA",
+              "public_release_date": "2019-04-10"
+            },
+            {
+              "version": "7.0.0-alpha1",
+              "public_release_date": "2019-04-12"
+            },
+            {
+              "version": "7.0.0-alpha2",
+              "public_release_date": "2019-04-12"
+            },
+            {
+              "version": "7.0.0-beta1",
+              "public_release_date": "2019-04-10"
+            },
+            {
+              "version": "7.0.0-rc1",
+              "public_release_date": "2019-04-10"
+            },
+            {
+              "version": "7.0.0-rc2",
+              "public_release_date": "2019-04-10"
+            },
+            {
+              "version": "7.0.1",
+              "public_release_date": "2019-05-01"
+            },
+            {
+              "version": "7.1.0",
+              "public_release_date": "2019-05-20"
+            },
+            {
+              "version": "7.1.1",
+              "public_release_date": "2019-05-28"
+            },
+            {
+              "version": "7.10.0",
+              "public_release_date": "2020-11-11"
+            },
+            {
+              "version": "7.10.1",
+              "public_release_date": "2020-12-09"
+            },
+            {
+              "version": "7.10.2",
+              "public_release_date": "2021-01-14"
+            },
+            {
+              "version": "7.11.0",
+              "public_release_date": "2021-02-10"
+            },
+            {
+              "version": "7.11.1",
+              "public_release_date": "2021-02-17"
+            },
+            {
+              "version": "7.11.2",
+              "public_release_date": "2021-03-10"
+            },
+            {
+              "version": "7.12.0",
+              "public_release_date": "2021-03-23"
+            },
+            {
+              "version": "7.12.1",
+              "public_release_date": "2021-04-27"
+            },
+            {
+              "version": "7.13.0",
+              "public_release_date": "2021-05-25"
+            },
+            {
+              "version": "7.13.1",
+              "public_release_date": "2021-06-02"
+            },
+            {
+              "version": "7.13.2",
+              "public_release_date": "2021-06-14"
+            },
+            {
+              "version": "7.13.3",
+              "public_release_date": "2021-07-07"
+            },
+            {
+              "version": "7.13.4",
+              "public_release_date": "2021-07-20"
+            },
+            {
+              "version": "7.14.0",
+              "public_release_date": "2021-08-03"
+            },
+            {
+              "version": "7.14.1",
+              "public_release_date": "2021-09-01"
+            },
+            {
+              "version": "7.14.2",
+              "public_release_date": "2021-09-21"
+            },
+            {
+              "version": "7.15.0",
+              "public_release_date": "2021-09-22"
+            },
+            {
+              "version": "7.15.1",
+              "public_release_date": "2021-10-14"
+            },
+            {
+              "version": "7.15.2",
+              "public_release_date": "2021-11-10"
+            },
+            {
+              "version": "7.16.0",
+              "public_release_date": "2021-12-07"
+            },
+            {
+              "version": "7.16.1",
+              "public_release_date": "2021-12-13"
+            },
+            {
+              "version": "7.16.2",
+              "public_release_date": "2021-12-19"
+            },
+            {
+              "version": "7.16.3",
+              "public_release_date": "2022-01-13"
+            },
+            {
+              "version": "7.17.0",
+              "public_release_date": "2022-02-01"
+            },
+            {
+              "version": "7.17.1",
+              "public_release_date": "2022-02-28"
+            },
+            {
+              "version": "7.17.10",
+              "public_release_date": "2023-05-02"
+            },
+            {
+              "version": "7.17.11",
+              "public_release_date": "2023-06-29"
+            },
+            {
+              "version": "7.17.12",
+              "public_release_date": "2023-07-25"
+            },
+            {
+              "version": "7.17.13",
+              "public_release_date": "2023-09-06"
+            },
+            {
+              "version": "7.17.14",
+              "public_release_date": "2023-10-10"
+            },
+            {
+              "version": "7.17.15",
+              "public_release_date": "2023-11-13"
+            },
+            {
+              "version": "7.17.16",
+              "public_release_date": "2023-12-12"
+            },
+            {
+              "version": "7.17.17",
+              "public_release_date": "2024-01-23"
+            },
+            {
+              "version": "7.17.18",
+              "public_release_date": "2024-02-06"
+            },
+            {
+              "version": "7.17.19",
+              "public_release_date": "2024-03-26"
+            },
+            {
+              "version": "7.17.2",
+              "public_release_date": "2022-03-31"
+            },
+            {
+              "version": "7.17.20",
+              "public_release_date": "2024-04-08"
+            },
+            {
+              "version": "7.17.21",
+              "public_release_date": "2024-05-02"
+            },
+            {
+              "version": "7.17.22",
+              "public_release_date": "2024-06-13"
+            },
+            {
+              "version": "7.17.23",
+              "public_release_date": "2024-07-30",
+              "manifest": "https://artifacts.elastic.co/downloads/7.17.23.json"
+            },
+            {
+              "version": "7.17.24",
+              "public_release_date": "2024-09-10",
+              "manifest": "https://artifacts.elastic.co/downloads/7.17.24.json"
+            },
+            {
+              "version": "7.17.25",
+              "public_release_date": "2024-10-22",
+              "manifest": "https://artifacts.elastic.co/downloads/7.17.25.json"
+            },
+            {
+              "version": "7.17.26",
+              "public_release_date": "2024-12-03",
+              "manifest": "https://artifacts.elastic.co/downloads/7.17.26.json"
+            },
+            {
+              "version": "7.17.28",
+              "public_release_date": "2025-02-25",
+              "manifest": "https://artifacts.elastic.co/downloads/7.17.28.json"
+            },
+            {
+              "version": "7.17.3",
+              "public_release_date": "2022-04-20"
+            },
+            {
+              "version": "7.17.4",
+              "public_release_date": "2022-05-24"
+            },
+            {
+              "version": "7.17.5",
+              "public_release_date": "2022-06-28"
+            },
+            {
+              "version": "7.17.6",
+              "public_release_date": "2022-08-24"
+            },
+            {
+              "version": "7.17.7",
+              "public_release_date": "2022-10-25"
+            },
+            {
+              "version": "7.17.8",
+              "public_release_date": "2022-12-08"
+            },
+            {
+              "version": "7.17.9",
+              "public_release_date": "2023-02-02"
+            },
+            {
+              "version": "7.2.0",
+              "public_release_date": "2019-06-25"
+            },
+            {
+              "version": "7.2.1",
+              "public_release_date": "2019-07-30"
+            },
+            {
+              "version": "7.3.0",
+              "public_release_date": "2019-07-31"
+            },
+            {
+              "version": "7.3.1",
+              "public_release_date": "2019-08-22"
+            },
+            {
+              "version": "7.3.2",
+              "public_release_date": "2019-09-12"
+            },
+            {
+              "version": "7.4.0",
+              "public_release_date": "2019-10-01"
+            },
+            {
+              "version": "7.4.1",
+              "public_release_date": "2019-10-23"
+            },
+            {
+              "version": "7.4.2",
+              "public_release_date": "2019-10-31"
+            },
+            {
+              "version": "7.5.0",
+              "public_release_date": "2019-12-02"
+            },
+            {
+              "version": "7.5.1",
+              "public_release_date": "2019-12-18"
+            },
+            {
+              "version": "7.5.2",
+              "public_release_date": "2020-01-21"
+            },
+            {
+              "version": "7.6.0",
+              "public_release_date": "2020-02-11"
+            },
+            {
+              "version": "7.6.1",
+              "public_release_date": "2020-03-03"
+            },
+            {
+              "version": "7.6.2",
+              "public_release_date": "2020-03-31"
+            },
+            {
+              "version": "7.7.0",
+              "public_release_date": "2020-05-13"
+            },
+            {
+              "version": "7.7.1",
+              "public_release_date": "2020-06-03"
+            },
+            {
+              "version": "7.8.0",
+              "public_release_date": "2020-06-18"
+            },
+            {
+              "version": "7.8.1",
+              "public_release_date": "2020-07-27"
+            },
+            {
+              "version": "7.9.0",
+              "public_release_date": "2020-08-18"
+            },
+            {
+              "version": "7.9.1",
+              "public_release_date": "2020-09-03"
+            },
+            {
+              "version": "7.9.2",
+              "public_release_date": "2020-09-24"
+            },
+            {
+              "version": "7.9.3",
+              "public_release_date": "2020-10-22"
+            },
+            {
+              "version": "8.0.0 GA",
+              "public_release_date": "2022-02-10"
+            },
+            {
+              "version": "8.0.0-alpha1",
+              "public_release_date": "2021-08-10"
+            },
+            {
+              "version": "8.0.0-alpha2",
+              "public_release_date": "2021-09-16"
+            },
+            {
+              "version": "8.0.0-beta1",
+              "public_release_date": "2021-11-09"
+            },
+            {
+              "version": "8.0.0-rc1",
+              "public_release_date": "2022-01-12"
+            },
+            {
+              "version": "8.0.0-rc2",
+              "public_release_date": "2022-02-03"
+            },
+            {
+              "version": "8.0.1",
+              "public_release_date": "2022-03-01"
+            },
+            {
+              "version": "8.1.0",
+              "public_release_date": "2022-03-08"
+            },
+            {
+              "version": "8.1.1",
+              "public_release_date": "2022-03-22"
+            },
+            {
+              "version": "8.1.2",
+              "public_release_date": "2022-03-31"
+            },
+            {
+              "version": "8.1.3",
+              "public_release_date": "2022-04-20"
+            },
+            {
+              "version": "8.10.0",
+              "public_release_date": "2023-09-12"
+            },
+            {
+              "version": "8.10.1",
+              "public_release_date": "2023-09-18"
+            },
+            {
+              "version": "8.10.2",
+              "public_release_date": "2023-09-21"
+            },
+            {
+              "version": "8.10.3",
+              "public_release_date": "2023-10-10"
+            },
+            {
+              "version": "8.10.4",
+              "public_release_date": "2023-10-17"
+            },
+            {
+              "version": "8.11.0",
+              "public_release_date": "2023-11-07"
+            },
+            {
+              "version": "8.11.1",
+              "public_release_date": "2023-11-13"
+            },
+            {
+              "version": "8.11.2",
+              "public_release_date": "2023-12-07"
+            },
+            {
+              "version": "8.11.3",
+              "public_release_date": "2023-12-12"
+            },
+            {
+              "version": "8.11.4",
+              "public_release_date": "2024-01-11"
+            },
+            {
+              "version": "8.12.0",
+              "public_release_date": "2024-01-17"
+            },
+            {
+              "version": "8.12.1",
+              "public_release_date": "2024-02-06"
+            },
+            {
+              "version": "8.12.2",
+              "public_release_date": "2024-02-22"
+            },
+            {
+              "version": "8.13.0",
+              "public_release_date": "2024-03-26"
+            },
+            {
+              "version": "8.13.1",
+              "public_release_date": "2024-04-02"
+            },
+            {
+              "version": "8.13.2",
+              "public_release_date": "2024-04-08"
+            },
+            {
+              "version": "8.13.3",
+              "public_release_date": "2024-05-02"
+            },
+            {
+              "version": "8.13.4",
+              "public_release_date": "2024-05-08"
+            },
+            {
+              "version": "8.14.0",
+              "public_release_date": "2024-06-05"
+            },
+            {
+              "version": "8.14.1",
+              "public_release_date": "2024-06-12"
+            },
+            {
+              "version": "8.14.2",
+              "public_release_date": "2024-07-04",
+              "manifest": "https://artifacts.elastic.co/downloads/8.14.2.json"
+            },
+            {
+              "version": "8.14.3",
+              "public_release_date": "2024-07-11",
+              "manifest": "https://artifacts.elastic.co/downloads/8.14.3.json"
+            },
+            {
+              "version": "8.15.0",
+              "public_release_date": "2024-08-08",
+              "manifest": "https://artifacts.elastic.co/downloads/8.15.0.json"
+            },
+            {
+              "version": "8.15.1",
+              "public_release_date": "2024-09-05",
+              "manifest": "https://artifacts.elastic.co/downloads/8.15.1.json"
+            },
+            {
+              "version": "8.15.2",
+              "public_release_date": "2024-09-26",
+              "manifest": "https://artifacts.elastic.co/downloads/8.15.2.json"
+            },
+            {
+              "version": "8.15.3",
+              "public_release_date": "2024-10-17",
+              "manifest": "https://artifacts.elastic.co/downloads/8.15.3.json"
+            },
+            {
+              "version": "8.15.4",
+              "public_release_date": "2024-11-12",
+              "manifest": "https://artifacts.elastic.co/downloads/8.15.4.json"
+            },
+            {
+              "version": "8.15.5",
+              "public_release_date": "2024-11-26",
+              "manifest": "https://artifacts.elastic.co/downloads/8.15.5.json"
+            },
+            {
+              "version": "8.16.0",
+              "public_release_date": "2024-11-12",
+              "manifest": "https://artifacts.elastic.co/downloads/8.16.0.json"
+            },
+            {
+              "version": "8.16.1",
+              "public_release_date": "2024-11-21",
+              "manifest": "https://artifacts.elastic.co/downloads/8.16.1.json"
+            },
+            {
+              "version": "8.16.2",
+              "public_release_date": "2024-12-17",
+              "manifest": "https://artifacts.elastic.co/downloads/8.16.2.json"
+            },
+            {
+              "version": "8.16.3",
+              "public_release_date": "2025-01-21",
+              "manifest": "https://artifacts.elastic.co/downloads/8.16.3.json"
+            },
+            {
+              "version": "8.16.4",
+              "public_release_date": "2025-02-11",
+              "manifest": "https://artifacts.elastic.co/downloads/8.16.4.json"
+            },
+            {
+              "version": "8.16.5",
+              "public_release_date": "2025-03-04",
+              "manifest": "https://artifacts.elastic.co/downloads/8.16.5.json"
+            },
+            {
+              "version": "8.17.0",
+              "public_release_date": "2024-12-12",
+              "manifest": "https://artifacts.elastic.co/downloads/8.17.0.json"
+            },
+            {
+              "version": "8.17.1",
+              "public_release_date": "2025-01-21",
+              "manifest": "https://artifacts.elastic.co/downloads/8.17.1.json"
+            },
+            {
+              "version": "8.17.2",
+              "public_release_date": "2025-02-11",
+              "manifest": "https://artifacts.elastic.co/downloads/8.17.2.json"
+            },
+            {
+              "version": "8.17.3",
+              "public_release_date": "2025-03-04",
+              "manifest": "https://artifacts.elastic.co/downloads/8.17.3.json"
+            },
+            {
+              "version": "8.2.0",
+              "public_release_date": "2022-05-03"
+            },
+            {
+              "version": "8.2.1",
+              "public_release_date": "2022-05-24"
+            },
+            {
+              "version": "8.2.2",
+              "public_release_date": "2022-05-26"
+            },
+            {
+              "version": "8.2.3",
+              "public_release_date": "2022-06-14"
+            },
+            {
+              "version": "8.3.0",
+              "public_release_date": "2022-06-28"
+            },
+            {
+              "version": "8.3.1",
+              "public_release_date": "2022-06-30"
+            },
+            {
+              "version": "8.3.2",
+              "public_release_date": "2022-07-07"
+            },
+            {
+              "version": "8.3.3",
+              "public_release_date": "2022-07-28"
+            },
+            {
+              "version": "8.4.0",
+              "public_release_date": "2022-08-24"
+            },
+            {
+              "version": "8.4.1",
+              "public_release_date": "2022-08-30"
+            },
+            {
+              "version": "8.4.2",
+              "public_release_date": "2022-09-20"
+            },
+            {
+              "version": "8.4.3",
+              "public_release_date": "2022-10-05"
+            },
+            {
+              "version": "8.5.0",
+              "public_release_date": "2022-11-01"
+            },
+            {
+              "version": "8.5.1",
+              "public_release_date": "2022-11-15"
+            },
+            {
+              "version": "8.5.2",
+              "public_release_date": "2022-11-22"
+            },
+            {
+              "version": "8.5.3",
+              "public_release_date": "2022-12-08"
+            },
+            {
+              "version": "8.6.0",
+              "public_release_date": "2023-01-10"
+            },
+            {
+              "version": "8.6.1",
+              "public_release_date": "2023-01-26"
+            },
+            {
+              "version": "8.6.2",
+              "public_release_date": "2023-02-16"
+            },
+            {
+              "version": "8.7.0",
+              "public_release_date": "2023-03-30"
+            },
+            {
+              "version": "8.7.1",
+              "public_release_date": "2023-05-02"
+            },
+            {
+              "version": "8.7.2",
+              "public_release_date": "2023-05-23"
+            },
+            {
+              "version": "8.8.0",
+              "public_release_date": "2023-05-25"
+            },
+            {
+              "version": "8.8.1",
+              "public_release_date": "2023-06-08"
+            },
+            {
+              "version": "8.8.2",
+              "public_release_date": "2023-06-29"
+            },
+            {
+              "version": "8.9.0",
+              "public_release_date": "2023-07-25"
+            },
+            {
+              "version": "8.9.1",
+              "public_release_date": "2023-08-17"
+            },
+            {
+              "version": "8.9.2",
+              "public_release_date": "2023-09-06"
+            },
+            {
+              "version": "9.0.0-beta1",
+              "public_release_date": "2025-02-18",
+              "manifest": "https://artifacts.elastic.co/downloads/9.0.0-beta1.json"
+            }
+          ]
+        }
+    headers:
+      Age:
+      - '306'
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Cache-Control:
+      - public, max-age=600
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 19 Mar 2025 04:02:05 GMT
+      ETag:
+      - W/"d008556073cae98499043fe65c244543"
+      Last-Modified:
+      - Fri, 07 Mar 2025 09:30:54 GMT
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 google
+      content-length:
+      - '20984'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: |-
+      {
+        "messages": [
+          {
+            "role": "user",
+            "content": "What is the latest version of Elasticsearch 8?"
+          },
+          {
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "id": "call_pT4CJ0D2kmnTP5WoVhv2edrt",
+                "type": "function",
+                "function": {
+                  "name": "get_latest_elasticsearch_version",
+                  "arguments": "{\"major_version\":8}"
+                }
+              }
+            ]
+          },
+          {
+            "role": "tool",
+            "tool_call_id": "call_pT4CJ0D2kmnTP5WoVhv2edrt",
+            "content": "8.17.3"
+          }
+        ],
+        "model": "gpt-4o-mini",
+        "stream": false,
+        "temperature": 0,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "get_latest_elasticsearch_version",
+              "description": "Returns the latest GA version of Elasticsearch in \"X.Y.Z\" format.",
+              "parameters": {
+                "properties": {
+                  "major_version": {
+                    "default": 0,
+                    "description": "Major version to filter by (e.g. 7, 8). Defaults to latest",
+                    "title": "Major Version",
+                    "type": "integer"
+                  }
+                },
+                "title": "get_latest_elasticsearch_version_args",
+                "type": "object"
+              }
+            }
+          }
+        ]
+      }
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      content-length:
+      - '817'
+      content-type:
+      - application/json
+      host:
+      - api.openai.com
+      user-agent:
+      - Agents/Python 0.0.0
+      x-stainless-arch:
+      - arm64
+      x-stainless-async:
+      - async:asyncio
+      x-stainless-lang:
+      - python
+      x-stainless-os:
+      - MacOS
+      x-stainless-package-version:
+      - 1.66.3
+      x-stainless-read-timeout:
+      - '600'
+      x-stainless-retry-count:
+      - '0'
+      x-stainless-runtime:
+      - CPython
+      x-stainless-runtime-version:
+      - 3.12.9
+    method: POST
+    uri: https://api.openai.com/v1/chat/completions
+  response:
+    body:
+      string: |-
+        {
+          "id": "chatcmpl-BCezvs9dfzeyJNyWqWMTNrHfQlfHh",
+          "object": "chat.completion",
+          "created": 1742357231,
+          "model": "gpt-4o-mini-2024-07-18",
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "content": "The latest version of Elasticsearch 8 is 8.17.3.",
+                "refusal": null,
+                "annotations": []
+              },
+              "logprobs": null,
+              "finish_reason": "stop"
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 138,
+            "completion_tokens": 17,
+            "total_tokens": 155,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "audio_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "audio_tokens": 0,
+              "accepted_prediction_tokens": 0,
+              "rejected_prediction_tokens": 0
+            }
+          },
+          "service_tier": "default",
+          "system_fingerprint": "fp_b8bc95a0ac"
+        }
+    headers:
+      CF-RAY:
+      - 922a19f98d39071d-ATL
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 19 Mar 2025 04:07:12 GMT
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      access-control-expose-headers:
+      - X-Request-ID
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '857'
+      openai-processing-ms:
+      - '481'
+      openai-version:
+      - '2020-10-01'
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-ratelimit-limit-requests:
+      - '10000'
+      x-ratelimit-limit-tokens:
+      - '200000'
+      x-ratelimit-remaining-requests:
+      - '9998'
+      x-ratelimit-remaining-tokens:
+      - '199967'
+      x-ratelimit-reset-requests:
+      - 16.52s
+      x-ratelimit-reset-tokens:
+      - 9ms
+      x-request-id:
+      - req_11be6b5836b6a31e8c1d9e64eec1314e
+    status:
+      code: 200
+      message: OK
+version: 1
