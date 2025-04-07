@@ -10,15 +10,9 @@
     "start": "node --env-file .env -r @elastic/opentelemetry-node index.js"
   },
   "dependencies": {
-    "ai": "^4.1.63",
-    "@ai-sdk/azure": "^1.2.6",
-    "@ai-sdk/openai": "^1.2.6",
-    "@elastic/opentelemetry-node": "*"
-  },
-  "_comment": "Override to avoid punycode warnings in recent versions of Node.JS",
-  "overrides": {
-    "node-fetch@2.x": {
-      "whatwg-url": "14.x"
-    }
+    "ai": "^4.3.2",
+    "@ai-sdk/azure": "^1.3.8",
+    "@ai-sdk/openai": "^1.3.7",
+    "@elastic/opentelemetry-node": "^1"
   }
 }
