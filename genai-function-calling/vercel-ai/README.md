@@ -36,7 +36,7 @@ npm start
 ## Notes
 
 The LLM should generate something like "The latest stable version of
-Elasticsearch is 8.17.3", unless it hallucinates. Just run it again, if you
+Elasticsearch is 8.17.4", unless it hallucinates. Just run it again, if you
 see something else.
 
 Vercel AI's OpenTelemetry instrumentation only produces traces (not logs or

@@ -1,6 +1,5 @@
 const {createAzure} = require('@ai-sdk/azure');
 const {createOpenAI} = require('@ai-sdk/openai')
-const fetch = require('node-fetch');
 const {generateText, tool} = require('ai');
 const {z} = require('zod');
 
