@@ -78,7 +78,7 @@ async def main():
         action="store_true",
         help="Run tools via a MCP server instead of directly",
     )
-    args = parser.parse_args()
+    args, _ = parser.parse_known_args()
 
     if args.mcp:
         from agents.mcp import MCPServerSse
