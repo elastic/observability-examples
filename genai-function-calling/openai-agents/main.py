@@ -1,3 +1,4 @@
+import argparse
 import asyncio
 import os
 
@@ -10,6 +11,7 @@ from agents import (
     Runner,
     function_tool,
 )
+from agents.mcp import MCPServerSse
 from agents.tracing import GLOBAL_TRACE_PROVIDER
 from openai import AsyncAzureOpenAI
 
@@ -19,7 +21,6 @@ from openai import AsyncAzureOpenAI
 GLOBAL_TRACE_PROVIDER.shutdown()
 
 
-@function_tool(strict_mode=False)
 async def get_latest_elasticsearch_version(major_version: int = 0) -> str:
     """Returns the latest GA version of Elasticsearch in "X.Y.Z" format.
 
@@ -49,15 +50,17 @@ async def get_latest_elasticsearch_version(major_version: int = 0) -> str:
     return max(versions, key=lambda v: tuple(map(int, v.split("."))))
 
 
-async def main():
+async def run_agent(**agent_kwargs: dict):
     model_name = os.getenv("CHAT_MODEL", "gpt-4o-mini")
     openai_client = AsyncAzureOpenAI() if os.getenv("AZURE_OPENAI_API_KEY") else None
-    model = OpenAIProvider(openai_client=openai_client, use_responses=False).get_model(model_name)
+    model = OpenAIProvider(openai_client=openai_client, use_responses=False).get_model(
+        model_name
+    )
     agent = Agent(
         name="version_assistant",
-        tools=[get_latest_elasticsearch_version],
         model=model,
         model_settings=ModelSettings(temperature=0),
+        **agent_kwargs,
     )
 
     result = await Runner.run(
@@ -66,6 +69,32 @@ async def main():
         run_config=RunConfig(workflow_name="GetLatestElasticsearchVersion"),
     )
     print(result.final_output)
+
+
+async def main():
+    parser = argparse.ArgumentParser(
+        prog="ElasticVersionFetcher",
+        description="Fetches the latest version of Elasticsearch 8",
+    )
+    parser.add_argument(
+        "--mcp",
+        action="store_true",
+        help="Run tools via a MCP server instead of directly",
+    )
+    args = parser.parse_args()
+
+    if args.mcp:
+        from mcp_server import mcp_server
+
+        async with (
+            mcp_server([get_latest_elasticsearch_version]),
+            MCPServerSse(params={"url": "http://localhost:8000/sse"}) as mcp_client,
+        ):
+            await run_agent(mcp_servers=[mcp_client])
+    else:
+        await run_agent(
+            tools=[function_tool(strict_mode=False)(get_latest_elasticsearch_version)]
+        )
 
 
 if __name__ == "__main__":

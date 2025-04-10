@@ -32,7 +32,11 @@ def vcr_config():
         "filter_headers": sensitive_request_headers,
         "before_record_response": lambda r: {
             **r,
-            "headers": {k: v for k, v in r["headers"].items() if k.lower() not in sensitive_response_headers},
+            "headers": {
+                k: v
+                for k, v in r["headers"].items()
+                if k.lower() not in sensitive_response_headers
+            },
         },
     }
 

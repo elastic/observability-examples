@@ -1,5 +1,6 @@
 openai-agents~=0.0.8
 httpx~=0.28.1
+mcp~=1.6.0
 
 elastic-opentelemetry~=1.0.0
 # Use openai-agents instrumentation from OpenInference
