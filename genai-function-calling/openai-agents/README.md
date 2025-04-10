@@ -52,6 +52,22 @@ Finally, run `main.py` (notice the prefix of `opentelemetry-instrument):
 dotenv run --no-override -- opentelemetry-instrument python main.py
 ```
 
+## Run with Model Context Protocol (MCP)
+
+[mcp_server](mcp_server.py) includes code needed to decouple tool discovery and invocation
+via the [Model Context Protocol (MCP) flow][flow-mcp]. To run using MCP, append
+`-- --mcp` flag to `dotenv run` or `docker compose run` command.
+
+For example, to run with Docker:
+```bash
+docker compose run --build --rm genai-function-calling --mcp
+```
+
+Or to run with Python:
+```bash
+dotenv run --no-override -- opentelemetry-instrument python main.py --mcp
+```
+
 ## Tests
 
 Tests use [pytest-vcr][pytest-vcr] to capture HTTP traffic for offline unit
@@ -88,3 +104,4 @@ OpenAI Agents SDK's OpenTelemetry instrumentation is via
 [pytest-vcr]: https://pytest-vcr.readthedocs.io/
 [test_main.yaml]: cassettes/test_main.yaml
 [openinference]:  https://github.com/Arize-ai/openinference/tree/main/python/instrumentation/openinference-instrumentation-openai-agents
+[flow-mcp]: ../README.md#model-context-protocol-flow

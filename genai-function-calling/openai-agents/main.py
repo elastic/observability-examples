@@ -1,3 +1,4 @@
+import argparse
 import asyncio
 import os
 
@@ -13,13 +14,14 @@ from agents import (
 from agents.tracing import GLOBAL_TRACE_PROVIDER
 from openai import AsyncAzureOpenAI
 
+from mcp_server import mcp_client_main, SERVER_ARG
+
 # Shut down the global tracer as it sends to the OpenAI "/traces/ingest"
 # endpoint, which we aren't using and doesn't exist on alternative backends
 # like Ollama.
 GLOBAL_TRACE_PROVIDER.shutdown()
 
 
-@function_tool(strict_mode=False)
 async def get_latest_elasticsearch_version(major_version: int = 0) -> str:
     """Returns the latest GA version of Elasticsearch in "X.Y.Z" format.
 
@@ -49,15 +51,15 @@ async def get_latest_elasticsearch_version(major_version: int = 0) -> str:
     return max(versions, key=lambda v: tuple(map(int, v.split("."))))
 
 
-async def main():
+async def run_agent(**agent_kwargs: dict):
     model_name = os.getenv("CHAT_MODEL", "gpt-4o-mini")
     openai_client = AsyncAzureOpenAI() if os.getenv("AZURE_OPENAI_API_KEY") else None
     model = OpenAIProvider(openai_client=openai_client, use_responses=False).get_model(model_name)
     agent = Agent(
         name="version_assistant",
-        tools=[get_latest_elasticsearch_version],
         model=model,
         model_settings=ModelSettings(temperature=0),
+        **agent_kwargs,
     )
 
     result = await Runner.run(
@@ -66,6 +68,30 @@ async def main():
         run_config=RunConfig(workflow_name="GetLatestElasticsearchVersion"),
     )
     print(result.final_output)
+
+
+async def main():
+    parser = argparse.ArgumentParser(
+        prog="genai-function-calling",
+        description="Fetches the latest version of Elasticsearch 8",
+    )
+    parser.add_argument(
+        "--mcp",
+        action="store_true",
+        help="Run tools via a MCP server instead of directly",
+    )
+    parser.add_argument(
+        SERVER_ARG,
+        action="store_true",
+        help="Run the MCP server",
+    )
+
+    args, _ = parser.parse_known_args()
+
+    if args.mcp:
+        await mcp_client_main(run_agent, [get_latest_elasticsearch_version], args.mcp_server)
+    else:
+        await run_agent(tools=[function_tool(strict_mode=False)(get_latest_elasticsearch_version)])
 
 
 if __name__ == "__main__":
