@@ -8,5 +8,6 @@ RUN --mount=type=cache,target=/root/.cache/pip pip install -r /tmp/requirements.
 RUN --mount=type=cache,target=/root/.cache/pip edot-bootstrap --action=install
 
 COPY main.py /
+COPY mcp_server.py /
 
-CMD [ "opentelemetry-instrument", "python", "main.py" ]
+ENTRYPOINT [ "opentelemetry-instrument", "python", "main.py" ]

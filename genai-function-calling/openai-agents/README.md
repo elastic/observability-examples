@@ -60,7 +60,7 @@ via the [Model Context Protocol (MCP) flow][flow-mcp]. To run using MCP, append
 
 For example, to run with Docker:
 ```bash
-docker compose run --build --rm genai-function-calling -- --mcp
+docker compose run --build --rm genai-function-calling --mcp
 ```
 
 Or to run with Python:
