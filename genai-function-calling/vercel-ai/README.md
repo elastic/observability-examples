@@ -33,6 +33,23 @@ npm install
 npm start
 ```
 
+
+## Run with Model Context Protocol (MCP)
+
+[mcp.js](mcp.js) includes code needed to decouple tool discovery and invocation
+via the [Model Context Protocol (MCP) flow][flow-mcp]. To run using MCP, append
+`-- --mcp` flag to `npm start` or `docker compose run` command.
+
+For example, to run with Docker:
+```bash
+docker compose run --build --rm genai-function-calling -- --mcp
+```
+
+Or to run with npm:
+```bash
+npm run start -- --mcp
+```
+
 ## Notes
 
 The LLM should generate something like "The latest stable version of
@@ -45,4 +62,4 @@ metrics).
 ---
 [flow]: ../README.md#example-application-flow
 [vercel-ai]: https://github.com/vercel/ai
-
+[flow-mcp]: ../README.md#model-context-protocol-flow

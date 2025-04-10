@@ -45,14 +45,14 @@ sequenceDiagram
     activate Agent
     Note over Agent: invokes get_latest_elasticsearch_version(majorVersion=8)
 
-    Agent -->> LLM: [user, assistant, tool: "8.17.3"]
+    Agent -->> LLM: [user, assistant, tool: "8.17.4"]
     Note over Agent: LLM is stateless, the tool result is sent back with prior messages
     deactivate Agent
     activate LLM
 
-    LLM ->> Agent: content: "The latest version of Elasticsearch 8 is 8.17.3"
+    LLM ->> Agent: content: "The latest version of Elasticsearch 8 is 8.17.4"
     deactivate LLM
-    Note over Agent: "The latest version of Elasticsearch 8 is 8.17.3"
+    Note over Agent: "The latest version of Elasticsearch 8 is 8.17.4"
 ```
 
 The GenAI framework not only abstracts the above loop, but also LLM plugability
@@ -100,5 +100,79 @@ Here's how to export your `HOST_IP`:
   * If macOS: `export HOST_IP=$(ipconfig getifaddr en0)`
   * If Ubuntu: `export HOST_IP=$(hostname -I | awk '{print $1}')`
 
+## Model Context Protocol flow
+
+Some examples optionally use Model Context Protocol ([MCP][mcp]) for tool
+discovery and execution.
+
+This uses the "stdio" transport which involves launching a subprocess. For
+convenience, the MCP server is defined in the same project as the normal
+example.
+
+The main difference is that instead of calling a local function to get the
+latest version of Elasticsearch, the agent creates and MCP server process and
+discovers the function via the MCP protocol. When the LLM uses that function,
+it uses the same protocol to invoke the function. Otherwise, the flow is the
+same.
+
+Here's a diagram of the MCP variant, which notably augments the original by
+decoupling tool discovery and execution from the agent, which is now also an
+MCP client.
+
+```mermaid
+sequenceDiagram
+    participant Agent as Agent (MCP Client)
+    participant MCP as MCP Server (subprocess)
+    participant LLM
+
+    participant Agent
+    participant LLM
+
+    Note over Agent: Spawns MCP Server subprocess and connects via stdio
+    activate MCP
+    MCP ->> MCP: Initialize and ready
+    deactivate MCP
+
+    Agent ->> MCP: initialize: {clientInfo, protocolVersion}
+    activate MCP
+    MCP -->> Agent: response: {capabilities, instructions, serverInfo}
+    deactivate MCP
+
+    Agent ->> MCP: tools/list
+    activate MCP
+    MCP -->> Agent: response: {tools: [{name: "get_latest_elasticsearch_version", ...}]}
+    deactivate MCP
+
+    Agent ->> LLM: user: "What is the latest version of Elasticsearch 8?"
+    activate LLM
+    Note over LLM: LLM determines it needs to use a tool to complete the task
+
+    LLM ->> Agent: assistant: {"function": {"name": "get_latest_elasticsearch_version", "arguments": "{\"majorVersion\": 8}"}}
+    deactivate LLM
+    activate Agent
+    Note over Agent: invokes get_latest_elasticsearch_version(majorVersion=8)
+
+    Agent -->> LLM: [user, assistant, tool: "8.17.4"]
+    Note over Agent: LLM is stateless, the tool result is sent back with prior messages
+    deactivate Agent
+    activate LLM
+
+    LLM ->> Agent: content: "The latest version of Elasticsearch 8 is 8.17.4"
+    deactivate LLM
+    Note over Agent: "The latest version of Elasticsearch 8 is 8.17.4"
+
+    Agent ->> MCP: Close stdin
+    activate MCP
+    MCP ->> MCP: Exits
+    deactivate MCP
+```
+
+Note: If you are using OpenTelemetry, there's not yet a way to join traces
+across the MCP process boundary. This means that the HTTP call to get the
+latest version of Elasticsearch will be in a separate trace from the agent.
+Please follow this [discussion][mcp-otel] in the MCP specification for updates.
+
 ---
 [native]: https://opentelemetry.io/docs/languages/java/instrumentation/#native-instrumentation
+[mcp]: https://modelcontextprotocol.io/specification
+[mcp-otel]: https://github.com/modelcontextprotocol/modelcontextprotocol/discussions/269
