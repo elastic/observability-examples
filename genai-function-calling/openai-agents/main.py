@@ -70,7 +70,7 @@ async def run_agent(**agent_kwargs: dict):
 
 async def main():
     parser = argparse.ArgumentParser(
-        prog="ElasticVersionFetcher",
+        prog="genai-function-calling",
         description="Fetches the latest version of Elasticsearch 8",
     )
     parser.add_argument(
