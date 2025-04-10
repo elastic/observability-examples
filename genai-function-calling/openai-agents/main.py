@@ -11,7 +11,6 @@ from agents import (
     Runner,
     function_tool,
 )
-from agents.mcp import MCPServerSse
 from agents.tracing import GLOBAL_TRACE_PROVIDER
 from openai import AsyncAzureOpenAI
 
@@ -84,6 +83,7 @@ async def main():
     args = parser.parse_args()
 
     if args.mcp:
+        from agents.mcp import MCPServerSse
         from mcp_server import mcp_server
 
         async with (
