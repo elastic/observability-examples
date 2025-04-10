@@ -1,6 +1,6 @@
 const {createAzure} = require('@ai-sdk/azure');
 const {createOpenAI} = require('@ai-sdk/openai');
-const {generateText, tool, ToolSet} = require('ai');
+const {generateText, tool} = require('ai');
 const {z} = require('zod');
 const {mcpClientMain} = require('./mcp');
 
@@ -48,9 +48,9 @@ const tools = {get_latest_elasticsearch_version: getLatestElasticsearchVersion};
 /**
  * Runs the agent with the given tools.
  *
- * @param {ToolSet} tools - The tools the LLM can use to answer the question.
+ * @param {import('ai').ToolSet} tools - The tools the LLM can use to answer the question.
  */
-async function runAgent(tools = tools) {
+async function runAgent(tools) {
     const {text} = await generateText({
         model: openai(model),
         messages: [{role: 'user', content: "What is the latest version of Elasticsearch 8?"}],
