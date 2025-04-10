@@ -52,9 +52,7 @@ async def get_latest_elasticsearch_version(major_version: int = 0) -> str:
 async def run_agent(**agent_kwargs: dict):
     model_name = os.getenv("CHAT_MODEL", "gpt-4o-mini")
     openai_client = AsyncAzureOpenAI() if os.getenv("AZURE_OPENAI_API_KEY") else None
-    model = OpenAIProvider(openai_client=openai_client, use_responses=False).get_model(
-        model_name
-    )
+    model = OpenAIProvider(openai_client=openai_client, use_responses=False).get_model(model_name)
     agent = Agent(
         name="version_assistant",
         model=model,
@@ -92,9 +90,7 @@ async def main():
         ):
             await run_agent(mcp_servers=[mcp_client])
     else:
-        await run_agent(
-            tools=[function_tool(strict_mode=False)(get_latest_elasticsearch_version)]
-        )
+        await run_agent(tools=[function_tool(strict_mode=False)(get_latest_elasticsearch_version)])
 
 
 if __name__ == "__main__":
