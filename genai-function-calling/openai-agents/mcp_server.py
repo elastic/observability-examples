@@ -1,35 +1,45 @@
-import asyncio
-import contextlib
-import httpx
+from agents.mcp import MCPServerStdio
 from mcp.server.fastmcp import FastMCP
-import uvicorn
+import os
+import signal
+import sys
 
 
-@contextlib.asynccontextmanager
-async def mcp_server(tools):
+SERVER_ARG = "--mcp-server"
+
+
+def handler(signum, frame):
+    sys.exit(0)
+
+
+async def mcp_server_main(tools):
     mcp_server = FastMCP(log_level="WARNING")
     for tool in tools:
         mcp_server.add_tool(tool)
-    # Manually setup uvicorn to allow shutting it down
-    config = uvicorn.Config(
-        mcp_server.sse_app(),
-        host="localhost",
-        port=8000,
-        log_level="critical",  # To suppress an SSE background task cancellation ERROR
-        timeout_graceful_shutdown=1,
-    )
-    server = uvicorn.Server(config)
-    server_task = asyncio.create_task(server.serve())
-    # Wait for the server to start
-    async with httpx.AsyncClient() as client:
-        while True:
-            try:
-                await client.get("http://localhost:8000/")
-                break
-            except httpx.ConnectError:
-                pass
-    try:
-        yield
-    finally:
-        server.should_exit = True
-        await server_task
+    # Mysteriously, cleanup such as from opentelemetry-instrument does not run on exit
+    # without registering an effectively no-op termination handler.
+    signal.signal(signal.SIGTERM, handler)
+    await mcp_server.run_stdio_async()
+
+
+async def run_agent_with_mcp_client(run_agent):
+    env = os.environ.copy()
+    # Make sure PYTHONPATH is set to the same as what started this
+    # process. Notably, opentelemetry-instrument removes itself from the value
+    # in os.environ and we'd like to restore it if it was used.
+    env["PYTHONPATH"] = os.pathsep.join(sys.path)
+    async with MCPServerStdio(
+        {
+            "command": sys.executable,
+            "args": sys.argv + [SERVER_ARG],
+            "env": env,
+        }
+    ) as mcp_client:
+        await run_agent(mcp_servers=[mcp_client])
+
+
+async def mcp_client_main(run_agent, tools, is_server):
+    if is_server:
+        await mcp_server_main(tools)
+    else:
+        await run_agent_with_mcp_client(run_agent)

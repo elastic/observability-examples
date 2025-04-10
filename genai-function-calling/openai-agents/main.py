@@ -14,6 +14,8 @@ from agents import (
 from agents.tracing import GLOBAL_TRACE_PROVIDER
 from openai import AsyncAzureOpenAI
 
+from mcp_server import mcp_client_main, SERVER_ARG
+
 # Shut down the global tracer as it sends to the OpenAI "/traces/ingest"
 # endpoint, which we aren't using and doesn't exist on alternative backends
 # like Ollama.
@@ -78,17 +80,16 @@ async def main():
         action="store_true",
         help="Run tools via a MCP server instead of directly",
     )
+    parser.add_argument(
+        SERVER_ARG,
+        action="store_true",
+        help="Run the MCP server",
+    )
+
     args, _ = parser.parse_known_args()
 
     if args.mcp:
-        from agents.mcp import MCPServerSse
-        from mcp_server import mcp_server
-
-        async with (
-            mcp_server([get_latest_elasticsearch_version]),
-            MCPServerSse(params={"url": "http://localhost:8000/sse"}) as mcp_client,
-        ):
-            await run_agent(mcp_servers=[mcp_client])
+        await mcp_client_main(run_agent, [get_latest_elasticsearch_version], args.mcp_server)
     else:
         await run_agent(tools=[function_tool(strict_mode=False)(get_latest_elasticsearch_version)])
 
