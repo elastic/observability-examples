@@ -4,9 +4,6 @@ import httpx
 from mcp.server.fastmcp import FastMCP
 import uvicorn
 
-server: uvicorn.Server
-server_task: asyncio.Task
-
 
 @contextlib.asynccontextmanager
 async def mcp_server(tools):
