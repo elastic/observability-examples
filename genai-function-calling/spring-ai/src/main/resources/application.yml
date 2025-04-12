@@ -33,8 +33,9 @@ logging:
     org:
       springframework:
         ai:
-          autoconfigure:
+          model:
             chat:
               observation:
-                # Hush warnings about prompt and completion logging
-                ChatObservationAutoConfiguration: OFF
+                autoconfigure:
+                  # Hush warnings about prompt and completion logging
+                  ChatObservationAutoConfiguration: OFF
