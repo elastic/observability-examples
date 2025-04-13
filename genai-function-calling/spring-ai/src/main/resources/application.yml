@@ -1,5 +1,4 @@
 # See https://docs.spring.io/spring-ai/reference/api/chat/openai-chat.html
-
 spring:
   main:
     web-application-type: none
