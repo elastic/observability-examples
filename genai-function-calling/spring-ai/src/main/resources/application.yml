@@ -4,6 +4,13 @@ spring:
     web-application-type: none
     banner-mode: "off"
   ai:
+    # Right now, we cannot select azure or openai with a single property.
+    # See https://github.com/spring-projects/spring-ai/issues/2712
+    model:
+      embedding:  ${spring.ai.model.chat}
+      audio:
+        transcription:  ${spring.ai.model.chat}
+      image:  ${spring.ai.model.chat}
     openai:
       base-url: ${OPENAI_BASE_URL:https://api.openai.com/v1}
       api-key: ${OPENAI_API_KEY:enter-your-api-key}
@@ -30,11 +37,18 @@ management.observations.annotations.enabled: true
 logging:
   level:
     root: WARN
+    io:
+      netty:
+        resolver:
+          dns:
+            # Hush warnings about native DNS on MacOS
+            DnsServerAddressStreamProviders: OFF
     org:
       springframework:
         ai:
-          autoconfigure:
+          model:
             chat:
               observation:
-                # Hush warnings about prompt and completion logging
-                ChatObservationAutoConfiguration: OFF
+                autoconfigure:
+                  # Hush warnings about prompt and completion logging
+                  ChatObservationAutoConfiguration: OFF

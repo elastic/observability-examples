@@ -2,11 +2,14 @@ FROM eclipse-temurin:21-jdk-alpine AS build
 
 WORKDIR /build
 
-# Copy the local code to the container
-COPY mvnw pom.xml ./
-COPY src ./src
+# Install dependencies (verify resolves more than dependency:go-offline)
+COPY mvnw ./
 COPY .mvn ./.mvn
+COPY pom.xml ./
+RUN ./mvnw verify -DskipTests
 
+# Copy source code and build the application
+COPY src ./src
 RUN ./mvnw package
 
 FROM eclipse-temurin:21-jre-alpine

@@ -6,10 +6,12 @@ import io.opentelemetry.api.GlobalOpenTelemetry;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatModel;
+import org.springframework.ai.model.SpringAIModelProperties;
+import org.springframework.ai.model.SpringAIModels;
 import org.springframework.ai.model.tool.DefaultToolCallingChatOptions;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
@@ -17,12 +19,12 @@ import org.springframework.stereotype.Component;
 public class Main {
 
 	@Component
-    static class VersionAgent implements CommandLineRunner {
+	static class VersionAgent implements CommandLineRunner {
 
 		private final ChatClient chat;
 		private final ElasticsearchTools tools;
 
-        VersionAgent(ChatModel chat, ElasticsearchTools tools) {
+		VersionAgent(ChatModel chat, ElasticsearchTools tools) {
 			this.chat = ChatClient.builder(chat).build();
 			this.tools = tools;
 		}
@@ -51,7 +53,15 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(Main.class, args);
+		// Choose between Azure OpenAI and OpenAI based on the presence of the official SDK
+        // environment variable AZURE_OPENAI_API_KEY. Otherwise, we'd create two beans.
+		String azureApiKey = System.getenv("AZURE_OPENAI_API_KEY");
+		String chatModel = azureApiKey != null && !azureApiKey.trim().isEmpty()
+				? SpringAIModels.AZURE_OPENAI
+				: SpringAIModels.OPENAI;
+		new SpringApplicationBuilder(Main.class)
+				.properties(SpringAIModelProperties.CHAT_MODEL + "=" + chatModel)
+				.run(args);
 	}
 
 }
