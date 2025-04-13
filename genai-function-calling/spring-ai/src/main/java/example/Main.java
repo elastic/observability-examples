@@ -59,15 +59,9 @@ public class Main {
 		String chatModel = azureApiKey != null && !azureApiKey.trim().isEmpty()
 				? SpringAIModels.AZURE_OPENAI
 				: SpringAIModels.OPENAI;
-		// Right now, we cannot select azure or openai with a single property, so set all of them.
-        // See https://github.com/spring-projects/spring-ai/issues/2712
 		new SpringApplicationBuilder(Main.class)
-				.properties(
-						SpringAIModelProperties.AUDIO_TRANSCRIPTION_MODEL + "=" + chatModel,
-						SpringAIModelProperties.CHAT_MODEL + "=" + chatModel,
-						SpringAIModelProperties.EMBEDDING_MODEL + "=" + chatModel,
-						SpringAIModelProperties.IMAGE_MODEL + "=" + chatModel
-				).run(args);
+				.properties(SpringAIModelProperties.CHAT_MODEL + "=" + chatModel)
+				.run(args);
 	}
 
 }
