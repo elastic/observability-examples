@@ -43,9 +43,9 @@ Run maven after setting ENV variables like this:
 
 ## Run with Model Context Protocol (MCP)
 
-[mcp_server](mcp_server.py) includes code needed to decouple tool discovery and invocation
-via the [Model Context Protocol (MCP) flow][flow-mcp]. To run using MCP, adjust
-the arguments you use for `docker compose run` or `./shdotenv ./mvnw`.
+[Mcp.java](src/main/java/example/Mcp.java) includes code needed to decouple
+tool invocation via the [Model Context Protocol (MCP) flow][flow-mcp]. To run
+using MCP, adjust arguments to `docker compose run` or `./shdotenv ./mvnw`.
 
 For example, to run with Docker:
 ```bash
