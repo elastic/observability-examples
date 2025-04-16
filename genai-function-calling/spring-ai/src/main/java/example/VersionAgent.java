@@ -6,6 +6,7 @@ import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.model.tool.DefaultToolCallingChatOptions;
 import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -13,10 +14,12 @@ class VersionAgent implements CommandLineRunner {
 
     private final ChatClient chat;
     private final ToolCallbackProvider tools;
+    private final ConfigurableApplicationContext context;
 
-    VersionAgent(ChatModel chat, ToolCallbackProvider tools) {
+    VersionAgent(ChatModel chat, ToolCallbackProvider tools, ConfigurableApplicationContext context) {
         this.chat = ChatClient.builder(chat).build();
         this.tools = tools;
+        this.context = context;
     }
 
     @Override
@@ -33,5 +36,6 @@ class VersionAgent implements CommandLineRunner {
                 .content();
 
         System.out.println(answer);
+        context.close(); // See https://github.com/spring-projects/spring-ai/issues/2756
     }
 }
