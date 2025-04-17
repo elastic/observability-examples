@@ -41,10 +41,26 @@ Run maven after setting ENV variables like this:
 ./shdotenv ./mvnw -q clean package exec:exec
 ```
 
+## Run with Model Context Protocol (MCP)
+
+[Mcp.java](src/main/java/example/Mcp.java) includes code needed to decouple
+tool invocation via the [Model Context Protocol (MCP) flow][flow-mcp]. To run
+using MCP, adjust arguments to `docker compose run` or `./shdotenv ./mvnw`.
+
+For example, to run with Docker:
+```bash
+docker compose run --build --rm genai-function-calling --mcp
+```
+
+Or to run with Maven:
+```bash
+./shdotenv ./mvnw -q clean package exec:exec -Dtools=mcp
+```
+
 ## Notes
 
 The LLM should generate something like "The latest stable version of
-Elasticsearch is 8.17.4", unless it hallucinates. Just run it again, if you
+Elasticsearch is 8.18.0", unless it hallucinates. Just run it again, if you
 see something else.
 
 Spring AI uses Micrometer which bridges to OpenTelemetry, but needs a few
@@ -80,3 +96,4 @@ OTEL_INSTRUMENTATION_MICROMETER_ENABLED=true
 ---
 [flow]: ../README.md#example-application-flow
 [spring-ai]: https://github.com/spring-projects/spring-ai/
+[flow-mcp]: ../README.md#model-context-protocol-flow

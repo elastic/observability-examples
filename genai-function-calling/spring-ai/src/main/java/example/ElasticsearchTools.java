@@ -1,15 +1,14 @@
 package example;
 
-import java.util.Comparator;
-import java.util.List;
-
+import jakarta.annotation.Nullable;
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.ai.tool.annotation.ToolParam;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import jakarta.annotation.Nullable;
+import java.util.Comparator;
+import java.util.List;
 
 
 @Component
@@ -33,11 +32,11 @@ class ElasticsearchTools {
                 // Filter out non-release versions (e.g. -rc1) and remove " GA" suffix
                 .map(release -> release.version().replace(" GA", ""))
                 .filter(version -> !version.contains("-"))
-                .filter(version ->  {
-                        if (majorVersion == null) {
-                                return true;
-                        }
-                        return version.startsWith(majorVersion + ".");
+                .filter(version -> {
+                    if (majorVersion == null) {
+                        return true;
+                    }
+                    return version.startsWith(majorVersion + ".");
                 })
                 // "8.9.1" > "8.10.0", so coerce to an integer: 80901 < 81000
                 .max(Comparator.comparingInt(v -> {
