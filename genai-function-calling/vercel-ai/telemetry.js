@@ -1,9 +1,9 @@
-import { NodeSDK } from "@opentelemetry/sdk-node";
-import { getNodeAutoInstrumentations } from '@opentelemetry/auto-instrumentations-node';
-import { OTLPTraceExporter} from "@opentelemetry/exporter-trace-otlp-proto";
-import { MCPInstrumentation } from "@arizeai/openinference-instrumentation-mcp";
-import * as MCPClientModule from "@modelcontextprotocol/sdk/client/index.js";
-import * as MCPServerModule from "@modelcontextprotocol/sdk/server/index.js";
+const { NodeSDK } = require("@opentelemetry/sdk-node");
+const { getNodeAutoInstrumentations } = require('@opentelemetry/auto-instrumentations-node');
+const { OTLPTraceExporter } = require("@opentelemetry/exporter-trace-otlp-proto");
+const { MCPInstrumentation } = require("@arizeai/openinference-instrumentation-mcp");
+const MCPClientModule = require("@modelcontextprotocol/sdk/client/index.js");
+const MCPServerModule = require("@modelcontextprotocol/sdk/server/index.js");
 
 const mcpInstrumentation = new MCPInstrumentation();
 // MCP must be manually instrumented as it doesn't have a traditional module structure

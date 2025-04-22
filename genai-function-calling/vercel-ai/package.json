@@ -2,12 +2,12 @@
   "name": "genai-function-calling",
   "version": "1.0.0",
   "private": true,
-  "type": "module",
+  "type": "commonjs",
   "engines": {
     "node": ">=22"
   },
   "scripts": {
-    "start": "node --env-file .env --import ./telemetry.js index.js"
+    "start": "node --env-file .env -r ./telemetry.js index.js"
   },
   "dependencies": {
     "ai": "^4.3.9",

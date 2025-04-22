@@ -1,19 +1,16 @@
-import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
-import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
-import { experimental_createMCPClient } from 'ai';
+const {McpServer} = require('@modelcontextprotocol/sdk/server/mcp.js');
+const {StdioServerTransport} = require('@modelcontextprotocol/sdk/server/stdio.js');
+const {StdioClientTransport} = require('@modelcontextprotocol/sdk/client/stdio.js');
+const {experimental_createMCPClient} = require('ai');
 
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+const fs = require('fs');
+const path = require('path');
 
 const SERVER_ARG = '--mcp-server';
 
 // Get MCP server parameters from package.json
 let name, version;
 try {
-    const __filename = fileURLToPath(import.meta.url);
-    const __dirname = path.dirname(__filename);
     const packageJsonPath = path.join(__dirname, 'package.json');
     const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
     name = packageJson.name;
@@ -97,4 +94,4 @@ async function mcpClientMain(runAgent, tools) {
     }
 }
 
-export { mcpClientMain };
+module.exports = {mcpClientMain};

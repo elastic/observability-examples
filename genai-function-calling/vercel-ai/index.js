@@ -1,8 +1,8 @@
-import { createAzure } from '@ai-sdk/azure';
-import { createOpenAI } from '@ai-sdk/openai';
-import { generateText, tool } from 'ai';
-import { z } from 'zod';
-import { mcpClientMain } from './mcp.js';
+const {createAzure} = require('@ai-sdk/azure');
+const {createOpenAI} = require('@ai-sdk/openai');
+const {generateText, tool} = require('ai');
+const {z} = require('zod');
+const {mcpClientMain} = require('./mcp');
 
 const openai = process.env.AZURE_OPENAI_API_KEY
     ? createAzure({ // coerce to standard OpenAI SDK ENV variables
