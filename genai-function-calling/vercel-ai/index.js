@@ -1,15 +1,3 @@
-
-import { MCPInstrumentation } from "@arizeai/openinference-instrumentation-mcp";
-import * as MCPClientModule from "@modelcontextprotocol/sdk/client/index.js";
-import * as MCPServerModule from "@modelcontextprotocol/sdk/server/index.js";
-
-// MCP must be manually instrumented as it doesn't have a traditional module structure
-mcpInstrumentation.manuallyInstrument({
-    clientModule: MCPClientModule,
-    serverModule: MCPServerModule,
-});
-
-
 import { createAzure } from '@ai-sdk/azure';
 import { createOpenAI } from '@ai-sdk/openai';
 import { generateText, tool } from 'ai';
