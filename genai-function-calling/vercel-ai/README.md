@@ -53,13 +53,17 @@ npm run start -- --mcp
 ## Notes
 
 The LLM should generate something like "The latest stable version of
-Elasticsearch is 8.17.4", unless it hallucinates. Just run it again, if you
-see something else.
+Elasticsearch is 8.18.0," unless it hallucinates. Run it again, if you see
+something else.
 
 Vercel AI's OpenTelemetry instrumentation only produces traces (not logs or
 metrics).
+
+This uses [OpenInference][openinference] to propagate trace identifiers when
+using MCP.
 
 ---
 [flow]: ../README.md#example-application-flow
 [vercel-ai]: https://github.com/vercel/ai
 [flow-mcp]: ../README.md#model-context-protocol-flow
+[openinference]: https://github.com/Arize-ai/openinference/tree/main/js/packages/openinference-instrumentation-mcp
