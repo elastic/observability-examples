@@ -1,13 +1,9 @@
-// First, import and initialize the instrumentation
+// Import and initialize MCPInstrumentation before importing the MCP modules.
 const { MCPInstrumentation } = require("@arizeai/openinference-instrumentation-mcp");
 const mcpInstrumentation = new MCPInstrumentation();
 
-// Then, import the MCP modules after instrumentation is set up
-const MCPClientModule = require("@modelcontextprotocol/sdk/client/index.js");
-const MCPServerModule = require("@modelcontextprotocol/sdk/server/index.js");
-
-// Finally, manually instrument the modules
+// Then, manually instrument MCP, as it doesn't have a traditional module structure.
 mcpInstrumentation.manuallyInstrument({
-    clientModule: MCPClientModule,
-    serverModule: MCPServerModule,
+    clientModule: require("@modelcontextprotocol/sdk/client/index.js"),
+    serverModule: require("@modelcontextprotocol/sdk/server/index.js"),
 });
