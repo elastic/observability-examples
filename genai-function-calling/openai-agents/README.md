@@ -49,9 +49,9 @@ dotenv run --no-override -- opentelemetry-instrument python main.py
 
 ## Run with Model Context Protocol (MCP)
 
-[mcp_server](mcp_server.py) includes code needed to decouple tool discovery and invocation
-via the [Model Context Protocol (MCP) flow][flow-mcp]. To run using MCP, append
-`-- --mcp` flag to `dotenv run` or `docker compose run` command.
+[main_mcp.py](main_mcp.py) includes code needed to decouple tool discovery and
+invocation via the [Model Context Protocol (MCP) flow][flow-mcp]. To run using
+MCP, append `-- --mcp` flag to `dotenv run` or `docker compose run` command.
 
 For example, to run with Docker:
 ```bash
