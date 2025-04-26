@@ -834,9 +834,9 @@ interactions:
               "manifest": "https://artifacts.elastic.co/downloads/8.17.2.json"
             },
             {
-              "version": "8.17.3",
+              "version": "8.18.0",
               "public_release_date": "2025-03-04",
-              "manifest": "https://artifacts.elastic.co/downloads/8.17.3.json"
+              "manifest": "https://artifacts.elastic.co/downloads/8.18.0.json"
             },
             {
               "version": "8.2.0",
@@ -1007,7 +1007,7 @@ interactions:
           {
             "role": "tool",
             "tool_call_id": "call_pT4CJ0D2kmnTP5WoVhv2edrt",
-            "content": "8.17.3"
+            "content": "8.18.0"
           }
         ],
         "model": "gpt-4o-mini",
@@ -1083,7 +1083,7 @@ interactions:
               "index": 0,
               "message": {
                 "role": "assistant",
-                "content": "The latest version of Elasticsearch 8 is 8.17.3.",
+                "content": "The latest version of Elasticsearch 8 is 8.18.0.",
                 "refusal": null,
                 "annotations": []
               },

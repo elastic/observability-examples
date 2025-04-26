@@ -45,14 +45,14 @@ sequenceDiagram
     activate Agent
     Note over Agent: invokes get_latest_elasticsearch_version(majorVersion=8)
 
-    Agent -->> LLM: [user, assistant, tool: "8.17.4"]
+    Agent -->> LLM: [user, assistant, tool: "8.18.0"]
     Note over Agent: LLM is stateless, the tool result is sent back with prior messages
     deactivate Agent
     activate LLM
 
-    LLM ->> Agent: content: "The latest version of Elasticsearch 8 is 8.17.4"
+    LLM ->> Agent: content: "The latest version of Elasticsearch 8 is 8.18.0"
     deactivate LLM
-    Note over Agent: "The latest version of Elasticsearch 8 is 8.17.4"
+    Note over Agent: "The latest version of Elasticsearch 8 is 8.18.0"
 ```
 
 The GenAI framework not only abstracts the above loop, but also LLM plugability
@@ -152,14 +152,14 @@ sequenceDiagram
     activate Agent
     Note over Agent: invokes get_latest_elasticsearch_version(majorVersion=8)
 
-    Agent -->> LLM: [user, assistant, tool: "8.17.4"]
+    Agent -->> LLM: [user, assistant, tool: "8.18.0"]
     Note over Agent: LLM is stateless, the tool result is sent back with prior messages
     deactivate Agent
     activate LLM
 
-    LLM ->> Agent: content: "The latest version of Elasticsearch 8 is 8.17.4"
+    LLM ->> Agent: content: "The latest version of Elasticsearch 8 is 8.18.0"
     deactivate LLM
-    Note over Agent: "The latest version of Elasticsearch 8 is 8.17.4"
+    Note over Agent: "The latest version of Elasticsearch 8 is 8.18.0"
 
     Agent ->> MCP: Close stdin
     activate MCP
