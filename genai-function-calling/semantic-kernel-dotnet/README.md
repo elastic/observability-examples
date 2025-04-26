@@ -11,12 +11,7 @@ of OpenTelemetry (EDOT) .NET, by prepending its command with `instrument.sh`.
 Copy [env.example](env.example) to `.env` and update its `OPENAI_API_KEY`.
 
 An OTLP compatible endpoint should be listening for traces, metrics and logs on
-`http://localhost:4317`. If not, update `OTEL_EXPORTER_OTLP_ENDPOINT` as well.
-
-For example, if Elastic APM server is running locally, edit `.env` like this:
-```
-OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:8200
-```
+`http://localhost:4318`. If not, update `OTEL_EXPORTER_OTLP_ENDPOINT` as well.
 
 ## Run with Docker
 
@@ -27,7 +22,7 @@ docker compose run --build --rm genai-function-calling
 ## Notes
 
 The LLM should generate something like "The latest stable version of
-Elasticsearch is 8.17.4", unless it hallucinates. Just run it again, if you
+Elasticsearch is 8.18.0", unless it hallucinates. Just run it again, if you
 see something else.
 
 Semantic Kernel .NET's OpenTelemetry instrumentation uses the following custom
