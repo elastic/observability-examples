@@ -14,12 +14,7 @@ Agents support is via [OpenInference][openinference].
 Copy [env.example](env.example) to `.env` and update its `OPENAI_API_KEY`.
 
 An OTLP compatible endpoint should be listening for traces, metrics and logs on
-`http://localhost:4317`. If not, update `OTEL_EXPORTER_OTLP_ENDPOINT` as well.
-
-For example, if Elastic APM server is running locally, edit `.env` like this:
-```
-OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:8200
-```
+`http://localhost:4318`. If not, update `OTEL_EXPORTER_OTLP_ENDPOINT` as well.
 
 ## Run with Docker
 
