@@ -30,8 +30,8 @@ sealed class ReleasesResponse
 [McpServerToolType]
 sealed class ElasticsearchPlugin
 {
-    [KernelFunction("get_latest_version")]
-    [McpServerTool(Name = "get_latest_version")]
+    [KernelFunction("get_latest_elasticsearch_version")]
+    [McpServerTool(Name = "get_latest_elasticsearch_version")]
     [Description("Returns the latest GA version of Elasticsearch in \"X.Y.Z\" format.")]
     public string GetLatestVersion(
         [Description("Major version to filter by (e.g. 7, 8). Defaults to latest")] int? majorVersion = null)

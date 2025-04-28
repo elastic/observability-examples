@@ -45,7 +45,7 @@ sequenceDiagram
     activate Agent
     Note over Agent: invokes get_latest_elasticsearch_version(majorVersion=8)
 
-    Agent -->> LLM: [user, assistant, tool: "8.18.0"]
+    Agent ->> LLM: [user, assistant, tool: "8.18.0"]
     Note over Agent: LLM is stateless, the tool result is sent back with prior messages
     deactivate Agent
     activate LLM
@@ -59,6 +59,13 @@ The GenAI framework not only abstracts the above loop, but also LLM plugability
 and tool registration. This simplifies swapping out LLMs and also enables
 flexibility in defining and testing functions.
 
+> [!NOTE]
+> LLM interactions above follow OpenAI's [Chat Completions API][openai-chat]. This is the
+> most implemented LLM API. In March 2025, OpenAI announced a stateful
+> [Responses API][openai-responses], which doesn't require passing prior messages in subsequent
+> calls to the LLM. Once [Ollama supports this][ollama-responses], we'll update examples and
+> diagrams accordingly.
+
 ## Observability with EDOT
 
 The OpenTelemetry instrumentation approach varies per GenAI framework. Some are
@@ -71,10 +78,41 @@ features and fill in other data, such as HTTP requests underlying the LLM and
 tool calls. In doing so, this implements the "zero code instrumentation"
 pattern of OpenTelemetry.
 
-Here's an example Kibana screenshot of one of the examples, looked up from a
-query like:
+Using OpenTelemetry requires a collector to receive the logs, metrics and
+traces sent by the EDOT SDK. If you don't have one, you can use Elastic Stack
+with EDOT Collector.
+
+<details>
+<summary>Running Elastic Stack with EDOT Collector in Docker</summary>
+
+Below starts Elasticsearch, Kibana, and EDOT Collector and only requires Docker 
+installed. Before you begin, ensure you have free CPU and memory on your Docker
+host (laptop). Assume 4 cpus and 4GB memory for the containers in the Elastic
+Stack.
+
+First, get a copy of docker-compose-elastic.yml
+```bash
+wget https://raw.githubusercontent.com/elastic/elasticsearch-labs/refs/heads/main/docker/docker-compose-elastic.yml
+```
+
+Next, start this Elastic Stack in the background:
+```bash
+docker compose -f docker-compose-elastic.yml up --force-recreate --wait -d
+```
+
+If you start your Elastic stack this way, you can access Kibana like this,
+authenticating with the username "elastic" and password "elastic":
 
 http://localhost:5601/app/apm/traces?rangeFrom=now-15m&rangeTo=now
+
+Clean up when finished, like this:
+```bash
+docker compose -f docker-compose-elastic.yml down
+```
+
+</details>
+
+If you used the above instructions, an example would look like this in Kibana:
 
 ![Kibana screenshot](./kibana-trace.png)
 
@@ -117,62 +155,52 @@ same.
 
 Here's a diagram of the MCP variant, which notably augments the original by
 decoupling tool discovery and execution from the agent, which is now also an
-MCP client.
+MCP client. MCP-related interactions are highlighted for emphasis.
 
 ```mermaid
 sequenceDiagram
     participant Agent as Agent (MCP Client)
-    participant MCP as MCP Server (subprocess)
-    participant LLM
 
-    participant Agent
-    participant LLM
-
-    Note over Agent: Spawns MCP Server subprocess and connects via stdio
-    activate MCP
-    MCP ->> MCP: Initialize and ready
-    deactivate MCP
-
-    Agent ->> MCP: initialize: {clientInfo, protocolVersion}
-    activate MCP
-    MCP -->> Agent: response: {capabilities, instructions, serverInfo}
-    deactivate MCP
-
-    Agent ->> MCP: tools/list
-    activate MCP
-    MCP -->> Agent: response: {tools: [{name: "get_latest_elasticsearch_version", ...}]}
-    deactivate MCP
-
-    Agent ->> LLM: user: "What is the latest version of Elasticsearch 8?"
+    rect rgb(191, 223, 255)
     activate LLM
-    Note over LLM: LLM determines it needs to use a tool to complete the task
+    create participant MCP as MCP Server (subprocess)
+    Agent->>+MCP: create stdio client transport
+    Agent->>+MCP: initialize: {clientInfo, protocolVersion}
+    MCP-->>-Agent: response: {capabilities, instructions, serverInfo}
+    Agent->>+MCP: tools/list
+    MCP-->>-Agent: response: {tools: [{name: "get_latest_elasticsearch_version", ...}]}
+    end
 
-    LLM ->> Agent: assistant: {"function": {"name": "get_latest_elasticsearch_version", "arguments": "{\"majorVersion\": 8}"}}
+    create participant LLM
+
+    Agent->>LLM: user: "What is the latest version of Elasticsearch 8?"
+    activate LLM
+    LLM->>Agent: assistant: {"function": {"name": "get_latest_elasticsearch_version", "arguments": "{\"majorVersion\": 8}"}}
     deactivate LLM
     activate Agent
-    Note over Agent: invokes get_latest_elasticsearch_version(majorVersion=8)
 
-    Agent -->> LLM: [user, assistant, tool: "8.18.0"]
-    Note over Agent: LLM is stateless, the tool result is sent back with prior messages
+    rect rgb(191, 223, 255)
+    Agent->>+MCP: tools/call: {get_latest_elasticsearch_version, {majorVersion: 8}}
+    MCP-->>-Agent: response: {output: "8.18.0"}
+    end
+
+    Agent->>LLM: [user, assistant, tool: "8.18.0"]
     deactivate Agent
     activate LLM
-
-    LLM ->> Agent: content: "The latest version of Elasticsearch 8 is 8.18.0"
+    LLM->>Agent: content: "The latest version of Elasticsearch 8 is 8.18.0"
     deactivate LLM
-    Note over Agent: "The latest version of Elasticsearch 8 is 8.18.0"
-
-    Agent ->> MCP: Close stdin
-    activate MCP
-    MCP ->> MCP: Exits
-    deactivate MCP
 ```
 
-Note: If you are using OpenTelemetry, there's not yet a way to join traces
-across the MCP process boundary. This means that the HTTP call to get the
-latest version of Elasticsearch will be in a separate trace from the agent.
-Please follow this [discussion][mcp-otel] in the MCP specification for updates.
+> [!NOTE]
+> How to join traces across MCP client-server transports is not yet
+> standardized. While most here support a compatible approach, your framework
+> might not and result in split traces. Please follow this [pull request][mcp-otel]
+> to the MCP specification for updates.
 
 ---
+[openai-chat]: https://platform.openai.com/docs/api-reference/chat
+[openai-responses]: https://platform.openai.com/docs/api-reference/responses
+[ollama-responses]: https://github.com/ollama/ollama/issues/10309
 [native]: https://opentelemetry.io/docs/languages/java/instrumentation/#native-instrumentation
 [mcp]: https://modelcontextprotocol.io/specification
-[mcp-otel]: https://github.com/modelcontextprotocol/modelcontextprotocol/discussions/269
+[mcp-otel]: https://github.com/modelcontextprotocol/modelcontextprotocol/pull/414
