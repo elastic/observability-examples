@@ -11,7 +11,7 @@ FROM mcr.microsoft.com/dotnet/sdk:${DOTNET_VERSION}-alpine AS app
 WORKDIR /app
 COPY *.csproj ./
 RUN dotnet restore
-COPY . ./
+COPY *.cs ./
 RUN dotnet publish -c Release -p:AssemblyName=app -o out
 
 FROM mcr.microsoft.com/dotnet/runtime:${DOTNET_VERSION}-alpine
