@@ -78,10 +78,41 @@ features and fill in other data, such as HTTP requests underlying the LLM and
 tool calls. In doing so, this implements the "zero code instrumentation"
 pattern of OpenTelemetry.
 
-Here's an example Kibana screenshot of one of the examples, looked up from a
-query like:
+Using OpenTelemetry requires a collector to receive the logs, metrics and
+traces sent by the EDOT SDK. If you don't have one, you can use Elastic Stack
+with EDOT Collector.
+
+<details>
+<summary>Running Elastic Stack with EDOT Collector in Docker</summary>
+
+Below starts Elasticsearch, Kibana, and EDOT Collector and only requires Docker 
+installed. Before you begin, ensure you have free CPU and memory on your Docker
+host (laptop). Assume 4 cpus and 4GB memory for the containers in the Elastic
+Stack.
+
+First, get a copy of docker-compose-elastic.yml
+```bash
+wget https://raw.githubusercontent.com/elastic/elasticsearch-labs/refs/heads/main/docker/docker-compose-elastic.yml
+```
+
+Next, start this Elastic Stack in the background:
+```bash
+docker compose -f docker-compose-elastic.yml up --force-recreate --wait -d
+```
+
+If you start your Elastic stack this way, you can access Kibana like this,
+authenticating with the username "elastic" and password "elastic":
 
 http://localhost:5601/app/apm/traces?rangeFrom=now-15m&rangeTo=now
+
+Clean up when finished, like this:
+```bash
+docker compose -f docker-compose-elastic.yml down
+```
+
+</details>
+
+If you used the above instructions, an example would look like this in Kibana:
 
 ![Kibana screenshot](./kibana-trace.png)
 
