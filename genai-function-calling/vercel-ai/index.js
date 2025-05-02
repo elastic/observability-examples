@@ -52,7 +52,7 @@ const tools = {get_latest_elasticsearch_version: getLatestElasticsearchVersion};
  */
 async function runAgent(tools) {
     const {text} = await generateText({
-        // If using qwen3, remove the reasoning tags from output. GPT models will not have
+        // If using reasoning models, remove the tags from output. Non-reasoning models will not have
         // such tags making it effectively a no-op.
         model: wrapLanguageModel({
             model: openai(model),
