@@ -1,6 +1,6 @@
 const {createAzure} = require('@ai-sdk/azure');
 const {createOpenAI} = require('@ai-sdk/openai');
-const {generateText, tool} = require('ai');
+const {extractReasoningMiddleware, generateText, tool, wrapLanguageModel} = require('ai');
 const {z} = require('zod');
 const {mcpClientMain} = require('./mcp');
 
@@ -52,7 +52,12 @@ const tools = {get_latest_elasticsearch_version: getLatestElasticsearchVersion};
  */
 async function runAgent(tools) {
     const {text} = await generateText({
-        model: openai(model),
+        // If using reasoning models, remove the format rewards from output. Non-reasoning models will not have
+        // them making it effectively a no-op.
+        model: wrapLanguageModel({
+            model: openai(model),
+            middleware: [extractReasoningMiddleware({ tagName: 'think' })],
+        }),
         messages: [{role: 'user', content: "What is the latest version of Elasticsearch 8?"}],
         temperature: 0,
         tools,
