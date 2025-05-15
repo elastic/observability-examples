@@ -40,6 +40,7 @@ management.observations.annotations.enabled: true
 logging:
   level:
     root: WARN
+
     io:
       netty:
         resolver:
@@ -49,6 +50,10 @@ logging:
     org:
       springframework:
         ai:
+          chat:
+            observation: DEBUG
+            client:
+              observation: DEBUG
           model:
             chat:
               observation:
