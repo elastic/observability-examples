@@ -72,6 +72,15 @@ spring:
         log-prompt: true
         log-completion: true
         include-error-logging: true
+logging:
+  level:
+    org:
+      springframework:
+        ai:
+          chat:
+            observation: DEBUG
+            client:
+              observation: DEBUG
 ```
 
 To delegate OpenTelemetry to EDOT, [Main.java](src/main/java/example/Main.java)
