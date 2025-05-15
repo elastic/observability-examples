@@ -63,6 +63,6 @@ class Main {
 
         new SpringApplicationBuilder(source)
                 .properties(properties)
-                .run(args);
+                .run(args).close();
     }
 }

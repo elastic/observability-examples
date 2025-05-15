@@ -4,13 +4,16 @@ spring:
     web-application-type: none
     banner-mode: "off"
   ai:
-    # Right now, we cannot select azure or openai with a single property.
-    # See https://github.com/spring-projects/spring-ai/issues/2712
     model:
-      embedding:  ${spring.ai.model.chat}
-      audio:
-        transcription:  ${spring.ai.model.chat}
-      image:  ${spring.ai.model.chat}
+      # Disable all models by default and enable per example to avoid eager autoconfiguration.
+      # https://github.com/spring-projects/spring-ai/blob/main/spring-ai-model/src/main/java/org/springframework/ai/model/SpringAIModelProperties.java#L37
+      embedding: none
+      embedding.text: none
+      embedding.multimodal: none
+      image: none
+      audio.transcription: none
+      audio.speech: none
+      moderation: none
     openai:
       base-url: ${OPENAI_BASE_URL:https://api.openai.com/v1}
       api-key: ${OPENAI_API_KEY:enter-your-api-key}
@@ -28,8 +31,8 @@ spring:
 
     chat:
       observations:
-        include-prompt: true
-        include-completion: true
+        log-prompt: true
+        log-completion: true
         include-error-logging: true
 
 management.observations.annotations.enabled: true
