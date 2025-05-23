@@ -78,9 +78,9 @@ logging:
       springframework:
         ai:
           chat:
-            observation: DEBUG
+            observation: INFO
             client:
-              observation: DEBUG
+              observation: INFO
 ```
 
 To delegate OpenTelemetry to EDOT, [Main.java](src/main/java/example/Main.java)
