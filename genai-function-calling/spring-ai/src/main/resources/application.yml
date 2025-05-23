@@ -51,9 +51,9 @@ logging:
       springframework:
         ai:
           chat:
-            observation: DEBUG
+            observation: INFO
             client:
-              observation: DEBUG
+              observation: INFO
           model:
             chat:
               observation:
