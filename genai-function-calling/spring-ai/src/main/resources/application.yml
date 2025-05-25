@@ -49,6 +49,8 @@ logging:
             DnsServerAddressStreamProviders: OFF
     org:
       springframework:
+        # Note: Prompt and completion logging is via SLF4J, which cannot set
+        # the OpenTelemetry log attribute "event.name".
         ai:
           chat:
             observation: INFO
