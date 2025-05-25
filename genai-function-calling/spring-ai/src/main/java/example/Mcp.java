@@ -5,7 +5,9 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.opentelemetry.api.GlobalOpenTelemetry;
 import io.opentelemetry.api.OpenTelemetry;
+import org.springframework.ai.mcp.client.autoconfigure.properties.McpClientCommonProperties;
 import org.springframework.ai.mcp.client.autoconfigure.properties.McpStdioClientProperties;
+import org.springframework.ai.mcp.server.autoconfigure.McpServerProperties;
 import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.ai.tool.method.MethodToolCallbackProvider;
 import org.springframework.boot.SpringBootConfiguration;
@@ -88,9 +90,9 @@ class McpClientAgent {
 
     static void main(String[] args) {
         Main.run(McpClientAgent.class, args,
-                "spring.ai.mcp.client.enabled=true",
-                "spring.ai.mcp.client.toolcallback.enabled=true",
-                "spring.ai.mcp.server.enabled=false"
+                McpClientCommonProperties.CONFIG_PREFIX + ".enabled=true",
+                McpClientCommonProperties.CONFIG_PREFIX + ".toolcallback.enabled=true",
+                McpServerProperties.CONFIG_PREFIX + ".enabled=false"
         );
     }
 }
@@ -116,8 +118,8 @@ class McpServer {
 
     static void main(String[] args) {
         Main.run(McpServer.class, args,
-                "spring.ai.mcp.client.enabled=false",
-                "spring.ai.mcp.server.stdio=true"
+                McpClientCommonProperties.CONFIG_PREFIX + ".enabled=false",
+                McpServerProperties.CONFIG_PREFIX + ".stdio=true"
         );
     }
 }

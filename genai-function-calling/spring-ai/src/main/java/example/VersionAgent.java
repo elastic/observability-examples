@@ -30,7 +30,7 @@ class VersionAgent implements CommandLineRunner {
     public void run(String... args) {
         String answer = chat.prompt()
                 .user("What is the latest version of Elasticsearch 8?")
-                .tools(tools)
+                .toolCallbacks(tools)
                 .options(DefaultToolCallingChatOptions.builder().temperature(0.0).build())
                 .call()
                 .content();
