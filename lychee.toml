@@ -1,4 +1,4 @@
-include_fragments = true
+include_fragments = false
 exclude_all_private = true
 
 accept = [
