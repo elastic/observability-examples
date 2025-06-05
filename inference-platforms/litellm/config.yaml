@@ -1,0 +1,10 @@
+model_list:
+  - model_name: "*"
+    litellm_params:
+      model: openai/*
+      api_base: os.environ/OPENAI_BASE_URL
+      api_key: os.environ/OPENAI_API_KEY
+
+litellm_settings:
+  callbacks: ["otel"]
+

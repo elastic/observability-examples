@@ -1,0 +1,26 @@
+services:
+  ollama-pull:
+    image: alpine/ollama
+    container_name: ollama-pull
+    environment:
+      OLLAMA_HOST: localhost:11434  # instead of IP 127.0.0.1
+    env_file:
+      - env.local
+    entrypoint: sh
+    command: -c 'env | grep _MODEL | cut -d= -f2 | xargs -I{} ollama pull {}'
+    extra_hosts:  # send localhost traffic to the docker host, e.g. your laptop
+      - "localhost:host-gateway"
+
+  llama-stack:
+    depends_on:
+      ollama-pull:
+        condition: service_completed_successfully
+    image: llamastack/distribution-ollama:0.2.9
+    container_name: llama-stack
+    tty: true
+    env_file:
+      - env.local
+    ports:
+      - "8321:8321"
+    extra_hosts:  # send localhost traffic to the docker host, e.g. your laptop
+      - "localhost:host-gateway"
