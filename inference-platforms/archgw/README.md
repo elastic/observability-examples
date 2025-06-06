@@ -20,6 +20,15 @@ working Docker configuration. Run `archgw` using `uvx` from [uv][uv].
 uvx archgw up --service archgw --foreground
 ```
 
+## Start Prometheus to Elasticsearch pump
+
+If your OpenTelemetry backend is Elasticsearch, you can pump Prometheus metrics
+coming from Arch Gateway to Elasticsearch like this:
+
+```bash
+docker compose -f docker-compose-elastic.yml run --rm prometheus-pump
+```
+
 ## Call Arch Gateway with python
 
 Once Arch Gateway is running, use [uv][uv] to make an OpenAI request via
@@ -38,7 +47,6 @@ and anything added in Arch Gateway's [wasm filter][archgw-wasm].
   instructions to run from Docker (to avoid nested docker).
 * Traces come from Envoy, whose configuration is written by `archgw`. At the
   moment, this hard-codes aspects including default ports.
-* Metrics are only via prometheus and there is no GitHub issue to support OTLP.
 * Until [this][openai-responses] resolves, don't use `--use-responses-api`.
 
 The chat prompt was designed to be idempotent, but the results are not. You may
