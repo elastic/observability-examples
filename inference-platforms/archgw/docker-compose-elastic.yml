@@ -23,6 +23,7 @@ configs:
                   format: ["prometheus"]
       
       processors:
+        # Elastic Stack doesn't currently support cumulative metrics
         cumulativetodelta:
 
       exporters:
