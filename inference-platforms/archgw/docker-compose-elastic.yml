@@ -1,6 +1,9 @@
 configs:
-  # configuration simplified from archgw here:
+  # Configuration is simplified from archgw here:
   # https://github.com/katanemo/archgw/blob/main/docs/source/guides/observability/monitoring.rst
+  #
+  # Note: The prometheus cluster name for qwen3:0.65b will shows up as '6b'
+  # See https://github.com/katanemo/archgw/issues/504
   prometheus-pump-config:
     content: |
       receivers:
@@ -23,7 +26,6 @@ configs:
         cumulativetodelta:
 
       exporters:
-        debug:
         elasticsearch:
           endpoint: http://localhost:9200
           user: elastic
@@ -40,11 +42,12 @@ configs:
           metrics:
             receivers: [prometheus]
             processors: [cumulativetodelta]
-            exporters: [debug, elasticsearch]
+            exporters: [elasticsearch]
 
 services:
   # prometheus-pump is an OpenTelemetry Collector that scrapes Prometheus metrics
   prometheus-pump:
+    # TODO: Use EDOT after https://github.com/elastic/elastic-agent/pull/8372
     image: ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-contrib:0.127.0
     container_name: prometheus-pump
     command: [
