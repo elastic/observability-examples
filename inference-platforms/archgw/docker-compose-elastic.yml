@@ -1,0 +1,63 @@
+configs:
+  # Configuration is simplified from archgw here:
+  # https://github.com/katanemo/archgw/blob/main/docs/source/guides/observability/monitoring.rst
+  #
+  # Note: The prometheus cluster name for qwen3:0.65b will shows up as '6b'
+  # See https://github.com/katanemo/archgw/issues/504
+  prometheus-pump-config:
+    content: |
+      receivers:
+        prometheus:
+          config:
+            global:
+              evaluation_interval: 5s
+            scrape_configs:
+              - job_name: 'archgw'
+                honor_timestamps: true
+                scrape_interval: 5s
+                scrape_timeout: 5s
+                metrics_path: /stats
+                static_configs:
+                  - targets: ['localhost:19901']
+                params:
+                  format: ["prometheus"]
+      
+      processors:
+        # Elastic Stack doesn't currently support cumulative metrics
+        cumulativetodelta:
+
+      exporters:
+        elasticsearch:
+          endpoint: http://localhost:9200
+          user: elastic
+          password: elastic
+          mapping:
+            mode: otel
+          metrics_dynamic_index:
+            enabled: true
+          flush:
+            interval: 1s  # improve responsiveness in example apps (default 30s)
+      
+      service:
+        pipelines:
+          metrics:
+            receivers: [prometheus]
+            processors: [cumulativetodelta]
+            exporters: [elasticsearch]
+
+services:
+  # prometheus-pump is an OpenTelemetry Collector that scrapes Prometheus metrics
+  prometheus-pump:
+    # TODO: Use EDOT after https://github.com/elastic/elastic-agent/pull/8372
+    image: ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-contrib:0.127.0
+    container_name: prometheus-pump
+    command: [
+      "--config=/etc/otel/config.yaml",
+    ]
+    configs:
+      - source: prometheus-pump-config
+        target: /etc/otel/config.yaml
+        mode: 0444
+    extra_hosts:  # send localhost traffic to the docker host, e.g. your laptop
+      - "localhost:host-gateway"
+
