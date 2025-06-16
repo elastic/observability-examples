@@ -48,8 +48,8 @@ configs:
 services:
   # prometheus-pump is an OpenTelemetry Collector that scrapes Prometheus metrics
   prometheus-pump:
-    # TODO: Use EDOT after https://github.com/elastic/elastic-agent/pull/8372
-    image: ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-contrib:0.127.0
+    # TODO: docker.elastic.co/elastic-agent/elastic-otel-collector:9.0.3
+    image: docker.elastic.co/elastic-agent/elastic-otel-collector:9.0.3-SNAPSHOT
     container_name: prometheus-pump
     command: [
       "--config=/etc/otel/config.yaml",
