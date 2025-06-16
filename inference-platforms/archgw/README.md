@@ -20,13 +20,24 @@ working Docker configuration. Run `archgw` using `uvx` from [uv][uv].
 uvx archgw up --service archgw --foreground
 ```
 
-## Start Prometheus to Elasticsearch pump
+## Start Prometheus Scraping
+
+### Elastic Stack
 
 If your OpenTelemetry backend is Elasticsearch, you can pump Prometheus metrics
 coming from Arch Gateway to Elasticsearch like this:
 
 ```bash
 docker compose -f docker-compose-elastic.yml run --rm prometheus-pump
+```
+
+### otel-tui
+
+If you are using [otel-tui][otel-tui] to visualize OpenTelemetry data, you can
+add Arch Gateway's Prometheus endpoint to it when starting, like this:
+
+```bash
+otel-tui --prom-target http://localhost:19901/stats?format=prometheus
 ```
 
 ## Call Arch Gateway with python
