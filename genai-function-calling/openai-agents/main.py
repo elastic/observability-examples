@@ -12,15 +12,15 @@ from agents import (
     function_tool,
     Tool,
 )
-from agents.tracing import GLOBAL_TRACE_PROVIDER
+from agents.tracing import set_tracing_disabled
 from openai import AsyncAzureOpenAI
 
 from main_mcp import run_main as mcp_main
 
-# Shut down the global tracer as it sends to the OpenAI "/traces/ingest"
+# Disable the default tracer as it sends to the OpenAI "/traces/ingest"
 # endpoint, which we aren't using and doesn't exist on alternative backends
 # like Ollama.
-GLOBAL_TRACE_PROVIDER.shutdown()
+set_tracing_disabled(True)
 
 
 async def get_latest_elasticsearch_version(major_version: int = 0) -> str:
