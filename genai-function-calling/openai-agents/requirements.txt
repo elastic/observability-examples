@@ -4,7 +4,7 @@ mcp~=1.13.1
 
 elastic-opentelemetry~=1.7.0
 # TODO: temporary until elastic-opentelemetry release with https://github.com/elastic/elastic-otel-python-instrumentations/pull/90
-elastic-opentelemetry-instrumentation-openai @ git+https://github.com/elastic/elastic-otel-python-instrumentations.git@use-logger#subdirectory=instrumentation/elastic-opentelemetry-instrumentation-openai
+elastic-opentelemetry-instrumentation-openai @ git+https://github.com/anuraaga/elastic-otel-python-instrumentations.git@use-logger-workaroun#subdirectory=instrumentation/elastic-opentelemetry-instrumentation-openai
 
 # Use openai-agents and MCP instrumentation from OpenInference
 openinference-instrumentation-openai-agents~=1.2.0
