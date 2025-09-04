@@ -1,9 +1,10 @@
 ARG DOTNET_VERSION=9.0
 
 FROM mcr.microsoft.com/dotnet/sdk:${DOTNET_VERSION}-alpine AS edot
-ARG EDOT_VERSION=1.0.2
+ARG EDOT_VERSION=1.1.0
 ARG EDOT_INSTALL=https://github.com/elastic/elastic-otel-dotnet/releases/download/${EDOT_VERSION}/elastic-dotnet-auto-install.sh
 ENV OTEL_DOTNET_AUTO_HOME=/edot
+ENV VERSION=${EDOT_VERSION}
 WORKDIR /edot
 RUN sh -c "$(curl -fsSL ${EDOT_INSTALL})"
 
