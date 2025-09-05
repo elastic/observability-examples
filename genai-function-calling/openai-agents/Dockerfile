@@ -1,5 +1,11 @@
 # Use glibc-based image with pre-compiled wheels for psutil
-FROM python:3.12-slim
+FROM python:3.13-slim
+
+# TODO: temporary until openinference-instrumentation-mcp 1.3.1 with ValidationError fix
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends git \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN --mount=type=cache,target=/root/.cache/pip python -m pip install --upgrade pip
 
