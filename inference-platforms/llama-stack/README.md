@@ -45,10 +45,10 @@ Here are some constraints about the LlamaStack implementation:
   requires emulation.
 * Llama Stack doesn't yet have ENV variable support for the OTLP exporter.
   Hence, we use Docker's localhost:host-gateway to direct localhost traffic
-  back to the host. See https://github.com/meta-llama/llama-stack/issues/783
+  back to the host. See https://github.com/llamastack/llama-stack/issues/783
 
 ---
 [docs]: https://llama-stack.readthedocs.io/en/latest/index.html
 [otel-sink]: https://llama-stack.readthedocs.io/en/latest/building_applications/telemetry.html#configuration
 [uv]: https://docs.astral.sh/uv/getting-started/installation/
-[docker]: https://github.com/meta-llama/llama-stack/issues/406
+[docker]: https://github.com/llamastack/llama-stack/issues/406
