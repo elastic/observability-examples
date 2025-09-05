@@ -12,8 +12,11 @@ exclude = [
     # OPENAI_BASE_URL is 404
     "https://api.openai.com/v1",
     # Exclude links replaced by %PUBLIC_URL%
-    ".*%25PUBLIC_URL%25.*"
+    ".*%25PUBLIC_URL%25.*",
+    # Does not respond on CI and not in any doc
+    "https://www.robotstxt.org/robotstxt.html",
 ]
 
 # better to be safe and avoid failures
 max_retries = 6
+timeout = 20

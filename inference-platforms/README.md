@@ -107,7 +107,7 @@ To start and use Ollama, do the following:
 [archgw]: https://docs.archgw.com/guides/observability/tracing.html
 [litellm]: https://llama-stack.readthedocs.io/en/latest/building_applications/telemetry.html#configuration
 [llama-stack]: https://llama-stack.readthedocs.io/en/latest/building_applications/telemetry.html#telemetry
-[open-responses]: https://openresponses.masaic.ai/openresponses/observability#setting-up-the-opentelemetry-collector
+[open-responses]: https://github.com/masaic-ai-platform/docs/blob/main/openresponses/observability.mdx
 [vllm]: https://github.com/vllm-project/vllm/blob/main/examples/online_serving/opentelemetry/README.md
 [uv]: https://docs.astral.sh/uv/getting-started/installation/
 [ollama-dl]: https://ollama.com/download
