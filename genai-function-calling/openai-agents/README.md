@@ -81,7 +81,7 @@ run pytest with dotenv, so that ENV variables are present:
 
 ```bash
 rm cassettes/test_main.yaml
-dotenv -f ../.env run -- pytest
+dotenv -f .env run -- pytest
 ```
 
 ## Notes
