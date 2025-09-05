@@ -10,12 +10,14 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Python 3.12
+      - name: Set up Python 3.13
         uses: actions/setup-python@v5
         with:
-          python-version: 3.12
+          python-version: 3.13
       - name: Install pre-commit
         run: |
           python -m pip install --upgrade pip
           pip install pre-commit
       - run: make lint
+        env:  # Pass implicit GH token to avoid rate limiting on API calls.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

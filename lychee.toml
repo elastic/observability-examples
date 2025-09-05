@@ -17,3 +17,4 @@ exclude = [
 
 # better to be safe and avoid failures
 max_retries = 6
+timeout = 20
