@@ -44,5 +44,5 @@ OpenTelemetry via a Micrometer bridge.
 
 ---
 [doc]: https://openresponses.masaic.ai/openresponses/compatibility
-[config]: https://openresponses.masaic.ai/openresponses/observability#setting-up-the-opentelemetry-collector
+[config]: https://github.com/masaic-ai-platform/docs/blob/main/openresponses/observability.mdx
 [uv]: https://docs.astral.sh/uv/getting-started/installation/
