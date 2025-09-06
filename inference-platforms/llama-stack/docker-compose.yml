@@ -15,12 +15,18 @@ services:
     depends_on:
       ollama-pull:
         condition: service_completed_successfully
-    image: llamastack/distribution-ollama:0.2.9
+    image: llamastack/distribution-starter:0.2.20
     container_name: llama-stack
+    platform: linux/amd64  # Force amd64 with emulation
     tty: true
     env_file:
       - env.local
     ports:
       - "8321:8321"
-    extra_hosts:  # send localhost traffic to the docker host, e.g. your laptop
-      - "localhost:host-gateway"
+    # Ensure the container which specially treats localhost routes back to the
+    # host machine, e.g. your laptop.
+    environment:
+      - OLLAMA_URL=http://host.docker.internal:11434
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://host.docker.internal:4318
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
