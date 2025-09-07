@@ -43,9 +43,6 @@ Here are some constraints about the LlamaStack implementation:
 * Bridges its tracing and metrics APIs to `otel_trace` and `otel_metric` sinks.
 * Until [this issue][docker] resolves, running docker on Apple Silicon
   requires emulation.
-* Llama Stack doesn't yet have ENV variable support for the OTLP exporter.
-  Hence, we use Docker's localhost:host-gateway to direct localhost traffic
-  back to the host. See https://github.com/llamastack/llama-stack/issues/783
 
 ---
 [docs]: https://llama-stack.readthedocs.io/en/latest/index.html
