@@ -1,13 +1,17 @@
 # Use glibc-based image with pre-compiled wheels for psutil
 FROM python:3.13-slim
 
+# Install build dependencies for fastuuid, needed by LiteLLM until
+# https://github.com/fastuuid/fastuuid/pull/55 is released.
+RUN apt-get update && apt-get install -y gcc && rm -rf /var/lib/apt/lists/*
+
 RUN python -m pip install --upgrade pip
 RUN pip install \
     # litellm proxy requirements
-    litellm[proxy]~=1.72.1 \
-    opentelemetry-exporter-otlp-proto-http~=1.34.0 \
-    # TODO: required until https://github.com/BerriAI/litellm/issues/9901
-    opentelemetry-exporter-otlp-proto-grpc~=1.34.0
+    litellm[proxy]~=1.76.1 \
+    opentelemetry-exporter-otlp-proto-http~=1.36.0 \
+    # LiteLLM has a hard dependency on grpc even if it is not used.
+    opentelemetry-exporter-otlp-proto-grpc~=1.36.0
 
 COPY config.yaml /
 
