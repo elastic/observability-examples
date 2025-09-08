@@ -17,7 +17,7 @@ const model = process.env.CHAT_MODEL || 'gpt-4o-mini';
 
 const getLatestElasticsearchVersion = tool({
     description: 'Get the latest version of Elasticsearch',
-    parameters: z.object({
+    inputSchema: z.object({
         majorVersion: z.number().optional().describe('Major version to filter by (e.g. 7, 8). Defaults to latest'),
     }),
     execute: async ({majorVersion}) => {
@@ -55,7 +55,7 @@ async function runAgent(tools) {
         // If using reasoning models, remove the format rewards from output. Non-reasoning models will not have
         // them making it effectively a no-op.
         model: wrapLanguageModel({
-            model: openai(model),
+            model: openai.chat(model),
             middleware: [extractReasoningMiddleware({ tagName: 'think' })],
         }),
         messages: [{role: 'user', content: "What is the latest version of Elasticsearch 8?"}],

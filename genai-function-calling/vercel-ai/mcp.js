@@ -34,7 +34,7 @@ async function mcpServerMain(tools) {
         server.tool(
             toolName,
             tool.description,
-            tool.parameters.shape,
+            tool.inputSchema.shape,
             async (params) => {
                 try {
                     const result = await tool.execute(params);
