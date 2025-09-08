@@ -14,8 +14,7 @@ Start ollama and the otel collector via this repository's [README](../../README.
 ## Run Arch Gateway
 
 Arch Gateway is a python command that internally runs Docker. Hence, you need a
-working Docker configuration. Run `archgw` using `uv run` from [uv][uv] to ensure
-Python is available:
+working Docker configuration. Run `archgw` using `uv run` from [uv][uv]:
 
 ```bash
 uv run --with archgw -- archgw up arch_config.yaml
