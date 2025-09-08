@@ -14,10 +14,17 @@ Start ollama and the otel collector via this repository's [README](../../README.
 ## Run Arch Gateway
 
 Arch Gateway is a python command that internally runs Docker. Hence, you need a
-working Docker configuration. Run `archgw` using `uvx` from [uv][uv].
+working Docker configuration. Run `archgw` using `uv run` from [uv][uv] to ensure
+Python is available:
 
 ```bash
-uvx archgw up --service archgw --foreground
+uv run --with archgw -- archgw up arch_config.yaml
+```
+
+When finished, clean up like this:
+
+```bash
+uv run --with archgw -- archgw down
 ```
 
 ## Start Prometheus Scraping
@@ -71,3 +78,4 @@ Just run it again until we find a way to make the results idempotent.
 [archgw-wasm]: https://github.com/katanemo/archgw/blob/main/arch/README.md
 [uv]: https://docs.astral.sh/uv/getting-started/installation/
 [openai-responses]: https://github.com/katanemo/archgw/issues/476
+[otel-tui]: https://github.com/ymtdzzz/otel-tui

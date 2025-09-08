@@ -1,4 +1,4 @@
-version: "0.1-beta"
+version: v0.1.0
 
 listeners:
   egress_traffic:
@@ -8,11 +8,10 @@ listeners:
     timeout: 30s
 
 llm_providers:
-  - name: qwen3:0.6b
+  - model: ollama/qwen3:0.6b
     provider_interface: openai
     # This configuration is converted to Envoy and run inside Docker.
-    endpoint: host.docker.internal:11434
-    model: qwen3:0.6b
+    base_url: http://host.docker.internal:11434
     default: true
 
 tracing:
