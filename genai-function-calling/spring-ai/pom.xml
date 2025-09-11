@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.4.5</version>
+        <version>3.5.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>co.elastic.observability-labs</groupId>
@@ -15,7 +15,7 @@
     <description>Function Calling with Spring AI</description>
     <properties>
         <java.version>21</java.version>
-        <spring-ai.version>1.0.0</spring-ai.version>
+        <spring-ai.version>1.0.1</spring-ai.version>
         <tools/>
     </properties>
     <dependencies>
@@ -50,8 +50,8 @@
         <dependency>
             <groupId>co.elastic.otel</groupId>
             <artifactId>elastic-otel-javaagent</artifactId>
-            <version>1.4.1</version>
-            <scope>optional</scope>
+            <version>1.5.0</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
     <dependencyManagement>
@@ -102,7 +102,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
-                <version>3.5.0</version>
+                <version>3.5.1</version>
                 <executions>
                     <execution>
                         <goals>
