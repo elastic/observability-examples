@@ -16,7 +16,7 @@ Elastic Stack.
 * [Envoy AI Gateway](aigw) - with [OpenTelemetry tracing and metrics][aigw]
 * [LiteLLM](litellm) - with  [OpenTelemetry logging callbacks][litellm]
 * [LlamaStack](llama-stack) - with [OpenTelemetry sinks][llama-stack]
-* [OpenResponses](open-responses) - with [OpenTelemetry export][open-responses]
+* [AgC](AgC) - with [OpenTelemetry export][AgC]
 * [vLLM](vllm) - with [OpenTelemetry POC][vllm] configuration
 
 If you use Elastic Stack, an example would look like this in Kibana:
@@ -109,7 +109,7 @@ To start and use Ollama, do the following:
 [archgw]: https://docs.archgw.com/guides/observability/tracing.html
 [litellm]: https://llama-stack.readthedocs.io/en/latest/building_applications/telemetry.html#configuration
 [llama-stack]: https://llama-stack.readthedocs.io/en/latest/building_applications/telemetry.html#telemetry
-[open-responses]: https://github.com/masaic-ai-platform/docs/blob/main/openresponses/observability.mdx
+[AgC]: https://github.com/masaic-ai-platform/AgC/blob/main/platform/README.md#setting-up-the-opentelemetry-collector
 [vllm]: https://github.com/vllm-project/vllm/blob/main/examples/online_serving/opentelemetry/README.md
 [uv]: https://docs.astral.sh/uv/getting-started/installation/
 [ollama-dl]: https://ollama.com/download
