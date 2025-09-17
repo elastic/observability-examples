@@ -16,7 +16,8 @@ Start Ollama and your OpenTelemetry Collector via this repository's [README](../
 ## Run Envoy AI Gateway
 
 ```bash
-docker compose up --build --force-recreate --remove-orphans
+docker compose pull
+docker compose up --force-recreate --remove-orphans
 ```
 
 Clean up when finished, like this:

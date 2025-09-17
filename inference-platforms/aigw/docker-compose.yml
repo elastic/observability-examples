@@ -1,7 +1,3 @@
-volumes:
-  aigw-target:  # Stores the binary between aigw-build and aigw
-  envoy-cache:  # Stores downloaded Envoy versions
-
 services:
   ollama-pull:
     image: alpine/ollama
@@ -15,27 +11,11 @@ services:
     extra_hosts:  # send localhost traffic to the docker host, e.g. your laptop
       - "localhost:host-gateway"
 
-  # aigw-build builds the Envoy AI Gateway CLI binary until 0.4 is released.
-  aigw-build:
-    image: golang:1.25
-    container_name: aigw-build
-    working_dir: /workspace
-    volumes:
-      - aigw-target:/workspace/out
-    command: |
-      bash -c "
-        git clone --depth 1 --branch otel-metrics https://github.com/codefromthecrypt/ai-gateway.git /workspace/ai-gateway &&
-        cd /workspace/ai-gateway &&
-        go build -buildvcs=false -o /workspace/out/aigw ./cmd/aigw
-      "
-
   # aigw is the Envoy AI Gateway CLI a.k.a standalone mode.
   aigw:
-    image: debian:trixie-slim
+    image: envoyproxy/ai-gateway-cli:latest
     container_name: aigw
     depends_on:
-      aigw-build:
-        condition: service_completed_successfully
       ollama-pull:
         condition: service_completed_successfully
     env_file:
@@ -48,8 +28,5 @@ services:
     extra_hosts:  # localhost:host-gateway trick doesn't work with aigw
       - "host.docker.internal:host-gateway"
     volumes:
-      - aigw-target:/app
       - ./ai-gateway-local.yaml:/config.yaml:ro
-      - envoy-cache:/tmp/envoy-gateway
-    working_dir: /app
-    command: ["sh", "-c", "apt-get update && apt-get install -y ca-certificates && ./aigw run /config.yaml"]
+    command: ["run", "/config.yaml"]
