@@ -1,0 +1,32 @@
+services:
+  ollama-pull:
+    image: alpine/ollama
+    container_name: ollama-pull
+    environment:
+      OLLAMA_HOST: localhost:11434  # instead of IP 127.0.0.1
+    env_file:
+      - env.local
+    entrypoint: sh
+    command: -c 'env | grep _MODEL | cut -d= -f2 | xargs -I{} ollama pull {}'
+    extra_hosts:  # send localhost traffic to the docker host, e.g. your laptop
+      - "localhost:host-gateway"
+
+  # aigw is the Envoy AI Gateway CLI a.k.a standalone mode.
+  aigw:
+    image: envoyproxy/ai-gateway-cli:latest
+    container_name: aigw
+    depends_on:
+      ollama-pull:
+        condition: service_completed_successfully
+    env_file:
+      - env.local
+    environment:
+      - OPENAI_HOST=host.docker.internal
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://host.docker.internal:4318
+    ports:
+      - "1975:1975"  # OpenAI compatible endpoint at /v1
+    extra_hosts:  # localhost:host-gateway trick doesn't work with aigw
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ./ai-gateway-local.yaml:/config.yaml:ro
+    command: ["run", "/config.yaml"]

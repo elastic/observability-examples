@@ -13,7 +13,8 @@ proxies. Each are observable with OpenTelemetry compatible backends such as
 Elastic Stack.
 
 * [ArchGW](archgw) - [with tracing configuration][archgw]
-* [LiteLLM](litellm) - [with OpenTelemetry logging callbacks][litellm]
+* [Envoy AI Gateway](aigw) - with [OpenTelemetry tracing and metrics][aigw]
+* [LiteLLM](litellm) - with  [OpenTelemetry logging callbacks][litellm]
 * [LlamaStack](llama-stack) - with [OpenTelemetry sinks][llama-stack]
 * [OpenResponses](open-responses) - with [OpenTelemetry export][open-responses]
 * [vLLM](vllm) - with [OpenTelemetry POC][vllm] configuration
@@ -104,6 +105,7 @@ To start and use Ollama, do the following:
    - This accepts OpenAI requests for any model on http://localhost:11434/v1
 
 ---
+[aigw]: https://aigateway.envoyproxy.io/docs/cli/aigwrun
 [archgw]: https://docs.archgw.com/guides/observability/tracing.html
 [litellm]: https://llama-stack.readthedocs.io/en/latest/building_applications/telemetry.html#configuration
 [llama-stack]: https://llama-stack.readthedocs.io/en/latest/building_applications/telemetry.html#telemetry
