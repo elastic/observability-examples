@@ -64,6 +64,9 @@ and anything added in Arch Gateway's [wasm filter][archgw-wasm].
   instructions to run from Docker (to avoid nested docker).
 * Traces come from Envoy, whose configuration is written by `archgw`. At the
   moment, this hard-codes aspects including default ports.
+* Prometheus metrics show the cluster as "openai_host" - the provider_interface
+  plus the first segment of the hostname (dots truncate the rest). The "host"
+  comes from "host.docker.internal".
 * Until [this][openai-responses] resolves, don't use `--use-responses-api`.
 
 The chat prompt was designed to be idempotent, but the results are not. You may
