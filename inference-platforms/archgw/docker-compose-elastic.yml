@@ -2,8 +2,7 @@ configs:
   # Configuration is simplified from archgw here:
   # https://github.com/katanemo/archgw/blob/main/docs/source/guides/observability/monitoring.rst
   #
-  # Note: The prometheus cluster name for qwen3:0.65b will shows up as '6b'
-  # See https://github.com/katanemo/archgw/issues/504
+  # Note: The cluster name for ollama + host.docker.internal = ollama_host
   prometheus-pump-config:
     content: |
       receivers:
