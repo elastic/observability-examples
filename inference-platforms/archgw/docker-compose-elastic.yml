@@ -2,7 +2,7 @@ configs:
   # Configuration is simplified from archgw here:
   # https://github.com/katanemo/archgw/blob/main/docs/source/guides/observability/monitoring.rst
   #
-  # Note: The cluster name for openai + host.docker.internal = openai_host
+  # Note: The cluster name for ollama + host.docker.internal = ollama_host
   prometheus-pump-config:
     content: |
       receivers:

@@ -64,10 +64,11 @@ and anything added in Arch Gateway's [wasm filter][archgw-wasm].
   instructions to run from Docker (to avoid nested docker).
 * Traces come from Envoy, whose configuration is written by `archgw`. At the
   moment, this hard-codes aspects including default ports.
-* Prometheus metrics show the cluster as "openai_host" - the provider_interface
+* Prometheus metrics show the cluster as "ollama_host" - the provider_interface
   plus the first segment of the hostname (dots truncate the rest). The "host"
   comes from "host.docker.internal".
 * Until [this][openai-responses] resolves, don't use `--use-responses-api`.
+* Until [this][docker-env] resolves, make sure your PATH has /usr/local/bin.
 
 The chat prompt was designed to be idempotent, but the results are not. You may
 see something besides 'South Atlantic Ocean.'.
@@ -81,3 +82,4 @@ Just run it again until we find a way to make the results idempotent.
 [uv]: https://docs.astral.sh/uv/getting-started/installation/
 [openai-responses]: https://github.com/katanemo/archgw/issues/476
 [otel-tui]: https://github.com/ymtdzzz/otel-tui
+[docker-env]: https://github.com/katanemo/archgw/issues/573
