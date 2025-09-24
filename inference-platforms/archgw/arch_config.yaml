@@ -8,7 +8,8 @@ listeners:
     timeout: 30s
 
 llm_providers:
-  # We don't use 'ollama', as we want to use 'openai' provider_interface.
+  # ollama/ in the model name forces using the ollama interface even though we
+  # want provider_interface: openai. local/ avoids this.
   - model: local/qwen3:0.6b
     provider_interface: openai
     # This configuration is converted to Envoy and run inside Docker.
