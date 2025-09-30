@@ -32,7 +32,7 @@ Once Envoy AI Gateway is running, use [uv][uv] to make an OpenAI request via
 [chat.py](../chat.py):
 
 ```bash
-uv run --exact -q --env-file env.local ../chat.py
+OPENAI_BASE_URL=http://localhost:1975/v1 uv run --exact -q --env-file env.local ../chat.py
 ```
 
 ## Notes
