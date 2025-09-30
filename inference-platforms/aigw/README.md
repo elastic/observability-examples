@@ -3,8 +3,10 @@
 This shows how to use [Envoy AI Gateway][docs] to proxy Ollama, accessible via an
 OpenAI compatible API.
 
-Envoy AI Gateway [YAML configuration](ai-gateway-local.yaml) is processed and run
-by `aigw`, which launches an Envoy proxy to handle requests. OpenTelemetry support
+Envoy AI Gateway is automatically configured by OpenAI and OpenTelemetry
+environment variables read by `aigw run`, such as `OPENAI_API_KEY`.
+
+`aigw run` launches an Envoy proxy to handle requests. OpenTelemetry support
 for GenAI metrics and traces is handled directly in the `aigw` (go) binary.
 
 OpenTelemetry traces produced by Envoy AI Gateway follow the [OpenInference specification][openinference].
@@ -32,7 +34,7 @@ Once Envoy AI Gateway is running, use [uv][uv] to make an OpenAI request via
 [chat.py](../chat.py):
 
 ```bash
-uv run --exact -q --env-file env.local ../chat.py
+OPENAI_BASE_URL=http://localhost:1975/v1 uv run --exact -q --env-file env.local ../chat.py
 ```
 
 ## Notes
