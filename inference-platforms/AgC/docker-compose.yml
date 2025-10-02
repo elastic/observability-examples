@@ -1,10 +1,10 @@
 services:
   open-responses:
-    image: masaicai/open-responses:0.3.2
+    image: masaicai/open-responses:0.5.2
     container_name: open-responses
     env_file:
       - env.local
     ports:
-        - "8080:8080"
+        - "6644:6644"
     extra_hosts:  # send localhost traffic to the docker host, e.g. your laptop
       - "localhost:host-gateway"
