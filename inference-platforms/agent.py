@@ -10,6 +10,7 @@
 #     "openinference-instrumentation-mcp",
 # ]
 # ///
+# ruff: noqa: E402
 from opentelemetry.instrumentation import auto_instrumentation
 
 # This must precede any other imports you want to instrument!
@@ -17,6 +18,7 @@ auto_instrumentation.initialize()
 
 import asyncio
 import os
+from datetime import datetime, timedelta
 
 from agents import (
     Agent,
@@ -37,9 +39,10 @@ async def run_agent(tools: list[Tool]):
         tools=tools,
     )
 
+    next_week = (datetime.now() + timedelta(weeks=1)).strftime("%Y-%m-%d")
     result = await Runner.run(
         starting_agent=agent,
-        input="Give me the best flight from New York to Kota Kinabalu on 2025-10-10",
+        input=f"Give me the best flight from New York to Kota Kinabalu on {next_week}",
         run_config=RunConfig(workflow_name="flight search"),
     )
     print(result.final_output)

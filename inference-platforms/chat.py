@@ -7,8 +7,10 @@
 #     "opentelemetry-instrumentation-httpx"
 # ]
 # ///
+# ruff: noqa: E402
 from opentelemetry.instrumentation import auto_instrumentation
 
+# This must precede any other imports you want to instrument!
 auto_instrumentation.initialize()
 
 import argparse
