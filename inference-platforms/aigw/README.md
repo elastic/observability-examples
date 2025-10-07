@@ -1,10 +1,23 @@
 # Envoy AI Gateway
 
-This shows how to use [Envoy AI Gateway][docs] to proxy Ollama, accessible via an
-OpenAI compatible API.
+This shows how to use [Envoy AI Gateway][docs] to proxy LLM and MCP servers,
+specifically Ollama and Kiwi flight search.
 
-Envoy AI Gateway is automatically configured by OpenAI and OpenTelemetry
-environment variables read by `aigw run`, such as `OPENAI_API_KEY`.
+Envoy AI Gateway exposes OpenAI and MCP compatible endpoints with configurable
+backends. It is automatically configured by OpenAI and OpenTelemetry
+environment variables read by `aigw run`, such as `OPENAI_API_KEY`. In the case
+of MCP, it uses the canonical JSON format like this:
+
+```json
+{
+"mcpServers": {
+  "kiwi": {
+    "type": "http",
+    "url": "https://mcp.kiwi.com"
+  }
+}
+}
+```
 
 `aigw run` launches an Envoy proxy to handle requests. OpenTelemetry support
 for GenAI metrics and traces is handled directly in the `aigw` (go) binary.
@@ -33,8 +46,16 @@ docker compose down
 Once Envoy AI Gateway is running, use [uv][uv] to make an OpenAI request via
 [chat.py](../chat.py):
 
+### Chat Completion
+
 ```bash
 OPENAI_BASE_URL=http://localhost:1975/v1 uv run --exact -q --env-file env.local ../chat.py
+```
+
+### MCP Agent
+
+```bash
+OPENAI_BASE_URL=http://localhost:1975/v1 MCP_URL=http://localhost:1975/mcp uv run --exact -q --env-file env.local ../agent.py
 ```
 
 ## Notes

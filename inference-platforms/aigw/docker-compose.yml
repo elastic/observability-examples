@@ -1,3 +1,16 @@
+configs:
+  # MCP servers configuration for aigw
+  mcp-config:
+    content: |
+      {
+        "mcpServers": {
+          "kiwi": {
+            "type": "http",
+            "url": "https://mcp.kiwi.com"
+          }
+        }
+      }
+
 services:
   ollama-pull:
     image: alpine/ollama
@@ -24,7 +37,10 @@ services:
       - OPENAI_BASE_URL=http://host.docker.internal:11434/v1
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://host.docker.internal:4318
     ports:
-      - "1975:1975"  # OpenAI compatible endpoint at /v1
-    extra_hosts:  # localhost:host-gateway trick doesn't work with aigw
+      - "1975:1975" # OpenAI compatible endpoint at /v1, MCP server at /mcp
+    configs:
+      - source: mcp-config
+        target: /etc/aigw/mcp-servers.json
+    extra_hosts: # localhost:host-gateway trick doesn't work with aigw
       - "host.docker.internal:host-gateway"
-    command: ["run", "/config.yaml"]
+    command: ["run", "--mcp-config", "/etc/aigw/mcp-servers.json"]
