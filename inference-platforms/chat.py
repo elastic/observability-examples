@@ -1,3 +1,4 @@
+# run like this: uv run --exact -q --env-file .env chat.py
 # /// script
 # dependencies = [
 #     "openai",
@@ -6,13 +7,14 @@
 #     "opentelemetry-instrumentation-httpx"
 # ]
 # ///
+from opentelemetry.instrumentation import auto_instrumentation
+
+auto_instrumentation.initialize()
+
 import argparse
 import os
 
 import openai
-from opentelemetry.instrumentation import auto_instrumentation
-
-auto_instrumentation.initialize()
 
 model = os.getenv("CHAT_MODEL", "gpt-4o-mini")
 
