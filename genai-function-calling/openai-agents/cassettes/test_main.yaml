@@ -5,13 +5,12 @@ interactions:
         "messages": [
           {
             "role": "user",
-            "content": "What is the latest version of Elasticsearch 8?"
+            "content": "What is the latest version of Elasticsearch 9?"
           }
         ],
-        "model": "gpt-4o-mini",
+        "model": "gpt-5-nano",
         "store": true,
         "stream": false,
-        "temperature": 0.0,
         "tools": [
           {
             "type": "function",
@@ -42,13 +41,13 @@ interactions:
       connection:
       - keep-alive
       content-length:
-      - '566'
+      - '547'
       content-type:
       - application/json
       host:
       - api.openai.com
       user-agent:
-      - Agents/Python 0.2.11
+      - Agents/Python 0.3.3
       x-stainless-arch:
       - arm64
       x-stainless-async:
@@ -58,7 +57,7 @@ interactions:
       x-stainless-os:
       - MacOS
       x-stainless-package-version:
-      - 1.105.0
+      - 1.109.1
       x-stainless-read-timeout:
       - '600'
       x-stainless-retry-count:
@@ -73,10 +72,10 @@ interactions:
     body:
       string: |-
         {
-          "id": "chatcmpl-CCIvaceDOPdzWU2BlnQf3NqndBJ7Y",
+          "id": "chatcmpl-CO7kzNtiVQlsbUwqzH3UfTUl3RQZk",
           "object": "chat.completion",
-          "created": 1757048730,
-          "model": "gpt-4o-mini-2024-07-18",
+          "created": 1759865725,
+          "model": "gpt-5-nano-2025-08-07",
           "choices": [
             {
               "index": 0,
@@ -85,48 +84,47 @@ interactions:
                 "content": null,
                 "tool_calls": [
                   {
-                    "id": "call_dRlRcX5ty8twG6mge0ADUBsq",
+                    "id": "call_e0Dh9K7xeks7GDS8fi8g3ZO2",
                     "type": "function",
                     "function": {
                       "name": "get_latest_elasticsearch_version",
-                      "arguments": "{\"major_version\":8}"
+                      "arguments": "{\"major_version\":9}"
                     }
                   }
                 ],
                 "refusal": null,
                 "annotations": []
               },
-              "logprobs": null,
               "finish_reason": "tool_calls"
             }
           ],
           "usage": {
-            "prompt_tokens": 104,
-            "completion_tokens": 18,
-            "total_tokens": 122,
+            "prompt_tokens": 185,
+            "completion_tokens": 155,
+            "total_tokens": 340,
             "prompt_tokens_details": {
               "cached_tokens": 0,
               "audio_tokens": 0
             },
             "completion_tokens_details": {
-              "reasoning_tokens": 0,
+              "reasoning_tokens": 128,
               "audio_tokens": 0,
               "accepted_prediction_tokens": 0,
               "rejected_prediction_tokens": 0
             }
           },
           "service_tier": "default",
-          "system_fingerprint": "fp_8bda4d3a2c"
+          "system_fingerprint": null
         }
     headers:
       CF-RAY:
-      - 97a331226d659b97-SIN
+      - 98afd76dfd118f1a-FRA
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Fri, 05 Sep 2025 05:05:31 GMT
+      - Tue, 07 Oct 2025 19:35:26 GMT
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -142,29 +140,31 @@ interactions:
       cf-cache-status:
       - DYNAMIC
       content-length:
-      - '1108'
+      - '1075'
       openai-processing-ms:
-      - '567'
+      - '1465'
       openai-project:
       - proj_KYenqYOfeZsnXEVK8dXVBhez
       openai-version:
       - '2020-10-01'
       x-envoy-upstream-service-time:
-      - '570'
+      - '1495'
+      x-openai-proxy-wasm:
+      - v0.1
       x-ratelimit-limit-requests:
-      - '10000'
+      - '500'
       x-ratelimit-limit-tokens:
       - '200000'
       x-ratelimit-remaining-requests:
-      - '9999'
+      - '499'
       x-ratelimit-remaining-tokens:
       - '199986'
       x-ratelimit-reset-requests:
-      - 8.64s
+      - 120ms
       x-ratelimit-reset-tokens:
       - 4ms
       x-request-id:
-      - req_4f610e44243841779beb2052dc7ba315
+      - req_010d511740054234a374d18dbb709e67
     status:
       code: 200
       message: OK
@@ -190,936 +190,2506 @@ interactions:
           "releases": [
             {
               "version": "6.7.0",
-              "public_release_date": "2019-03-26"
+              "public_release_date": "2019-03-26",
+              "is_end_of_support": true,
+              "end_of_support_date": "2019-12-17",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2019-06-20",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "6.7.1",
-              "public_release_date": "2019-04-04"
+              "public_release_date": "2019-04-04",
+              "is_end_of_support": true,
+              "end_of_support_date": "2019-12-17",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2019-06-20",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "6.7.2",
-              "public_release_date": "2019-05-02"
+              "public_release_date": "2019-05-02",
+              "is_end_of_support": true,
+              "end_of_support_date": "2019-12-17",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2019-06-20",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "6.8.0",
-              "public_release_date": "2019-05-20"
+              "public_release_date": "2019-05-20",
+              "is_end_of_support": true,
+              "end_of_support_date": "2019-10-07",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2019-04-10",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "6.8.1",
-              "public_release_date": "2019-06-20"
+              "public_release_date": "2019-06-20",
+              "is_end_of_support": true,
+              "end_of_support_date": "2019-10-07",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2019-04-10",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "6.8.2",
-              "public_release_date": "2019-07-30"
+              "public_release_date": "2019-07-30",
+              "is_end_of_support": true,
+              "end_of_support_date": "2019-10-07",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2019-04-10",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "6.8.3",
-              "public_release_date": "2019-09-05"
+              "public_release_date": "2019-09-05",
+              "is_end_of_support": true,
+              "end_of_support_date": "2019-10-07",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2019-04-10",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "6.8.4",
-              "public_release_date": "2019-10-23"
+              "public_release_date": "2019-10-23",
+              "is_end_of_support": true,
+              "end_of_support_date": "2019-10-07",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2019-04-10",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "6.8.5",
-              "public_release_date": "2019-11-20"
+              "public_release_date": "2019-11-20",
+              "is_end_of_support": true,
+              "end_of_support_date": "2019-10-07",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2019-04-10",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "6.8.6",
-              "public_release_date": "2019-12-18"
+              "public_release_date": "2019-12-18",
+              "is_end_of_support": true,
+              "end_of_support_date": "2019-10-07",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2019-04-10",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "6.8.7",
-              "public_release_date": "2020-03-03"
+              "public_release_date": "2020-03-03",
+              "is_end_of_support": true,
+              "end_of_support_date": "2019-10-07",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2019-04-10",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "6.8.8",
-              "public_release_date": "2020-03-31"
+              "public_release_date": "2020-03-31",
+              "is_end_of_support": true,
+              "end_of_support_date": "2019-10-07",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2019-04-10",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "6.8.9",
-              "public_release_date": "2020-05-13"
+              "public_release_date": "2020-05-13",
+              "is_end_of_support": true,
+              "end_of_support_date": "2019-10-07",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2019-04-10",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "6.8.10",
-              "public_release_date": "2020-06-03"
+              "public_release_date": "2020-06-03",
+              "is_end_of_support": true,
+              "end_of_support_date": "2019-10-07",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2019-04-10",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "6.8.11",
-              "public_release_date": "2020-07-27"
+              "public_release_date": "2020-07-27",
+              "is_end_of_support": true,
+              "end_of_support_date": "2019-10-07",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2019-04-10",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "6.8.12",
-              "public_release_date": "2020-08-18"
+              "public_release_date": "2020-08-18",
+              "is_end_of_support": true,
+              "end_of_support_date": "2019-10-07",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2019-04-10",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "6.8.13",
-              "public_release_date": "2020-10-22"
+              "public_release_date": "2020-10-22",
+              "is_end_of_support": true,
+              "end_of_support_date": "2019-10-07",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2019-04-10",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "6.8.14",
-              "public_release_date": "2021-02-10"
+              "public_release_date": "2021-02-10",
+              "is_end_of_support": true,
+              "end_of_support_date": "2019-10-07",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2019-04-10",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "6.8.15",
-              "public_release_date": "2021-03-23"
+              "public_release_date": "2021-03-23",
+              "is_end_of_support": true,
+              "end_of_support_date": "2019-10-07",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2019-04-10",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "6.8.16",
-              "public_release_date": "2021-05-25"
+              "public_release_date": "2021-05-25",
+              "is_end_of_support": true,
+              "end_of_support_date": "2019-10-07",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2019-04-10",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "6.8.17",
-              "public_release_date": "2021-07-07"
+              "public_release_date": "2021-07-07",
+              "is_end_of_support": true,
+              "end_of_support_date": "2019-10-07",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2019-04-10",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "6.8.18",
-              "public_release_date": "2021-08-03"
+              "public_release_date": "2021-08-03",
+              "is_end_of_support": true,
+              "end_of_support_date": "2019-10-07",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2019-04-10",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "6.8.19",
-              "public_release_date": "2021-09-21"
+              "public_release_date": "2021-09-21",
+              "is_end_of_support": true,
+              "end_of_support_date": "2019-10-07",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2019-04-10",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "6.8.20",
-              "public_release_date": "2021-10-14"
+              "public_release_date": "2021-10-14",
+              "is_end_of_support": true,
+              "end_of_support_date": "2019-10-07",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2019-04-10",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "6.8.21",
-              "public_release_date": "2021-12-13"
+              "public_release_date": "2021-12-13",
+              "is_end_of_support": true,
+              "end_of_support_date": "2019-10-07",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2019-04-10",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "6.8.22",
-              "public_release_date": "2021-12-19"
+              "public_release_date": "2021-12-19",
+              "is_end_of_support": true,
+              "end_of_support_date": "2019-10-07",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2019-04-10",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "6.8.23",
-              "public_release_date": "2022-01-13"
-            },
-            {
-              "version": "7.0.0 GA",
-              "public_release_date": "2019-04-10"
+              "public_release_date": "2022-01-13",
+              "is_end_of_support": true,
+              "end_of_support_date": "2019-10-07",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2019-04-10",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.0.0-alpha1",
-              "public_release_date": "2019-04-12"
+              "public_release_date": "2019-04-12",
+              "is_end_of_support": true,
+              "end_of_support_date": "2023-07-31",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2023-02-01",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.0.0-alpha2",
-              "public_release_date": "2019-04-12"
+              "public_release_date": "2019-04-12",
+              "is_end_of_support": true,
+              "end_of_support_date": "2023-07-31",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2023-02-01",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.0.0-beta1",
-              "public_release_date": "2019-04-10"
+              "public_release_date": "2019-04-10",
+              "is_end_of_support": true,
+              "end_of_support_date": "2023-07-31",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2023-02-01",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.0.0-rc1",
-              "public_release_date": "2019-04-10"
+              "public_release_date": "2019-04-10",
+              "is_end_of_support": true,
+              "end_of_support_date": "2023-07-31",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2023-02-01",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.0.0-rc2",
-              "public_release_date": "2019-04-10"
+              "public_release_date": "2019-04-10",
+              "is_end_of_support": true,
+              "end_of_support_date": "2023-07-31",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2023-02-01",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
+            },
+            {
+              "version": "7.0.0 GA",
+              "public_release_date": "2019-04-10",
+              "is_end_of_support": true,
+              "end_of_support_date": "2023-07-31",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2023-02-01",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.0.1",
-              "public_release_date": "2019-05-01"
+              "public_release_date": "2019-05-01",
+              "is_end_of_support": true,
+              "end_of_support_date": "2023-07-31",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2023-02-01",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.1.0",
-              "public_release_date": "2019-05-20"
+              "public_release_date": "2019-05-20",
+              "is_end_of_support": true,
+              "end_of_support_date": "2020-01-26",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2019-07-30",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.1.1",
-              "public_release_date": "2019-05-28"
+              "public_release_date": "2019-05-28",
+              "is_end_of_support": true,
+              "end_of_support_date": "2020-01-26",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2019-07-30",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.2.0",
-              "public_release_date": "2019-06-25"
+              "public_release_date": "2019-06-25",
+              "is_end_of_support": true,
+              "end_of_support_date": "2020-02-18",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2019-08-22",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.2.1",
-              "public_release_date": "2019-07-30"
+              "public_release_date": "2019-07-30",
+              "is_end_of_support": true,
+              "end_of_support_date": "2020-02-18",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2019-08-22",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.3.0",
-              "public_release_date": "2019-07-31"
+              "public_release_date": "2019-07-31",
+              "is_end_of_support": true,
+              "end_of_support_date": "2020-04-20",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2019-10-23",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.3.1",
-              "public_release_date": "2019-08-22"
+              "public_release_date": "2019-08-22",
+              "is_end_of_support": true,
+              "end_of_support_date": "2020-04-20",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2019-10-23",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.3.2",
-              "public_release_date": "2019-09-12"
+              "public_release_date": "2019-09-12",
+              "is_end_of_support": true,
+              "end_of_support_date": "2020-04-20",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2019-10-23",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.4.0",
-              "public_release_date": "2019-10-01"
+              "public_release_date": "2019-10-01",
+              "is_end_of_support": true,
+              "end_of_support_date": "2020-06-15",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2019-12-18",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.4.1",
-              "public_release_date": "2019-10-23"
+              "public_release_date": "2019-10-23",
+              "is_end_of_support": true,
+              "end_of_support_date": "2020-06-15",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2019-12-18",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.4.2",
-              "public_release_date": "2019-10-31"
+              "public_release_date": "2019-10-31",
+              "is_end_of_support": true,
+              "end_of_support_date": "2020-06-15",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2019-12-18",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.5.0",
-              "public_release_date": "2019-12-02"
+              "public_release_date": "2019-12-02",
+              "is_end_of_support": true,
+              "end_of_support_date": "2020-08-30",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2020-03-03",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.5.1",
-              "public_release_date": "2019-12-18"
+              "public_release_date": "2019-12-18",
+              "is_end_of_support": true,
+              "end_of_support_date": "2020-08-30",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2020-03-03",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.5.2",
-              "public_release_date": "2020-01-21"
+              "public_release_date": "2020-01-21",
+              "is_end_of_support": true,
+              "end_of_support_date": "2020-08-30",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2020-03-03",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.6.0",
-              "public_release_date": "2020-02-11"
+              "public_release_date": "2020-02-11",
+              "is_end_of_support": true,
+              "end_of_support_date": "2020-11-30",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2020-06-03",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.6.1",
-              "public_release_date": "2020-03-03"
+              "public_release_date": "2020-03-03",
+              "is_end_of_support": true,
+              "end_of_support_date": "2020-11-30",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2020-06-03",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.6.2",
-              "public_release_date": "2020-03-31"
+              "public_release_date": "2020-03-31",
+              "is_end_of_support": true,
+              "end_of_support_date": "2020-11-30",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2020-06-03",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.7.0",
-              "public_release_date": "2020-05-13"
+              "public_release_date": "2020-05-13",
+              "is_end_of_support": true,
+              "end_of_support_date": "2021-01-23",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2020-07-27",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.7.1",
-              "public_release_date": "2020-06-03"
+              "public_release_date": "2020-06-03",
+              "is_end_of_support": true,
+              "end_of_support_date": "2021-01-23",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2020-07-27",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.8.0",
-              "public_release_date": "2020-06-18"
+              "public_release_date": "2020-06-18",
+              "is_end_of_support": true,
+              "end_of_support_date": "2021-03-02",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2020-09-03",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.8.1",
-              "public_release_date": "2020-07-27"
+              "public_release_date": "2020-07-27",
+              "is_end_of_support": true,
+              "end_of_support_date": "2021-03-02",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2020-09-03",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.9.0",
-              "public_release_date": "2020-08-18"
+              "public_release_date": "2020-08-18",
+              "is_end_of_support": true,
+              "end_of_support_date": "2021-06-07",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2020-12-09",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.9.1",
-              "public_release_date": "2020-09-03"
+              "public_release_date": "2020-09-03",
+              "is_end_of_support": true,
+              "end_of_support_date": "2021-06-07",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2020-12-09",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.9.2",
-              "public_release_date": "2020-09-24"
+              "public_release_date": "2020-09-24",
+              "is_end_of_support": true,
+              "end_of_support_date": "2021-06-07",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2020-12-09",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.9.3",
-              "public_release_date": "2020-10-22"
+              "public_release_date": "2020-10-22",
+              "is_end_of_support": true,
+              "end_of_support_date": "2021-06-07",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2020-12-09",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.10.0",
-              "public_release_date": "2020-11-11"
+              "public_release_date": "2020-11-11",
+              "is_end_of_support": true,
+              "end_of_support_date": "2021-08-16",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2021-02-17",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.10.1",
-              "public_release_date": "2020-12-09"
+              "public_release_date": "2020-12-09",
+              "is_end_of_support": true,
+              "end_of_support_date": "2021-08-16",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2021-02-17",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.10.2",
-              "public_release_date": "2021-01-14"
+              "public_release_date": "2021-01-14",
+              "is_end_of_support": true,
+              "end_of_support_date": "2021-08-16",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2021-02-17",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.11.0",
-              "public_release_date": "2021-02-10"
+              "public_release_date": "2021-02-10",
+              "is_end_of_support": true,
+              "end_of_support_date": "2021-10-24",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2021-04-27",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.11.1",
-              "public_release_date": "2021-02-17"
+              "public_release_date": "2021-02-17",
+              "is_end_of_support": true,
+              "end_of_support_date": "2021-10-24",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2021-04-27",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.11.2",
-              "public_release_date": "2021-03-10"
+              "public_release_date": "2021-03-10",
+              "is_end_of_support": true,
+              "end_of_support_date": "2021-10-24",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2021-04-27",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.12.0",
-              "public_release_date": "2021-03-23"
+              "public_release_date": "2021-03-23",
+              "is_end_of_support": true,
+              "end_of_support_date": "2021-11-29",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2021-06-02",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.12.1",
-              "public_release_date": "2021-04-27"
+              "public_release_date": "2021-04-27",
+              "is_end_of_support": true,
+              "end_of_support_date": "2021-11-29",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2021-06-02",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.13.0",
-              "public_release_date": "2021-05-25"
+              "public_release_date": "2021-05-25",
+              "is_end_of_support": true,
+              "end_of_support_date": "2022-02-28",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2021-09-01",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.13.1",
-              "public_release_date": "2021-06-02"
+              "public_release_date": "2021-06-02",
+              "is_end_of_support": true,
+              "end_of_support_date": "2022-02-28",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2021-09-01",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.13.2",
-              "public_release_date": "2021-06-14"
+              "public_release_date": "2021-06-14",
+              "is_end_of_support": true,
+              "end_of_support_date": "2022-02-28",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2021-09-01",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.13.3",
-              "public_release_date": "2021-07-07"
+              "public_release_date": "2021-07-07",
+              "is_end_of_support": true,
+              "end_of_support_date": "2022-02-28",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2021-09-01",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.13.4",
-              "public_release_date": "2021-07-20"
+              "public_release_date": "2021-07-20",
+              "is_end_of_support": true,
+              "end_of_support_date": "2022-02-28",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2021-09-01",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.14.0",
-              "public_release_date": "2021-08-03"
+              "public_release_date": "2021-08-03",
+              "is_end_of_support": true,
+              "end_of_support_date": "2022-04-12",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2021-10-14",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.14.1",
-              "public_release_date": "2021-09-01"
+              "public_release_date": "2021-09-01",
+              "is_end_of_support": true,
+              "end_of_support_date": "2022-04-12",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2021-10-14",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.14.2",
-              "public_release_date": "2021-09-21"
+              "public_release_date": "2021-09-21",
+              "is_end_of_support": true,
+              "end_of_support_date": "2022-04-12",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2021-10-14",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.15.0",
-              "public_release_date": "2021-09-22"
+              "public_release_date": "2021-09-22",
+              "is_end_of_support": true,
+              "end_of_support_date": "2022-06-11",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2021-12-13",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.15.1",
-              "public_release_date": "2021-10-14"
+              "public_release_date": "2021-10-14",
+              "is_end_of_support": true,
+              "end_of_support_date": "2022-06-11",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2021-12-13",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.15.2",
-              "public_release_date": "2021-11-10"
+              "public_release_date": "2021-11-10",
+              "is_end_of_support": true,
+              "end_of_support_date": "2022-06-11",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2021-12-13",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.16.0",
-              "public_release_date": "2021-12-07"
+              "public_release_date": "2021-12-07",
+              "is_end_of_support": true,
+              "end_of_support_date": "2022-08-27",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2022-02-28",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.16.1",
-              "public_release_date": "2021-12-13"
+              "public_release_date": "2021-12-13",
+              "is_end_of_support": true,
+              "end_of_support_date": "2022-08-27",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2022-02-28",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.16.2",
-              "public_release_date": "2021-12-19"
+              "public_release_date": "2021-12-19",
+              "is_end_of_support": true,
+              "end_of_support_date": "2022-08-27",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2022-02-28",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.16.3",
-              "public_release_date": "2022-01-13"
+              "public_release_date": "2022-01-13",
+              "is_end_of_support": true,
+              "end_of_support_date": "2022-08-27",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2022-02-28",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.17.0",
-              "public_release_date": "2022-02-01"
+              "public_release_date": "2022-02-01",
+              "is_end_of_support": false,
+              "end_of_support_date": "2026-01-15",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2025-04-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.17.1",
-              "public_release_date": "2022-02-28"
+              "public_release_date": "2022-02-28",
+              "is_end_of_support": false,
+              "end_of_support_date": "2026-01-15",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2025-04-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.17.2",
-              "public_release_date": "2022-03-31"
+              "public_release_date": "2022-03-31",
+              "is_end_of_support": false,
+              "end_of_support_date": "2026-01-15",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2025-04-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.17.3",
-              "public_release_date": "2022-04-20"
+              "public_release_date": "2022-04-20",
+              "is_end_of_support": false,
+              "end_of_support_date": "2026-01-15",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2025-04-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.17.4",
-              "public_release_date": "2022-05-24"
+              "public_release_date": "2022-05-24",
+              "is_end_of_support": false,
+              "end_of_support_date": "2026-01-15",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2025-04-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.17.5",
-              "public_release_date": "2022-06-28"
+              "public_release_date": "2022-06-28",
+              "is_end_of_support": false,
+              "end_of_support_date": "2026-01-15",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2025-04-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.17.6",
-              "public_release_date": "2022-08-24"
+              "public_release_date": "2022-08-24",
+              "is_end_of_support": false,
+              "end_of_support_date": "2026-01-15",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2025-04-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.17.7",
-              "public_release_date": "2022-10-25"
+              "public_release_date": "2022-10-25",
+              "is_end_of_support": false,
+              "end_of_support_date": "2026-01-15",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2025-04-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.17.8",
-              "public_release_date": "2022-12-08"
+              "public_release_date": "2022-12-08",
+              "is_end_of_support": false,
+              "end_of_support_date": "2026-01-15",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2025-04-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.17.9",
-              "public_release_date": "2023-02-02"
+              "public_release_date": "2023-02-02",
+              "is_end_of_support": false,
+              "end_of_support_date": "2026-01-15",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2025-04-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.17.10",
-              "public_release_date": "2023-05-02"
+              "public_release_date": "2023-05-02",
+              "is_end_of_support": false,
+              "end_of_support_date": "2026-01-15",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2025-04-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.17.11",
-              "public_release_date": "2023-06-29"
+              "public_release_date": "2023-06-29",
+              "is_end_of_support": false,
+              "end_of_support_date": "2026-01-15",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2025-04-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.17.12",
-              "public_release_date": "2023-07-25"
+              "public_release_date": "2023-07-25",
+              "is_end_of_support": false,
+              "end_of_support_date": "2026-01-15",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2025-04-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.17.13",
-              "public_release_date": "2023-09-06"
+              "public_release_date": "2023-09-06",
+              "is_end_of_support": false,
+              "end_of_support_date": "2026-01-15",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2025-04-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.17.14",
-              "public_release_date": "2023-10-10"
+              "public_release_date": "2023-10-10",
+              "is_end_of_support": false,
+              "end_of_support_date": "2026-01-15",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2025-04-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.17.15",
-              "public_release_date": "2023-11-13"
+              "public_release_date": "2023-11-13",
+              "is_end_of_support": false,
+              "end_of_support_date": "2026-01-15",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2025-04-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.17.16",
-              "public_release_date": "2023-12-12"
+              "public_release_date": "2023-12-12",
+              "is_end_of_support": false,
+              "end_of_support_date": "2026-01-15",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2025-04-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.17.17",
-              "public_release_date": "2024-01-23"
+              "public_release_date": "2024-01-23",
+              "is_end_of_support": false,
+              "end_of_support_date": "2026-01-15",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2025-04-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.17.18",
-              "public_release_date": "2024-02-06"
+              "public_release_date": "2024-02-06",
+              "is_end_of_support": false,
+              "end_of_support_date": "2026-01-15",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2025-04-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.17.19",
-              "public_release_date": "2024-03-26"
+              "public_release_date": "2024-03-26",
+              "is_end_of_support": false,
+              "end_of_support_date": "2026-01-15",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2025-04-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.17.20",
-              "public_release_date": "2024-04-08"
+              "public_release_date": "2024-04-08",
+              "is_end_of_support": false,
+              "end_of_support_date": "2026-01-15",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2025-04-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.17.21",
-              "public_release_date": "2024-05-02"
+              "public_release_date": "2024-05-02",
+              "is_end_of_support": false,
+              "end_of_support_date": "2026-01-15",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2025-04-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.17.22",
-              "public_release_date": "2024-06-13"
+              "public_release_date": "2024-06-13",
+              "is_end_of_support": false,
+              "end_of_support_date": "2026-01-15",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2025-04-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "7.17.23",
               "public_release_date": "2024-07-30",
+              "is_end_of_support": false,
+              "end_of_support_date": "2026-01-15",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2025-04-15",
+              "is_retired": false,
+              "retired_date": null,
               "manifest": "https://artifacts.elastic.co/downloads/7.17.23.json"
             },
             {
               "version": "7.17.24",
               "public_release_date": "2024-09-10",
+              "is_end_of_support": false,
+              "end_of_support_date": "2026-01-15",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2025-04-15",
+              "is_retired": false,
+              "retired_date": null,
               "manifest": "https://artifacts.elastic.co/downloads/7.17.24.json"
             },
             {
               "version": "7.17.25",
               "public_release_date": "2024-10-22",
+              "is_end_of_support": false,
+              "end_of_support_date": "2026-01-15",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2025-04-15",
+              "is_retired": false,
+              "retired_date": null,
               "manifest": "https://artifacts.elastic.co/downloads/7.17.25.json"
             },
             {
               "version": "7.17.26",
               "public_release_date": "2024-12-03",
+              "is_end_of_support": false,
+              "end_of_support_date": "2026-01-15",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2025-04-15",
+              "is_retired": false,
+              "retired_date": null,
               "manifest": "https://artifacts.elastic.co/downloads/7.17.26.json"
             },
             {
               "version": "7.17.28",
               "public_release_date": "2025-02-25",
+              "is_end_of_support": false,
+              "end_of_support_date": "2026-01-15",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2025-04-15",
+              "is_retired": false,
+              "retired_date": null,
               "manifest": "https://artifacts.elastic.co/downloads/7.17.28.json"
             },
             {
               "version": "7.17.29",
-              "manifest": "https://artifacts.elastic.co/downloads/7.17.29.json",
-              "public_release_date": "2025-06-24"
-            },
-            {
-              "version": "8.0.0 GA",
-              "public_release_date": "2022-02-10"
+              "public_release_date": "2025-06-24",
+              "is_end_of_support": false,
+              "end_of_support_date": "2026-01-15",
+              "is_end_of_maintenance": true,
+              "end_of_maintenance_date": "2025-04-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": "https://artifacts.elastic.co/downloads/7.17.29.json"
             },
             {
               "version": "8.0.0-alpha1",
-              "public_release_date": "2021-08-10"
+              "public_release_date": "2021-08-10",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.0.0-alpha2",
-              "public_release_date": "2021-09-16"
+              "public_release_date": "2021-09-16",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.0.0-beta1",
-              "public_release_date": "2021-11-09"
+              "public_release_date": "2021-11-09",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.0.0-rc1",
-              "public_release_date": "2022-01-12"
+              "public_release_date": "2022-01-12",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.0.0-rc2",
-              "public_release_date": "2022-02-03"
+              "public_release_date": "2022-02-03",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
+            },
+            {
+              "version": "8.0.0 GA",
+              "public_release_date": "2022-02-10",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.0.1",
-              "public_release_date": "2022-03-01"
+              "public_release_date": "2022-03-01",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.1.0",
-              "public_release_date": "2022-03-08"
+              "public_release_date": "2022-03-08",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.1.1",
-              "public_release_date": "2022-03-22"
+              "public_release_date": "2022-03-22",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.1.2",
-              "public_release_date": "2022-03-31"
+              "public_release_date": "2022-03-31",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.1.3",
-              "public_release_date": "2022-04-20"
+              "public_release_date": "2022-04-20",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.2.0",
-              "public_release_date": "2022-05-03"
+              "public_release_date": "2022-05-03",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.2.1",
-              "public_release_date": "2022-05-24"
+              "public_release_date": "2022-05-24",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.2.2",
-              "public_release_date": "2022-05-26"
+              "public_release_date": "2022-05-26",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.2.3",
-              "public_release_date": "2022-06-14"
+              "public_release_date": "2022-06-14",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.3.0",
-              "public_release_date": "2022-06-28"
+              "public_release_date": "2022-06-28",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.3.1",
-              "public_release_date": "2022-06-30"
+              "public_release_date": "2022-06-30",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.3.2",
-              "public_release_date": "2022-07-07"
+              "public_release_date": "2022-07-07",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.3.3",
-              "public_release_date": "2022-07-28"
+              "public_release_date": "2022-07-28",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.4.0",
-              "public_release_date": "2022-08-24"
+              "public_release_date": "2022-08-24",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.4.1",
-              "public_release_date": "2022-08-30"
+              "public_release_date": "2022-08-30",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.4.2",
-              "public_release_date": "2022-09-20"
+              "public_release_date": "2022-09-20",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.4.3",
-              "public_release_date": "2022-10-05"
+              "public_release_date": "2022-10-05",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.5.0",
-              "public_release_date": "2022-11-01"
+              "public_release_date": "2022-11-01",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.5.1",
-              "public_release_date": "2022-11-15"
+              "public_release_date": "2022-11-15",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.5.2",
-              "public_release_date": "2022-11-22"
+              "public_release_date": "2022-11-22",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.5.3",
-              "public_release_date": "2022-12-08"
+              "public_release_date": "2022-12-08",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.6.0",
-              "public_release_date": "2023-01-10"
+              "public_release_date": "2023-01-10",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.6.1",
-              "public_release_date": "2023-01-26"
+              "public_release_date": "2023-01-26",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.6.2",
-              "public_release_date": "2023-02-16"
+              "public_release_date": "2023-02-16",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.7.0",
-              "public_release_date": "2023-03-30"
+              "public_release_date": "2023-03-30",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.7.1",
-              "public_release_date": "2023-05-02"
+              "public_release_date": "2023-05-02",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.7.2",
-              "public_release_date": "2023-05-23"
+              "public_release_date": "2023-05-23",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.8.0",
-              "public_release_date": "2023-05-25"
+              "public_release_date": "2023-05-25",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.8.1",
-              "public_release_date": "2023-06-08"
+              "public_release_date": "2023-06-08",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.8.2",
-              "public_release_date": "2023-06-29"
+              "public_release_date": "2023-06-29",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.9.0",
-              "public_release_date": "2023-07-25"
+              "public_release_date": "2023-07-25",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.9.1",
-              "public_release_date": "2023-08-17"
+              "public_release_date": "2023-08-17",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.9.2",
-              "public_release_date": "2023-09-06"
+              "public_release_date": "2023-09-06",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.10.0",
-              "public_release_date": "2023-09-12"
+              "public_release_date": "2023-09-12",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.10.1",
-              "public_release_date": "2023-09-18"
+              "public_release_date": "2023-09-18",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.10.2",
-              "public_release_date": "2023-09-21"
+              "public_release_date": "2023-09-21",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.10.3",
-              "public_release_date": "2023-10-10"
+              "public_release_date": "2023-10-10",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.10.4",
-              "public_release_date": "2023-10-17"
+              "public_release_date": "2023-10-17",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.11.0",
-              "public_release_date": "2023-11-07"
+              "public_release_date": "2023-11-07",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.11.1",
-              "public_release_date": "2023-11-13"
+              "public_release_date": "2023-11-13",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.11.2",
-              "public_release_date": "2023-12-07"
+              "public_release_date": "2023-12-07",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.11.3",
-              "public_release_date": "2023-12-12"
+              "public_release_date": "2023-12-12",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.11.4",
-              "public_release_date": "2024-01-11"
+              "public_release_date": "2024-01-11",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.12.0",
-              "public_release_date": "2024-01-17"
+              "public_release_date": "2024-01-17",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.12.1",
-              "public_release_date": "2024-02-06"
+              "public_release_date": "2024-02-06",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.12.2",
-              "public_release_date": "2024-02-22"
+              "public_release_date": "2024-02-22",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.13.0",
-              "public_release_date": "2024-03-26"
+              "public_release_date": "2024-03-26",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.13.1",
-              "public_release_date": "2024-04-02"
+              "public_release_date": "2024-04-02",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.13.2",
-              "public_release_date": "2024-04-08"
+              "public_release_date": "2024-04-08",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.13.3",
-              "public_release_date": "2024-05-02"
+              "public_release_date": "2024-05-02",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.13.4",
-              "public_release_date": "2024-05-08"
+              "public_release_date": "2024-05-08",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.14.0",
-              "public_release_date": "2024-06-05"
+              "public_release_date": "2024-06-05",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.14.1",
-              "public_release_date": "2024-06-12"
+              "public_release_date": "2024-06-12",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": null
             },
             {
               "version": "8.14.2",
               "public_release_date": "2024-07-04",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
               "manifest": "https://artifacts.elastic.co/downloads/8.14.2.json"
             },
             {
               "version": "8.14.3",
               "public_release_date": "2024-07-11",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
               "manifest": "https://artifacts.elastic.co/downloads/8.14.3.json"
             },
             {
               "version": "8.15.0",
               "public_release_date": "2024-08-08",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
               "manifest": "https://artifacts.elastic.co/downloads/8.15.0.json"
             },
             {
               "version": "8.15.1",
               "public_release_date": "2024-09-05",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
               "manifest": "https://artifacts.elastic.co/downloads/8.15.1.json"
             },
             {
               "version": "8.15.2",
               "public_release_date": "2024-09-26",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
               "manifest": "https://artifacts.elastic.co/downloads/8.15.2.json"
             },
             {
               "version": "8.15.3",
               "public_release_date": "2024-10-17",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
               "manifest": "https://artifacts.elastic.co/downloads/8.15.3.json"
             },
             {
               "version": "8.15.4",
               "public_release_date": "2024-11-12",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
               "manifest": "https://artifacts.elastic.co/downloads/8.15.4.json"
             },
             {
               "version": "8.15.5",
               "public_release_date": "2024-11-26",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
               "manifest": "https://artifacts.elastic.co/downloads/8.15.5.json"
             },
             {
               "version": "8.16.0",
               "public_release_date": "2024-11-12",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
               "manifest": "https://artifacts.elastic.co/downloads/8.16.0.json"
             },
             {
               "version": "8.16.1",
               "public_release_date": "2024-11-21",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
               "manifest": "https://artifacts.elastic.co/downloads/8.16.1.json"
             },
             {
               "version": "8.16.2",
               "public_release_date": "2024-12-17",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
               "manifest": "https://artifacts.elastic.co/downloads/8.16.2.json"
             },
             {
               "version": "8.16.3",
               "public_release_date": "2025-01-21",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
               "manifest": "https://artifacts.elastic.co/downloads/8.16.3.json"
             },
             {
               "version": "8.16.4",
               "public_release_date": "2025-02-11",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
               "manifest": "https://artifacts.elastic.co/downloads/8.16.4.json"
             },
             {
               "version": "8.16.5",
               "public_release_date": "2025-03-04",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
               "manifest": "https://artifacts.elastic.co/downloads/8.16.5.json"
             },
             {
               "version": "8.16.6",
-              "manifest": "https://artifacts.elastic.co/downloads/8.16.6.json",
-              "public_release_date": "2025-03-25"
+              "public_release_date": "2025-03-25",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": "https://artifacts.elastic.co/downloads/8.16.6.json"
             },
             {
               "version": "8.17.0",
               "public_release_date": "2024-12-12",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
               "manifest": "https://artifacts.elastic.co/downloads/8.17.0.json"
             },
             {
               "version": "8.17.1",
               "public_release_date": "2025-01-21",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
               "manifest": "https://artifacts.elastic.co/downloads/8.17.1.json"
             },
             {
               "version": "8.17.2",
               "public_release_date": "2025-02-11",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
               "manifest": "https://artifacts.elastic.co/downloads/8.17.2.json"
             },
             {
               "version": "8.17.3",
               "public_release_date": "2025-03-04",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
               "manifest": "https://artifacts.elastic.co/downloads/8.17.3.json"
             },
             {
               "version": "8.17.4",
-              "manifest": "https://artifacts.elastic.co/downloads/8.17.4.json",
-              "public_release_date": "2025-03-25"
+              "public_release_date": "2025-03-25",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": "https://artifacts.elastic.co/downloads/8.17.4.json"
             },
             {
               "version": "8.17.5",
-              "manifest": "https://artifacts.elastic.co/downloads/8.17.5.json",
-              "public_release_date": "2025-04-15"
+              "public_release_date": "2025-04-15",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": "https://artifacts.elastic.co/downloads/8.17.5.json"
             },
             {
               "version": "8.17.6",
-              "manifest": "https://artifacts.elastic.co/downloads/8.17.6.json",
-              "public_release_date": "2025-05-06"
+              "public_release_date": "2025-05-06",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": "https://artifacts.elastic.co/downloads/8.17.6.json"
             },
             {
               "version": "8.17.7",
-              "manifest": "https://artifacts.elastic.co/downloads/8.17.7.json",
-              "public_release_date": "2025-06-03"
+              "public_release_date": "2025-06-03",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": "https://artifacts.elastic.co/downloads/8.17.7.json"
             },
             {
               "version": "8.17.8",
-              "manifest": "https://artifacts.elastic.co/downloads/8.17.8.json",
-              "public_release_date": "2025-06-24"
+              "public_release_date": "2025-06-24",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": "https://artifacts.elastic.co/downloads/8.17.8.json"
             },
             {
               "version": "8.17.9",
-              "manifest": "https://artifacts.elastic.co/downloads/8.17.9.json",
-              "public_release_date": "2025-07-22"
+              "public_release_date": "2025-07-22",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": "https://artifacts.elastic.co/downloads/8.17.9.json"
             },
             {
               "version": "8.17.10",
-              "manifest": "https://artifacts.elastic.co/downloads/8.17.10.json",
-              "public_release_date": "2025-08-12"
+              "public_release_date": "2025-08-12",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": "https://artifacts.elastic.co/downloads/8.17.10.json"
             },
             {
               "version": "8.18.0",
-              "manifest": "https://artifacts.elastic.co/downloads/8.18.0.json",
-              "public_release_date": "2025-04-15"
+              "public_release_date": "2025-04-15",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": "https://artifacts.elastic.co/downloads/8.18.0.json"
             },
             {
               "version": "8.18.1",
-              "manifest": "https://artifacts.elastic.co/downloads/8.18.1.json",
-              "public_release_date": "2025-05-06"
+              "public_release_date": "2025-05-06",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": "https://artifacts.elastic.co/downloads/8.18.1.json"
             },
             {
               "version": "8.18.2",
-              "manifest": "https://artifacts.elastic.co/downloads/8.18.2.json",
-              "public_release_date": "2025-05-29"
+              "public_release_date": "2025-05-29",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": "https://artifacts.elastic.co/downloads/8.18.2.json"
             },
             {
               "version": "8.18.3",
-              "manifest": "https://artifacts.elastic.co/downloads/8.18.3.json",
-              "public_release_date": "2025-06-24"
+              "public_release_date": "2025-06-24",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": "https://artifacts.elastic.co/downloads/8.18.3.json"
             },
             {
               "version": "8.18.4",
-              "manifest": "https://artifacts.elastic.co/downloads/8.18.4.json",
-              "public_release_date": "2025-07-22"
+              "public_release_date": "2025-07-22",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": "https://artifacts.elastic.co/downloads/8.18.4.json"
             },
             {
               "version": "8.18.5",
-              "manifest": "https://artifacts.elastic.co/downloads/8.18.5.json",
-              "public_release_date": "2025-08-12"
+              "public_release_date": "2025-08-12",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": "https://artifacts.elastic.co/downloads/8.18.5.json"
             },
             {
               "version": "8.18.6",
-              "manifest": "https://artifacts.elastic.co/downloads/8.18.6.json",
-              "public_release_date": "2025-08-28"
+              "public_release_date": "2025-08-28",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": "https://artifacts.elastic.co/downloads/8.18.6.json"
+            },
+            {
+              "version": "8.18.7",
+              "public_release_date": "2025-09-16",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": "https://artifacts.elastic.co/downloads/8.18.7.json"
+            },
+            {
+              "version": "8.18.8",
+              "public_release_date": "2025-10-06",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": "https://artifacts.elastic.co/downloads/8.18.8.json"
+            },
+            {
+              "version": "8.18.8",
+              "public_release_date": "2025-10-06",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": "https://artifacts.elastic.co/releases/stack.json"
             },
             {
               "version": "8.19.0",
-              "manifest": "https://artifacts.elastic.co/downloads/8.19.0.json",
-              "public_release_date": "2025-07-29"
+              "public_release_date": "2025-07-29",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": "https://artifacts.elastic.co/downloads/8.19.0.json"
             },
             {
               "version": "8.19.1",
-              "manifest": "https://artifacts.elastic.co/downloads/8.19.1.json",
-              "public_release_date": "2025-08-07"
+              "public_release_date": "2025-08-07",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": "https://artifacts.elastic.co/downloads/8.19.1.json"
             },
             {
               "version": "8.19.2",
-              "manifest": "https://artifacts.elastic.co/downloads/8.19.2.json",
-              "public_release_date": "2025-08-12"
+              "public_release_date": "2025-08-12",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": "https://artifacts.elastic.co/downloads/8.19.2.json"
             },
             {
               "version": "8.19.3",
-              "manifest": "https://artifacts.elastic.co/downloads/8.19.3.json",
-              "public_release_date": "2025-08-28"
+              "public_release_date": "2025-08-28",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": "https://artifacts.elastic.co/downloads/8.19.3.json"
             },
             {
-              "version": "9.0.0",
-              "manifest": "https://artifacts.elastic.co/downloads/9.0.0.json",
-              "public_release_date": "2025-04-15"
+              "version": "8.19.4",
+              "public_release_date": "2025-09-18",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": "https://artifacts.elastic.co/downloads/8.19.4.json"
+            },
+            {
+              "version": "8.19.5",
+              "public_release_date": "2025-10-06",
+              "is_end_of_support": false,
+              "end_of_support_date": "2027-07-14",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": "https://artifacts.elastic.co/downloads/8.19.5.json"
             },
             {
               "version": "9.0.0-beta1",
               "public_release_date": "2025-02-18",
+              "is_end_of_support": false,
+              "end_of_support_date": "2028-02-03",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-08-07",
+              "is_retired": false,
+              "retired_date": null,
               "manifest": "https://artifacts.elastic.co/downloads/9.0.0-beta1.json"
             },
             {
+              "version": "9.0.0",
+              "public_release_date": "2025-04-15",
+              "is_end_of_support": false,
+              "end_of_support_date": "2028-03-30",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-10-02",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": "https://artifacts.elastic.co/downloads/9.0.0.json"
+            },
+            {
               "version": "9.0.1",
-              "manifest": "https://artifacts.elastic.co/downloads/9.0.1.json",
-              "public_release_date": "2025-05-06"
+              "public_release_date": "2025-05-06",
+              "is_end_of_support": false,
+              "end_of_support_date": "2028-03-30",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-10-02",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": "https://artifacts.elastic.co/downloads/9.0.1.json"
             },
             {
               "version": "9.0.2",
-              "manifest": "https://artifacts.elastic.co/downloads/9.0.2.json",
-              "public_release_date": "2025-06-03"
+              "public_release_date": "2025-06-03",
+              "is_end_of_support": false,
+              "end_of_support_date": "2028-03-30",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-10-02",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": "https://artifacts.elastic.co/downloads/9.0.2.json"
             },
             {
               "version": "9.0.3",
-              "manifest": "https://artifacts.elastic.co/downloads/9.0.3.json",
-              "public_release_date": "2025-06-24"
+              "public_release_date": "2025-06-24",
+              "is_end_of_support": false,
+              "end_of_support_date": "2028-03-30",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-10-02",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": "https://artifacts.elastic.co/downloads/9.0.3.json"
             },
             {
               "version": "9.0.4",
-              "manifest": "https://artifacts.elastic.co/downloads/9.0.4.json",
-              "public_release_date": "2025-07-22"
+              "public_release_date": "2025-07-22",
+              "is_end_of_support": false,
+              "end_of_support_date": "2028-03-30",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-10-02",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": "https://artifacts.elastic.co/downloads/9.0.4.json"
             },
             {
               "version": "9.0.5",
-              "manifest": "https://artifacts.elastic.co/downloads/9.0.5.json",
-              "public_release_date": "2025-08-12"
+              "public_release_date": "2025-08-12",
+              "is_end_of_support": false,
+              "end_of_support_date": "2028-03-30",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-10-02",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": "https://artifacts.elastic.co/downloads/9.0.5.json"
             },
             {
               "version": "9.0.6",
-              "manifest": "https://artifacts.elastic.co/downloads/9.0.6.json",
-              "public_release_date": "2025-08-28"
+              "public_release_date": "2025-08-28",
+              "is_end_of_support": false,
+              "end_of_support_date": "2028-03-30",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-10-02",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": "https://artifacts.elastic.co/downloads/9.0.6.json"
+            },
+            {
+              "version": "9.0.7",
+              "public_release_date": "2025-09-16",
+              "is_end_of_support": false,
+              "end_of_support_date": "2028-03-30",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-10-02",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": "https://artifacts.elastic.co/downloads/9.0.7.json"
+            },
+            {
+              "version": "9.0.8",
+              "public_release_date": "2025-10-06",
+              "is_end_of_support": false,
+              "end_of_support_date": "2028-03-30",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2027-10-02",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": "https://artifacts.elastic.co/downloads/9.0.8.json"
             },
             {
               "version": "9.1.0",
-              "manifest": "https://artifacts.elastic.co/downloads/9.1.0.json",
-              "public_release_date": "2025-07-29"
+              "public_release_date": "2025-07-29",
+              "is_end_of_support": false,
+              "end_of_support_date": null,
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": null,
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": "https://artifacts.elastic.co/downloads/9.1.0.json"
             },
             {
               "version": "9.1.1",
-              "manifest": "https://artifacts.elastic.co/downloads/9.1.1.json",
-              "public_release_date": "2025-08-07"
+              "public_release_date": "2025-08-07",
+              "is_end_of_support": false,
+              "end_of_support_date": "2028-07-13",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2028-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": "https://artifacts.elastic.co/downloads/9.1.1.json"
             },
             {
               "version": "9.1.2",
-              "manifest": "https://artifacts.elastic.co/downloads/9.1.2.json",
-              "public_release_date": "2025-08-12"
+              "public_release_date": "2025-08-12",
+              "is_end_of_support": false,
+              "end_of_support_date": "2028-07-13",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2028-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": "https://artifacts.elastic.co/downloads/9.1.2.json"
             },
             {
               "version": "9.1.3",
-              "manifest": "https://artifacts.elastic.co/downloads/9.1.3.json",
-              "public_release_date": "2025-08-28"
+              "public_release_date": "2025-08-28",
+              "is_end_of_support": false,
+              "end_of_support_date": "2028-07-13",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2028-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": "https://artifacts.elastic.co/downloads/9.1.3.json"
+            },
+            {
+              "version": "9.1.4",
+              "public_release_date": "2025-09-18",
+              "is_end_of_support": false,
+              "end_of_support_date": "2028-07-13",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2028-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": "https://artifacts.elastic.co/downloads/9.1.4.json"
+            },
+            {
+              "version": "9.1.5",
+              "public_release_date": "2025-10-06",
+              "is_end_of_support": false,
+              "end_of_support_date": "2028-07-13",
+              "is_end_of_maintenance": false,
+              "end_of_maintenance_date": "2028-01-15",
+              "is_retired": false,
+              "retired_date": null,
+              "manifest": "https://artifacts.elastic.co/downloads/9.1.5.json"
             }
           ]
         }
     headers:
       Age:
-      - '991'
+      - '460'
       Alt-Svc:
       - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
       Cache-Control:
@@ -1127,11 +2697,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 05 Sep 2025 04:49:00 GMT
+      - Tue, 07 Oct 2025 19:27:47 GMT
       ETag:
-      - W/"e3fdaae554ea6ee83b5923fc2b548866"
+      - W/"914bc8c03f8987a2b59470f5cff49855"
       Last-Modified:
-      - Thu, 28 Aug 2025 09:31:06 GMT
+      - Mon, 06 Oct 2025 13:09:23 GMT
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
       Vary:
@@ -1139,7 +2709,7 @@ interactions:
       Via:
       - 1.1 google
       content-length:
-      - '21853'
+      - '90270'
     status:
       code: 200
       message: OK
@@ -1149,31 +2719,30 @@ interactions:
         "messages": [
           {
             "role": "user",
-            "content": "What is the latest version of Elasticsearch 8?"
+            "content": "What is the latest version of Elasticsearch 9?"
           },
           {
             "role": "assistant",
             "tool_calls": [
               {
-                "id": "call_dRlRcX5ty8twG6mge0ADUBsq",
+                "id": "call_e0Dh9K7xeks7GDS8fi8g3ZO2",
                 "type": "function",
                 "function": {
                   "name": "get_latest_elasticsearch_version",
-                  "arguments": "{\"major_version\":8}"
+                  "arguments": "{\"major_version\":9}"
                 }
               }
             ]
           },
           {
             "role": "tool",
-            "tool_call_id": "call_dRlRcX5ty8twG6mge0ADUBsq",
-            "content": "8.19.3"
+            "tool_call_id": "call_e0Dh9K7xeks7GDS8fi8g3ZO2",
+            "content": "9.1.5"
           }
         ],
-        "model": "gpt-4o-mini",
+        "model": "gpt-5-nano",
         "store": true,
         "stream": false,
-        "temperature": 0.0,
         "tools": [
           {
             "type": "function",
@@ -1204,13 +2773,13 @@ interactions:
       connection:
       - keep-alive
       content-length:
-      - '832'
+      - '812'
       content-type:
       - application/json
       host:
       - api.openai.com
       user-agent:
-      - Agents/Python 0.2.11
+      - Agents/Python 0.3.3
       x-stainless-arch:
       - arm64
       x-stainless-async:
@@ -1220,7 +2789,7 @@ interactions:
       x-stainless-os:
       - MacOS
       x-stainless-package-version:
-      - 1.105.0
+      - 1.109.1
       x-stainless-read-timeout:
       - '600'
       x-stainless-retry-count:
@@ -1235,50 +2804,49 @@ interactions:
     body:
       string: |-
         {
-          "id": "chatcmpl-CCIvcIK3vgSI5fx3iCWRrRs2UGcMZ",
+          "id": "chatcmpl-CO7l1Sr9EIpFlqjDaN3amOLO1VzjG",
           "object": "chat.completion",
-          "created": 1757048732,
-          "model": "gpt-4o-mini-2024-07-18",
+          "created": 1759865727,
+          "model": "gpt-5-nano-2025-08-07",
           "choices": [
             {
               "index": 0,
               "message": {
                 "role": "assistant",
-                "content": "The latest version of Elasticsearch 8 is 8.19.3.",
+                "content": "Latest Elasticsearch 9.x GA version: 9.1.5.\n\nWould you like release notes or guidance on upgrading to 9.1.5?",
                 "refusal": null,
                 "annotations": []
               },
-              "logprobs": null,
               "finish_reason": "stop"
             }
           ],
           "usage": {
-            "prompt_tokens": 138,
-            "completion_tokens": 16,
-            "total_tokens": 154,
+            "prompt_tokens": 225,
+            "completion_tokens": 361,
+            "total_tokens": 586,
             "prompt_tokens_details": {
               "cached_tokens": 0,
               "audio_tokens": 0
             },
             "completion_tokens_details": {
-              "reasoning_tokens": 0,
+              "reasoning_tokens": 320,
               "audio_tokens": 0,
               "accepted_prediction_tokens": 0,
               "rejected_prediction_tokens": 0
             }
           },
           "service_tier": "default",
-          "system_fingerprint": "fp_8bda4d3a2c"
+          "system_fingerprint": null
         }
     headers:
       CF-RAY:
-      - 97a3312cfd019b97-SIN
+      - 98afd77b9cde8f1a-FRA
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Fri, 05 Sep 2025 05:05:32 GMT
+      - Tue, 07 Oct 2025 19:35:30 GMT
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -1294,29 +2862,31 @@ interactions:
       cf-cache-status:
       - DYNAMIC
       content-length:
-      - '857'
+      - '886'
       openai-processing-ms:
-      - '476'
+      - '3350'
       openai-project:
       - proj_KYenqYOfeZsnXEVK8dXVBhez
       openai-version:
       - '2020-10-01'
       x-envoy-upstream-service-time:
-      - '480'
+      - '3385'
+      x-openai-proxy-wasm:
+      - v0.1
       x-ratelimit-limit-requests:
-      - '10000'
+      - '500'
       x-ratelimit-limit-tokens:
       - '200000'
       x-ratelimit-remaining-requests:
-      - '9998'
+      - '499'
       x-ratelimit-remaining-tokens:
-      - '199983'
+      - '199982'
       x-ratelimit-reset-requests:
-      - 15.637s
+      - 120ms
       x-ratelimit-reset-tokens:
       - 5ms
       x-request-id:
-      - req_4a8aa725a2374fb0a25ba7c1147f86e2
+      - req_af0c32f594ac40ad99a1b247fef87f15
     status:
       code: 200
       message: OK

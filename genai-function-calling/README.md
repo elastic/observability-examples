@@ -27,7 +27,7 @@ performs the same process. The user asks a question that is beyond the training
 date of the LLM. The application uses the framework to implement an agent
 pattern to automatically call functions when it needs new information.
 
-Here's how the question "What is the latest version of Elasticsearch 8?" ends up
+Here's how the question "What is the latest version of Elasticsearch 9?" ends up
 being answered.
 
 ```mermaid
@@ -36,23 +36,23 @@ sequenceDiagram
     participant LLM
 
     Note over Agent: Framework sends its tools along with the prompt
-    Agent ->> LLM: user: "What is the latest version of Elasticsearch 8?"
+    Agent ->> LLM: user: "What is the latest version of Elasticsearch 9?"
     activate LLM
     Note over LLM: LLM determines it needs to use a tool to complete the task
 
-    LLM ->> Agent: assistant: {"function": {"name": "get_latest_elasticsearch_version", "arguments": "{\"majorVersion\": 8}"}}
+    LLM ->> Agent: assistant: {"function": {"name": "get_latest_elasticsearch_version", "arguments": "{\"majorVersion\": 9}"}}
     deactivate LLM
     activate Agent
-    Note over Agent: invokes get_latest_elasticsearch_version(majorVersion=8)
+    Note over Agent: invokes get_latest_elasticsearch_version(majorVersion=9)
 
-    Agent ->> LLM: [user, assistant, tool: "8.19.3"]
+    Agent ->> LLM: [user, assistant, tool: "9.1.5"]
     Note over Agent: LLM is stateless, the tool result is sent back with prior messages
     deactivate Agent
     activate LLM
 
-    LLM ->> Agent: content: "The latest version of Elasticsearch 8 is 8.19.3"
+    LLM ->> Agent: content: "The latest version of Elasticsearch 9 is 9.1.5"
     deactivate LLM
-    Note over Agent: "The latest version of Elasticsearch 8 is 8.19.3"
+    Note over Agent: "The latest version of Elasticsearch 9 is 9.1.5"
 ```
 
 The GenAI framework not only abstracts the above loop, but also LLM plugability
@@ -173,21 +173,21 @@ sequenceDiagram
 
     create participant LLM
 
-    Agent->>LLM: user: "What is the latest version of Elasticsearch 8?"
+    Agent->>LLM: user: "What is the latest version of Elasticsearch 9?"
     activate LLM
-    LLM->>Agent: assistant: {"function": {"name": "get_latest_elasticsearch_version", "arguments": "{\"majorVersion\": 8}"}}
+    LLM->>Agent: assistant: {"function": {"name": "get_latest_elasticsearch_version", "arguments": "{\"majorVersion\": 9}"}}
     deactivate LLM
     activate Agent
 
     rect rgb(191, 223, 255)
-    Agent->>+MCP: tools/call: {get_latest_elasticsearch_version, {majorVersion: 8}}
-    MCP-->>-Agent: response: {output: "8.19.3"}
+    Agent->>+MCP: tools/call: {get_latest_elasticsearch_version, {majorVersion: 9}}
+    MCP-->>-Agent: response: {output: "9.1.5"}
     end
 
-    Agent->>LLM: [user, assistant, tool: "8.19.3"]
+    Agent->>LLM: [user, assistant, tool: "9.1.5"]
     deactivate Agent
     activate LLM
-    LLM->>Agent: content: "The latest version of Elasticsearch 8 is 8.19.3"
+    LLM->>Agent: content: "The latest version of Elasticsearch 9 is 9.1.5"
     deactivate LLM
 ```
 

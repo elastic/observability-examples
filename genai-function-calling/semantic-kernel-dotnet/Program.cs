@@ -33,7 +33,7 @@ sealed class ElasticsearchPlugin
     [McpServerTool(Name = "get_latest_elasticsearch_version")]
     [Description("Returns the latest GA version of Elasticsearch in \"X.Y.Z\" format.")]
     public string GetLatestVersion(
-        [Description("Major version to filter by (e.g. 7, 8). Defaults to latest")] int? majorVersion = null)
+        [Description("Major version to filter by (e.g. 8, 9). Defaults to latest")] int? majorVersion = null)
     {
         using var httpClient = new HttpClient();
         var response = httpClient.GetAsync("https://artifacts.elastic.co/releases/stack.json").Result;
