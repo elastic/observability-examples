@@ -55,7 +55,7 @@ Or to run with Maven:
 ## Notes
 
 The LLM should generate something like "The latest stable version of
-Elasticsearch is 8.18.1", unless it hallucinates. Just run it again, if you
+Elasticsearch is 9.1.5", unless it hallucinates. Just run it again, if you
 see something else.
 
 Spring AI uses Micrometer which bridges to OpenTelemetry, but needs a few

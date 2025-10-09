@@ -14,4 +14,7 @@ async def test_main(default_openai_env, capsys):
 
     reply = capsys.readouterr().out.strip()
 
-    assert reply == "The latest version of Elasticsearch 8 is 8.19.3."
+    assert (
+        reply
+        == "Latest Elasticsearch 9.x GA version: 9.1.5.\n\nWould you like release notes or guidance on upgrading to 9.1.5?"
+    )

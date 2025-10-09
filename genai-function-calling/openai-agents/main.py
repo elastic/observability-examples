@@ -5,7 +5,6 @@ import sys
 from httpx import AsyncClient
 from agents import (
     Agent,
-    ModelSettings,
     OpenAIProvider,
     RunConfig,
     Runner,
@@ -47,19 +46,18 @@ async def get_latest_elasticsearch_version(major_version: int = 0) -> str:
 
 
 async def run_agent(tools: list[Tool]):
-    model_name = os.getenv("CHAT_MODEL", "gpt-4o-mini")
+    model_name = os.getenv("CHAT_MODEL", "gpt-5-nano")
     openai_client = AsyncAzureOpenAI() if os.getenv("AZURE_OPENAI_API_KEY") else None
     model = OpenAIProvider(openai_client=openai_client, use_responses=False).get_model(model_name)
     agent = Agent(
         name="version_assistant",
         model=model,
-        model_settings=ModelSettings(temperature=0),
         tools=tools,
     )
 
     result = await Runner.run(
         starting_agent=agent,
-        input="What is the latest version of Elasticsearch 8?",
+        input="What is the latest version of Elasticsearch 9?",
         run_config=RunConfig(workflow_name="GetLatestElasticsearchVersion"),
     )
     print(result.final_output)

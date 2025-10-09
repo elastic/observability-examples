@@ -55,7 +55,6 @@ async def main():
             "url": mcp_url,
             "timeout": 30.0,
         },
-        cache_tools_list=True,
         client_session_timeout_seconds=60.0,
     ) as server:
         tools = await server.list_tools()

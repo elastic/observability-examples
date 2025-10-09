@@ -18,7 +18,7 @@ const model = process.env.CHAT_MODEL || 'gpt-4o-mini';
 const getLatestElasticsearchVersion = tool({
     description: 'Get the latest version of Elasticsearch',
     inputSchema: z.object({
-        majorVersion: z.number().optional().describe('Major version to filter by (e.g. 7, 8). Defaults to latest'),
+        majorVersion: z.number().optional().describe('Major version to filter by (e.g. 8, 9). Defaults to latest'),
     }),
     execute: async ({majorVersion}) => {
         const response = await fetch('https://artifacts.elastic.co/releases/stack.json');

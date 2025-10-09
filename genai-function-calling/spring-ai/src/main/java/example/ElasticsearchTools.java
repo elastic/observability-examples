@@ -20,7 +20,7 @@ class ElasticsearchTools {
     }
 
     @Tool(description = "Returns the latest GA version of Elasticsearch in \"X.Y.Z\" format.")
-    String getLatestElasticsearchVersion(@ToolParam(description = "Major version to filter by (e.g. 7, 8). Defaults to latest") @Nullable Integer majorVersion) {
+    String getLatestElasticsearchVersion(@ToolParam(description = "Major version to filter by (e.g. 8, 9). Defaults to latest") @Nullable Integer majorVersion) {
         ReleasesResponse response = WebClient.create().get().uri("https://artifacts.elastic.co/releases/stack.json")
                 .exchangeToMono(res -> res.mutate()
                         // Fix incorrect content-type from artifacts.elastic.co

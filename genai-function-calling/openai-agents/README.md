@@ -87,7 +87,7 @@ dotenv -f .env run -- pytest
 ## Notes
 
 The LLM should generate something like "The latest stable version of
-Elasticsearch is 8.19.3", unless it hallucinates. Just run it again, if you
+Elasticsearch is 9.1.5", unless it hallucinates. Just run it again, if you
 see something else.
 
 OpenAI Agents SDK's OpenTelemetry instrumentation is via
