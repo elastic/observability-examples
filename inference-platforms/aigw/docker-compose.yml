@@ -34,6 +34,7 @@ services:
     env_file:
       - env.local
     environment:
+      - OTEL_SERVICE_NAME=aigw
       - OPENAI_BASE_URL=http://host.docker.internal:11434/v1
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://host.docker.internal:4318
     ports:
