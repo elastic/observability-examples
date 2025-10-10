@@ -49,10 +49,10 @@ async def run_agent(tools: list[Tool]):
 
 
 async def main():
-    mcp_url = os.getenv("MCP_URL", "https://mcp.kiwi.com")
     async with MCPServerStreamableHttp(
         {
-            "url": mcp_url,
+            "url": os.getenv("MCP_URL", "https://mcp.kiwi.com"),
+            "headers": dict(h.split("=", 1) for h in os.getenv("MCP_HEADERS", "").split(",") if h),
             "timeout": 30.0,
         },
         client_session_timeout_seconds=60.0,
