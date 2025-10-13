@@ -17,13 +17,13 @@ Arch Gateway is a python command that internally runs Docker. Hence, you need a
 working Docker configuration. Run `archgw` using `uv run` from [uv][uv]:
 
 ```bash
-uv run --with archgw -- archgw up arch_config.yaml
+uv run --python 3.12 --with archgw -- archgw up arch_config.yaml
 ```
 
 When finished, clean up like this:
 
 ```bash
-uv run --with archgw -- archgw down
+uv run --python 3.12 --with archgw -- archgw down
 ```
 
 ## Start Prometheus Scraping
@@ -68,7 +68,7 @@ and anything added in Arch Gateway's [wasm filter][archgw-wasm].
   plus the first segment of the hostname (dots truncate the rest). The "host"
   comes from "host.docker.internal".
 * Until [this][openai-responses] resolves, don't use `--use-responses-api`.
-* Until [this][docker-env] resolves, make sure your PATH has /usr/local/bin.
+* This example uses Python 3.12 until torch has wheels for 3.14.
 
 The chat prompt was designed to be idempotent, but the results are not. You may
 see something besides 'South Atlantic Ocean.'.
@@ -82,4 +82,3 @@ Just run it again until we find a way to make the results idempotent.
 [uv]: https://docs.astral.sh/uv/getting-started/installation/
 [openai-responses]: https://github.com/katanemo/archgw/issues/476
 [otel-tui]: https://github.com/ymtdzzz/otel-tui
-[docker-env]: https://github.com/katanemo/archgw/issues/573
