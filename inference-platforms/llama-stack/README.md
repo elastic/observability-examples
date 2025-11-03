@@ -35,7 +35,18 @@ Or, for the OpenAI Responses API
 uv run --exact -q --env-file env.local ../chat.py --use-responses-api
 ```
 
+### MCP Agent
+
+```bash
+uv run --exact -q --env-file env.local ../agent.py --use-responses-api
+```
+
 ## Notes
+
+* Llama Stack's Responses API connects to MCP servers server-side (unlike aigw
+  which proxies MCP). The agent passes MCP configuration via `HostedMCPTool`.
+* Until [this PR][openai-agents-pr] merges, the agent requires the fix branch
+  for handling providers that don't return token usage details.
 
 * Uses the `starter` distribution with its built-in `remote::openai` provider,
   pointing to Ollama via `OPENAI_BASE_URL` environment variable.
@@ -50,3 +61,4 @@ uv run --exact -q --env-file env.local ../chat.py --use-responses-api
 [uv]: https://docs.astral.sh/uv/getting-started/installation/
 [prefix-pr]: https://github.com/meta-llama/llama-stack/pull/3822
 [docker]: https://github.com/llamastack/llama-stack/issues/406
+[openai-agents-pr]: https://github.com/openai/openai-agents-python/pull/2034
