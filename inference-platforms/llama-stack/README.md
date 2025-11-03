@@ -1,10 +1,7 @@
 # Llama Stack
 
-This shows how to use [Llama Stack][docs] to proxy Ollama, accessible via an
-OpenAI compatible API.
-
-This uses the [`otel` telemetry sink][otel-sink] to export OpenTelemetry traces
-and metrics from signals recorded with Llama Stack's observability SDK.
+This shows how to use [Llama Stack][docs] to proxy Ollama via an OpenAI
+compatible API.
 
 ## Prerequisites
 
@@ -13,7 +10,7 @@ Start Ollama and your OpenTelemetry Collector via this repository's [README](../
 ## Run Llama Stack
 
 ```bash
-docker compose up --pull always --force-recreate --remove-orphans
+docker compose up --force-recreate --remove-orphans
 ```
 
 Clean up when finished, like this:
@@ -36,16 +33,25 @@ Or, for the OpenAI Responses API
 uv run --exact -q --env-file env.local ../chat.py --use-responses-api
 ```
 
+### MCP Agent
+
+```bash
+uv run --exact -q --env-file env.local ../agent.py --use-responses-api
+```
+
 ## Notes
 
-Here are some constraints about the LlamaStack implementation:
-* Only supports llama models (so not Qwen)
-* Bridges its tracing and metrics APIs to `otel_trace` and `otel_metric` sinks.
+* Llama Stack's Responses API connects to MCP servers server-side (unlike aigw
+  which proxies MCP). The agent passes MCP configuration via `HostedMCPTool`.
+
+* Uses the `starter` distribution with its built-in `remote::openai` provider,
+  pointing to Ollama via `OPENAI_BASE_URL` environment variable.
+* Models require `provider_id/` prefix (e.g., `openai/qwen3:0.6b`)
 * Until [this issue][docker] resolves, running docker on Apple Silicon
   requires emulation.
 
 ---
+[docker]: https://github.com/llamastack/llama-stack/issues/406
 [docs]: https://llama-stack.readthedocs.io/en/latest/index.html
 [otel-sink]: https://llama-stack.readthedocs.io/en/latest/building_applications/telemetry.html#configuration
 [uv]: https://docs.astral.sh/uv/getting-started/installation/
-[docker]: https://github.com/llamastack/llama-stack/issues/406
