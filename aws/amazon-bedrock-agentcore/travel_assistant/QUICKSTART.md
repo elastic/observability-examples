@@ -130,20 +130,4 @@ You should see:
 - Check Elastic API key permissions
 - Ensure all OTEL_* variables are set
 
-## Next Steps
-
-- Read the full [README.md](README.md) for detailed documentation
-- Check out [CONTRIBUTING.md](CONTRIBUTING.md) to contribute
-- Explore the code in `claudeserver.py`
-
-## Need Help?
-
-- Review the full README for detailed explanations
-- Check AWS Bedrock documentation
-- Visit Tavily documentation for API help
-- Review Elastic documentation for observability setup
-
-## Success! 🎉
-
-Your Travel Assistant Agent is now running and ready to help plan trips!
 
