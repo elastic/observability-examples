@@ -75,7 +75,7 @@ Type 'quit' to exit the chat.
 
 ## Example Trace
 
-![Alt text](/langtrace/img/Xnapper-2024-08-16-12.36.03.png "Langtrace traces")
+![Alt text](img/Xnapper-2024-08-16-12.36.03.png "Langtrace traces")
 
 ## How it works
 
