@@ -266,10 +266,8 @@ travel_assistant/
 ├── claudeserver.py                 # Main agent implementation
 ├── requirements.txt                # Python dependencies
 ├── .gitignore                      # Git ignore patterns
-├── LICENSE                         # MIT License
 ├── README.md                       # This file
 ├── QUICKSTART.md                   # 5-minute setup guide
-├── CONTRIBUTING.md                 # Contribution guidelines
 ├── env.example                     # Environment template
 ├── invoke.sh                       # Test script (Netherlands)
 ├── invoke_india_best_places.sh     # Test script (India with delay)
@@ -327,18 +325,6 @@ Access your Elastic deployment to view:
    - This is expected! The tool has a 120-second delay
    - Ensure your timeout settings are >= 130 seconds
 
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Contributing
-
-Contributions are welcome! Please ensure:
-- Code follows existing style
-- Tests pass
-- Documentation is updated
-- No sensitive credentials in commits
 
 ## Security Notes
 
