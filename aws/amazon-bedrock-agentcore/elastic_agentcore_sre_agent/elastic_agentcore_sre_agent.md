@@ -1,6 +1,6 @@
 # Agentcore SRE Agent
 
-For the purpose of troubleshooting AWS Agentocre agents, we at Elastic have built an SRE Agent using the [Elastic Agent Builder](https://www.elastic.co/elasticsearch/agent-builder). On steps to create a new personalized agent, you can follow this [blog](https://www.elastic.co/search-labs/blog/elastic-ai-agent-builder-context-engineering-introduction).
+For the purpose of troubleshooting AWS Agentcore agents, we at Elastic have built an SRE Agent using the [Elastic Agent Builder](https://www.elastic.co/elasticsearch/agent-builder). For steps to create a new personalized agent, you can follow this [blog](https://www.elastic.co/search-labs/blog/elastic-ai-agent-builder-context-engineering-introduction).
 
 You can customize the agent by providing custom instructions to the Agent. 
 
