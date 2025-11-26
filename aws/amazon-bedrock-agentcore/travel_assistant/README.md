@@ -54,7 +54,6 @@ The delay is intentional and serves as a testing mechanism for production-grade 
 
 - AWS Account with Bedrock access
 - Python 3.11+
-- Docker (optional, for containerized deployment)
 - AgentCore CLI installed
 
 ## Setup Instructions
@@ -266,8 +265,6 @@ You can monitor these metrics in Elastic Observability if configured.
 travel_assistant/
 ├── claudeserver.py                 # Main agent implementation
 ├── requirements.txt                # Python dependencies
-├── Dockerfile                      # Container configuration
-├── .dockerignore                   # Docker ignore patterns
 ├── .gitignore                      # Git ignore patterns
 ├── LICENSE                         # MIT License
 ├── README.md                       # This file
@@ -304,24 +301,6 @@ Access your Elastic deployment to view:
 - Trace timelines
 - Error tracking
 
-## Docker Deployment
-
-### Build the Image
-
-```bash
-docker build -t travel-assistant .
-```
-
-### Run the Container
-
-```bash
-docker run -p 8080:8080 \
-  -e TAVILY_API_KEY="your-tavily-api-key" \
-  -e AWS_ACCESS_KEY_ID="your-aws-key" \
-  -e AWS_SECRET_ACCESS_KEY="your-aws-secret" \
-  -e AWS_DEFAULT_REGION="us-east-1" \
-  travel-assistant
-```
 
 ## Troubleshooting
 
