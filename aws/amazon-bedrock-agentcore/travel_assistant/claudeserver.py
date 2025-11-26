@@ -16,7 +16,10 @@ try:
     from opentelemetry import propagate
     from opentelemetry.baggage.propagation import W3CBaggagePropagator
     from opentelemetry.propagators.composite import CompositePropagator
-    from opentelemetry.trace.propagation.tracecontext import TraceContextTextMapPropagator
+    from opentelemetry.trace.propagation.tracecontext import (
+        TraceContextTextMapPropagator,
+    )
+
     OTEL_AVAILABLE = True
 except ImportError:
     OTEL_AVAILABLE = False
@@ -24,8 +27,6 @@ except ImportError:
 logging.basicConfig(level=logging.ERROR, format="[%(levelname)s] %(message)s")
 logger = logging.getLogger(__name__)
 logger.setLevel(os.getenv("AGENT_RUNTIME_LOG_LEVEL", "INFO").upper())
-
-
 
 
 @tool
@@ -44,13 +45,13 @@ def web_search(query: str) -> str:
         api_key = os.getenv("TAVILY_API_KEY")
         if not api_key:
             return "Error: TAVILY_API_KEY environment variable not set. Please sign up at https://tavily.com to get your API key."
-        
+
         tavily_client = TavilyClient(api_key=api_key)
         response = tavily_client.search(query, max_results=5)
-        
+
         # Extract results from Tavily response
-        results = response.get('results', [])
-        
+        results = response.get("results", [])
+
         formatted_results = []
         for i, result in enumerate(results, 1):
             formatted_results.append(
@@ -63,6 +64,7 @@ def web_search(query: str) -> str:
 
     except Exception as e:
         return f"Error searching the web: {str(e)}"
+
 
 @tool
 def web_search_ddg(query: str) -> str:
@@ -78,10 +80,10 @@ def web_search_ddg(query: str) -> str:
     try:
         # Initialize DuckDuckGo search client
         ddgs = DDGS()
-        
+
         # Perform search with max_results=5
         results = list(ddgs.text(query, max_results=5))
-        
+
         formatted_results = []
         for i, result in enumerate(results, 1):
             formatted_results.append(
@@ -94,6 +96,7 @@ def web_search_ddg(query: str) -> str:
 
     except Exception as e:
         return f"Error searching the web with DuckDuckGo: {str(e)}"
+
 
 @tool
 def country_specific_search(query: str) -> str:
@@ -109,25 +112,25 @@ def country_specific_search(query: str) -> str:
     """
     try:
         logger.info("Delayed India search initiated. Waiting 120 seconds before performing search...")
-        
+
         # Wait for 120 seconds
         time.sleep(120)
-        
+
         logger.info("Wait complete. Performing Tavily search for India destinations...")
-        
+
         # Get Tavily API key from environment variable
         api_key = os.getenv("TAVILY_API_KEY")
         if not api_key:
             return "Error: TAVILY_API_KEY environment variable not set. Please sign up at https://tavily.com to get your API key."
-        
+
         # Perform the search specifically about best places to visit in India
         tavily_client = TavilyClient(api_key=api_key)
         search_query = f"best places to visit in India {query}"
         response = tavily_client.search(search_query, max_results=5)
-        
+
         # Extract results from Tavily response
-        results = response.get('results', [])
-        
+        results = response.get("results", [])
+
         formatted_results = ["[DELAYED SEARCH - Waited 120 seconds before executing]\n"]
         for i, result in enumerate(results, 1):
             formatted_results.append(
@@ -141,21 +144,19 @@ def country_specific_search(query: str) -> str:
     except Exception as e:
         return f"Error in delayed India search: {str(e)}"
 
+
 # Function to initialize Bedrock model
 def get_bedrock_model():
     region = os.getenv("AWS_DEFAULT_REGION", "us-east-1")
     model_id = os.getenv("BEDROCK_MODEL_ID", "us.anthropic.claude-3-5-sonnet-20240620-v1:0")
 
-    bedrock_model = BedrockModel(
-        model_id=model_id,
-        region_name=region,
-        temperature=0.0,
-        max_tokens=1024
-    )
+    bedrock_model = BedrockModel(model_id=model_id, region_name=region, temperature=0.0, max_tokens=1024)
     return bedrock_model
+
 
 # Initialize the Bedrock model
 bedrock_model = get_bedrock_model()
+
 
 # Define the agent's system prompt
 system_prompt = """You are an experienced travel agent specializing in personalized travel recommendations 
@@ -173,7 +174,9 @@ IMPORTANT: When responding to queries:
 5. Synthesize information from both sources to provide comprehensive recommendations with current 
    information, brief descriptions, and practical travel details."""
 
+
 app = BedrockAgentCoreApp()
+
 
 def initialize_agent():
     """Initialize the agent with proper telemetry configuration."""
@@ -188,13 +191,13 @@ def initialize_agent():
                     "telemetry.sdk.language": "python",
                 }
             )
-            
+
             # Create a custom tracer provider with our resource
             tracer_provider = TracerProvider(resource=custom_resource)
-            
+
             # Set as global tracer provider (required for traces to work)
             trace_api.set_tracer_provider(tracer_provider)
-            
+
             # Set up propagators (required for distributed tracing)
             propagate.set_global_textmap(
                 CompositePropagator(
@@ -204,26 +207,27 @@ def initialize_agent():
                     ]
                 )
             )
-            
+
             # Initialize Strands telemetry with the custom tracer provider
             strands_telemetry = StrandsTelemetry(tracer_provider=tracer_provider)
             strands_telemetry.setup_otlp_exporter()
-            
+
             logger.info("Strands telemetry initialized with custom resource attributes")
             logger.info(f"Resource attributes: {custom_resource.attributes}")
         except Exception as e:
             logger.warning("Telemetry setup failed: %s", str(e))
     else:
         logger.warning("Telemetry setup skipped - OpenTelemetry packages not available")
-    
+
     # Create and cache the agent
     agent = Agent(
         model=bedrock_model,
         system_prompt=system_prompt,
-        tools=[web_search, web_search_ddg, country_specific_search]
+        tools=[web_search, web_search_ddg, country_specific_search],
     )
-    
+
     return agent
+
 
 @app.entrypoint
 def strands_agent_bedrock(payload, context=None):
@@ -232,12 +236,13 @@ def strands_agent_bedrock(payload, context=None):
     """
     user_input = payload.get("prompt")
     logger.info("[%s] User input: %s", context.session_id, user_input)
-    
+
     # Initialize agent with proper configuration
     agent = initialize_agent()
-    
+
     response = agent(user_input)
-    return response.message['content'][0]['text']
+    return response.message["content"][0]["text"]
+
 
 if __name__ == "__main__":
     app.run()
