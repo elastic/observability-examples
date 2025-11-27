@@ -339,3 +339,7 @@ For issues or questions:
 - AWS Bedrock AgentCore: [AWS Documentation](https://docs.aws.amazon.com/bedrock/)
 - Tavily API: [Tavily Documentation](https://docs.tavily.com/)
 - Elastic Observability: [Elastic Documentation](https://www.elastic.co/guide/)
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
