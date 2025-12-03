@@ -21,7 +21,7 @@ const getLatestElasticsearchVersion = tool({
         majorVersion: z.number().optional().describe('Major version to filter by (e.g. 8, 9). Defaults to latest'),
     }),
     execute: async ({majorVersion}) => {
-        const response = await fetch('https://artifacts.elastic.co/releases/stack.json');
+        const response = await fetch('https://ela.st/past-stack-releases');
         const data = await response.json();
         const latest = data.releases
             // Filter out non-release versions (e.g. -rc1) and remove " GA" suffix

@@ -36,7 +36,7 @@ sealed class ElasticsearchPlugin
         [Description("Major version to filter by (e.g. 8, 9). Defaults to latest")] int? majorVersion = null)
     {
         using var httpClient = new HttpClient();
-        var response = httpClient.GetAsync("https://artifacts.elastic.co/releases/stack.json").Result;
+        var response = httpClient.GetAsync("https://ela.st/past-stack-releases").Result;
         var json = response.Content.ReadAsStringAsync().Result;
         var releaseData = JsonSerializer.Deserialize<ReleasesResponse>(json);
 
