@@ -23,7 +23,7 @@ async def get_latest_elasticsearch_version(major_version: int = 0) -> str:
         major_version: Major version to filter by (e.g. 7, 8). Defaults to latest
     """
     async with AsyncClient() as client:
-        response = await client.get("https://artifacts.elastic.co/releases/stack.json")
+        response = await client.get("https://ela.st/past-stack-releases")
     response.raise_for_status()
     releases = response.json()["releases"]
 

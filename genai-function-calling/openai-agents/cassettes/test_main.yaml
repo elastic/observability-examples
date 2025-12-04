@@ -182,7 +182,7 @@ interactions:
       user-agent:
       - python-httpx/0.28.1
     method: GET
-    uri: https://artifacts.elastic.co/releases/stack.json
+    uri: https://ela.st/past-stack-releases
   response:
     body:
       string: |-
@@ -2441,7 +2441,7 @@ interactions:
               "end_of_maintenance_date": "2027-01-15",
               "is_retired": false,
               "retired_date": null,
-              "manifest": "https://artifacts.elastic.co/releases/stack.json"
+              "manifest": "https://ela.st/past-stack-releases"
             },
             {
               "version": "8.19.0",
