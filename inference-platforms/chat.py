@@ -39,10 +39,8 @@ def main():
 
     # vllm-specific switch to disable thinking, ignored by other inference platforms.
     # See https://qwen.readthedocs.io/en/latest/deployment/vllm.html#thinking-non-thinking-modes
-    if "qwen3" in model.lower():
-        extra_body = {"chat_template_kwargs": {"enable_thinking": False}}
-    else:
-        extra_body = {}
+    extra_body = {"chat_template_kwargs": {"enable_thinking": False}} if model.startswith("Qwen/Qwen3") else None
+
     if args.use_responses_api:
         response = client.responses.create(
             model=model, input=messages[0]["content"], temperature=0, extra_body=extra_body

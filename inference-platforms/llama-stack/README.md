@@ -43,15 +43,11 @@ uv run --exact -q --env-file env.local ../agent.py --use-responses-api
 
 * Llama Stack's Responses API connects to MCP servers server-side (unlike aigw
   which proxies MCP). The agent passes MCP configuration via `HostedMCPTool`.
-
 * Uses the `starter` distribution with its built-in `remote::openai` provider,
   pointing to Ollama via `OPENAI_BASE_URL` environment variable.
 * Models require `provider_id/` prefix (e.g., `openai/qwen3:0.6b`)
-* Until [this issue][docker] resolves, running docker on Apple Silicon
-  requires emulation.
 
 ---
-[docker]: https://github.com/llamastack/llama-stack/issues/406
 [docs]: https://llama-stack.readthedocs.io/en/latest/index.html
 [otel-sink]: https://llama-stack.readthedocs.io/en/latest/building_applications/telemetry.html#configuration
 [uv]: https://docs.astral.sh/uv/getting-started/installation/

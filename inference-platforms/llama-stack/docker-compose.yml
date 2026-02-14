@@ -15,8 +15,7 @@ services:
     depends_on:
       ollama-pull:
         condition: service_completed_successfully
-    image: llamastack/distribution-starter:0.4.1
-    platform: linux/amd64  # ARM64 not published: https://github.com/llamastack/llama-stack/issues/406
+    image: llamastack/distribution-starter:0.5.0
     container_name: llama-stack
     tty: true
     env_file:
