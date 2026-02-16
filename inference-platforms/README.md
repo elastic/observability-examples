@@ -106,7 +106,7 @@ To start and use Ollama, do the following:
 
 ---
 [aigw]: https://aigateway.envoyproxy.io/docs/cli/aigwrun
-[archgw]: https://docs.archgw.com/guides/observability/tracing.html
+[archgw]: https://docs.planoai.dev/guides/observability/tracing.html
 [litellm]: https://llama-stack.readthedocs.io/en/latest/building_applications/telemetry.html#configuration
 [llama-stack]: https://llama-stack.readthedocs.io/en/latest/building_applications/telemetry.html#telemetry
 [AgC]: https://github.com/masaic-ai-platform/AgC/blob/main/platform/README.md#setting-up-the-opentelemetry-collector

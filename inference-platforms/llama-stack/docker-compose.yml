@@ -7,7 +7,7 @@ services:
     env_file:
       - env.local
     entrypoint: sh
-    command: -c 'env | grep _MODEL | cut -d= -f2 | xargs -I{} ollama pull {}'
+    command: -c 'env | grep _MODEL | cut -d= -f2 | sed "s/^[^/]*\///" | xargs -I{} ollama pull {}'
     extra_hosts:  # send localhost traffic to the docker host, e.g. your laptop
       - "localhost:host-gateway"
 
@@ -15,9 +15,8 @@ services:
     depends_on:
       ollama-pull:
         condition: service_completed_successfully
-    image: llamastack/distribution-starter:0.2.20
+    image: llamastack/distribution-starter:0.5.0
     container_name: llama-stack
-    platform: linux/amd64  # Force amd64 with emulation
     tty: true
     env_file:
       - env.local
@@ -26,7 +25,11 @@ services:
     # Ensure the container which specially treats localhost routes back to the
     # host machine, e.g. your laptop.
     environment:
-      - OLLAMA_URL=http://host.docker.internal:11434
+      - OPENAI_BASE_URL=http://host.docker.internal:11434/v1
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://host.docker.internal:4318
+      # Ensure we only see traces sampled upstream. This reduces noise without
+      # disabling SQL tracing entirely.
+      - OTEL_TRACES_SAMPLER=parentbased_traceidratio
+      - OTEL_TRACES_SAMPLER_ARG=0.0
     extra_hosts:
       - "host.docker.internal:host-gateway"
