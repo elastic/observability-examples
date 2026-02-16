@@ -76,9 +76,9 @@ Just run it again until we find a way to make the results idempotent.
 
 ---
 [docs]: https://github.com/katanemo/archgw?tab=readme-ov-file#use-arch-gateway-as-llm-router
-[config]: https://docs.archgw.com/guides/observability/tracing.html
+[config]: https://docs.planoai.dev/guides/observability/tracing.html
 [envoy-otel]: https://www.envoyproxy.io/docs/envoy/latest/api-v3/config/trace/v3/opentelemetry.proto#extension-envoy-tracers-opentelemetry
-[archgw-wasm]: https://github.com/katanemo/archgw/blob/main/arch/README.md
+[archgw-wasm]: https://github.com/katanemo/plano/blob/main/README.md
 [uv]: https://docs.astral.sh/uv/getting-started/installation/
-[openai-responses]: https://github.com/katanemo/archgw/issues/476
+[openai-responses]: https://github.com/katanemo/plano/issues/476
 [otel-tui]: https://github.com/ymtdzzz/otel-tui
