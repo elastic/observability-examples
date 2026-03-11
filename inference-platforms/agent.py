@@ -41,7 +41,7 @@ async def run_agent(tools: list[Tool], model_name: str, use_responses: bool):
         tools=tools,
     )
 
-    next_week = (datetime.now() + timedelta(weeks=1)).strftime("%Y-%m-%d")
+    next_week = (datetime.now() + timedelta(weeks=1)).strftime("%d/%m/%Y")
     result = await Runner.run(
         starting_agent=agent,
         input=f"Give me the best flight from New York to Kota Kinabalu on {next_week}",

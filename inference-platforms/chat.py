@@ -45,7 +45,7 @@ def main():
         response = client.responses.create(
             model=model, input=messages[0]["content"], temperature=0, extra_body=extra_body
         )
-        print(response.output[0].content[0].text)
+        print(response.output_text)
     else:
         chat_completion = client.chat.completions.create(
             model=model, messages=messages, temperature=0, extra_body=extra_body

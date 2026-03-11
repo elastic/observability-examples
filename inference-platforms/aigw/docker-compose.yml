@@ -36,7 +36,7 @@ services:
     environment:
       - OTEL_SERVICE_NAME=aigw
       - OPENAI_BASE_URL=http://host.docker.internal:11434/v1
-      - OTEL_EXPORTER_OTLP_ENDPOINT=http://host.docker.internal:4318
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://host.docker.internal:4317
     ports:
       - "1975:1975" # OpenAI compatible endpoint at /v1, MCP server at /mcp
     configs:
