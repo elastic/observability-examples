@@ -45,7 +45,7 @@ async def run_agent(tools: list[Tool], model_name: str, use_responses: bool):
     next_week = (datetime.now() + timedelta(weeks=1)).strftime("%d/%m/%Y")
     result = await Runner.run(
         starting_agent=agent,
-        input=f"Give me the best flight from New York to Kota Kinabalu on {next_week}",
+        input=f"Use the search-flight tool to search for flights from New York to Los Angeles on {next_week}",
         run_config=RunConfig(workflow_name="flight search"),
     )
     print(result.final_output)
