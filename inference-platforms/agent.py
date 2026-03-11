@@ -41,6 +41,7 @@ async def run_agent(tools: list[Tool], model_name: str, use_responses: bool):
         tools=tools,
     )
 
+    # Small models can't convert between date formats that may be required by tools so this format needs to be precise
     next_week = (datetime.now() + timedelta(weeks=1)).strftime("%d/%m/%Y")
     result = await Runner.run(
         starting_agent=agent,
