@@ -39,5 +39,5 @@ uv run --exact -q --env-file env.local ../chat.py --use-responses-api
 * This does not yet support logs, and there is no GitHub issue on it.
 
 ---
-[vllm]: https://docs.vllm.ai/en/latest/features/opentelemetry.html
+[vllm]: https://docs.vllm.ai/en/latest/examples/online_serving/opentelemetry/
 [uv]: https://docs.astral.sh/uv/getting-started/installation/
