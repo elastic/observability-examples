@@ -30,6 +30,8 @@ Start Ollama and your OpenTelemetry Collector via this repository's [README](../
 
 ## Run Envoy AI Gateway
 
+### Run with Docker
+
 ```bash
 docker compose up --force-recreate --pull always --remove-orphans --wait -d
 ```
@@ -38,6 +40,20 @@ Clean up when finished, like this:
 
 ```bash
 docker compose down
+```
+
+### Run with Go
+
+Download [shdotenv](https://github.com/ko1nksm/shdotenv) to load `env.local` when running.
+
+```
+curl -O -L https://github.com/ko1nksm/shdotenv/releases/download/v0.14.0/shdotenv
+chmod +x ./shdotenv
+```
+
+Run `aigw` from source after setting ENV variables like this:
+```bash
+./shdotenv -e env.local go run github.com/envoyproxy/ai-gateway/cmd/aigw@latest run --mcp-json '{"mcpServers":{"kiwi":{"type":"http","url":"https://mcp.kiwi.com"}}}'
 ```
 
 ## Call Envoy AI Gateway with python
@@ -51,6 +67,11 @@ Once Envoy AI Gateway is running, use [uv][uv] to make an OpenAI request via
 OPENAI_BASE_URL=http://localhost:1975/v1 uv run --exact -q --env-file env.local ../chat.py
 ```
 
+Or, for the OpenAI Responses API
+```bash
+OPENAI_BASE_URL=http://localhost:1975/v1 uv run --exact -q --env-file env.local ../chat.py --use-responses-api
+```
+
 ### MCP Agent
 
 ```bash
@@ -60,10 +81,9 @@ OPENAI_BASE_URL=http://localhost:1975/v1 MCP_URL=http://localhost:1975/mcp uv ru
 ## Notes
 
 Here are some constraints about the Envoy AI Gateway implementation:
-* Until [this][openai-responses] resolves, don't use `--use-responses-api`.
+* Access log integration currently requires the OTLP gRPC transport (`OTEL_EXPORTER_OTLP_PROTOCOL=grpc`).
 
 ---
 [docs]: https://aigateway.envoyproxy.io/docs/cli/
 [openinference]: https://github.com/Arize-ai/openinference/tree/main/spec
 [uv]: https://docs.astral.sh/uv/getting-started/installation/
-[openai-responses]: https://github.com/envoyproxy/ai-gateway/issues/980

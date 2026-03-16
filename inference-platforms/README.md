@@ -19,6 +19,43 @@ Elastic Stack.
 * [AgC](AgC) - with [OpenTelemetry export][AgC]
 * [vLLM](vllm) - with [OpenTelemetry POC][vllm] configuration
 
+## MCP Agent flow
+
+[agent.py](agent.py) uses the [OpenAI Agents SDK][openai-agents] to search for
+flights via [Kiwi's MCP server][kiwi-mcp], proxied through an inference
+platform like [Envoy AI Gateway](aigw).
+
+```mermaid
+sequenceDiagram
+    participant Agent
+    participant Gateway as AI Gateway
+    participant LLM as LLM Server
+    participant MCP as MCP Server
+
+    Agent ->> Gateway: user: "Use the search-flight tool to search for flights from New York to Los Angeles on 18/03/2026"
+    Gateway ->> LLM: ChatCompletion
+    activate LLM
+    LLM ->> Gateway: tool_call: search-flight({origin: "JFK", destination: "LAX", departureDate: "18/03/2026"})
+    deactivate LLM
+    Gateway ->> Agent:
+    activate Agent
+
+    Agent ->> Gateway: tools/call: search-flight
+    Gateway ->> MCP: tools/call: search-flight
+    activate MCP
+    MCP -->> Gateway: {flights: [{price: 177, route: "JFK→ATL→LAX"}, ...]}
+    deactivate MCP
+    Gateway -->> Agent:
+    deactivate Agent
+
+    Agent ->> Gateway: [user, assistant, tool: {flights}]
+    Gateway ->> LLM: ChatCompletion
+    activate LLM
+    LLM ->> Gateway: "The cheapest flight is JFK → ATL → LAX for €177..."
+    deactivate LLM
+    Gateway ->> Agent:
+```
+
 If you use Elastic Stack, an example would look like this in Kibana:
 
 ![Kibana screenshot](./kibana-trace.jpg)
@@ -114,3 +151,5 @@ To start and use Ollama, do the following:
 [uv]: https://docs.astral.sh/uv/getting-started/installation/
 [ollama-dl]: https://ollama.com/download
 [otel-tui]: https://github.com/ymtdzzz/otel-tui
+[openai-agents]: https://github.com/openai/openai-agents-python
+[kiwi-mcp]: https://mcp.kiwi.com
