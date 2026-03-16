@@ -1,8 +1,18 @@
 services:
   vllm:
     container_name: vllm
-    build:
-      context: .
+    image: vllm/vllm-openai-cpu:v0.17.0
+    entrypoint: []
+    # Serve args from the prior Dockerfile CMD:
+    # https://github.com/elastic/observability-examples/blob/139feb0f/inference-platforms/vllm/Dockerfile#L59
+    command:
+      - sh
+      - -c
+      - >
+        vllm serve $$CHAT_MODEL
+        --max-model-len=8192
+        --enforce-eager
+        --otlp-traces-endpoint=$$OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
     env_file:
       - env.local
     ports:
