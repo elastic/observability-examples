@@ -1,5 +1,4 @@
-# Use glibc-based image with pre-compiled wheels for psutil
-FROM python:3.13-slim
+FROM python:3.13-alpine
 
 RUN --mount=type=cache,target=/root/.cache/pip python -m pip install --upgrade pip
 
