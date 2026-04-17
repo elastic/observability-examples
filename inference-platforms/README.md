@@ -12,7 +12,7 @@ This directory includes examples of OpenAI accessible inferences platforms and
 proxies. Each are observable with OpenTelemetry compatible backends such as
 Elastic Stack.
 
-* [ArchGW](archgw) - [with tracing configuration][archgw]
+* [Plano](plano) - [with tracing configuration][plano]
 * [Envoy AI Gateway](aigw) - with [OpenTelemetry tracing and metrics][aigw]
 * [LiteLLM](litellm) - with  [OpenTelemetry logging callbacks][litellm]
 * [LlamaStack](llama-stack) - with [OpenTelemetry sinks][llama-stack]
@@ -138,12 +138,12 @@ To start and use Ollama, do the following:
 1. Ensure `ollama` is installed
    - On macOS/Linux: `brew install ollama`
    - For Windows or otherwise, see the [download page][ollama-dl].
-2. In a separate terminal, run `OLLAMA_HOST=0.0.0.0 OLLAMA_CONTEXT_LENGTH=8192 ollama serve`
+2. In a separate terminal, run `OLLAMA_FLASH_ATTENTION=1 OLLAMA_KV_CACHE_TYPE=q8_0 ollama serve`
    - This accepts OpenAI requests for any model on http://localhost:11434/v1
 
 ---
 [aigw]: https://aigateway.envoyproxy.io/docs/cli/aigwrun
-[archgw]: https://docs.planoai.dev/guides/observability/tracing.html
+[plano]: https://docs.planoai.dev/guides/observability/tracing.html
 [litellm]: https://llama-stack.readthedocs.io/en/latest/building_applications/telemetry.html#configuration
 [llama-stack]: https://llama-stack.readthedocs.io/en/latest/building_applications/telemetry.html#telemetry
 [AgC]: https://github.com/masaic-ai-platform/AgC/blob/main/platform/README.md#setting-up-the-opentelemetry-collector
