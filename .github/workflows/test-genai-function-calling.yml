@@ -9,6 +9,9 @@ on:
       - '!**/*.md'
       - '!**/*.png'
 
+permissions:
+  contents: read
+
 jobs:
   test:
     runs-on: ubuntu-24.04
