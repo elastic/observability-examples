@@ -1,18 +1,18 @@
-version: v0.1.0
+version: v0.3.0
 
 listeners:
-  egress_traffic:
+  - type: model
+    name: model_listener
     address: 0.0.0.0
     port: 12000
-    message_format: openai
     timeout: 30s
 
-llm_providers:
+model_providers:
   # Use ollama directly, since we can't inherit OPENAI_BASE_URL etc and need
   # to hard-code the model anyway.
-  - model: ollama/qwen3:0.6b
-    # This configuration is converted to Envoy and run inside Docker.
-    base_url: http://host.docker.internal:11434
+  - model: openai/qwen3:0.6b
+    # In native mode, Envoy runs on the host alongside ollama.
+    base_url: http://localhost:11434
     default: true
 
 tracing:

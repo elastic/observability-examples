@@ -1,8 +1,8 @@
 configs:
-  # Configuration is simplified from archgw here:
-  # https://github.com/katanemo/archgw/blob/main/docs/source/guides/observability/monitoring.rst
+  # Configuration is simplified from plano here:
+  # https://github.com/katanemo/plano/blob/main/docs/source/guides/observability/monitoring.rst
   #
-  # Note: The cluster name for ollama + host.docker.internal = ollama_host
+  # Note: The cluster name for openai + localhost = openai_localhost
   prometheus-pump-config:
     content: |
       receivers:
@@ -11,16 +11,16 @@ configs:
             global:
               evaluation_interval: 5s
             scrape_configs:
-              - job_name: 'archgw'
+              - job_name: 'plano'
                 honor_timestamps: true
                 scrape_interval: 5s
                 scrape_timeout: 5s
                 metrics_path: /stats
                 static_configs:
-                  - targets: ['localhost:19901']
+                  - targets: ['localhost:9901']
                 params:
                   format: ["prometheus"]
-      
+
       processors:
         # Elastic Stack doesn't currently support cumulative metrics
         cumulativetodelta:
@@ -36,7 +36,7 @@ configs:
             enabled: true
           flush:
             interval: 1s  # improve responsiveness in example apps (default 30s)
-      
+
       service:
         pipelines:
           metrics:
@@ -58,4 +58,3 @@ services:
         mode: 0444
     extra_hosts:  # send localhost traffic to the docker host, e.g. your laptop
       - "localhost:host-gateway"
-
